@@ -1,10 +1,10 @@
 package fr.moveo.applicationlourde;
 
-import fr.moveo.applicationlourde.frames.WindowMain;
+import fr.moveo.applicationlourde.frames.WindowConnection;
 
 public class Main {
 
     public static void main(String[] args) {
-	    WindowMain fenetre = new WindowMain();
+	    new WindowConnection();
     }
 }

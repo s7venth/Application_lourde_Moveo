@@ -8,19 +8,28 @@ import javax.swing.*;
 public class MenuBar extends JMenuBar {
 
     // Les menus
-    private JMenu mainMenu;
+    private JMenu mainMenu,optionMenu;
 
     //Les sous menus
-    private JMenuItem menuAccueil;
+    private JMenuItem memberManagementItem,logOutItem,aboutItem,helpItem;
 
     public MenuBar(){
 
         mainMenu = new JMenu("Menu Principal");
-        menuAccueil = new JMenuItem("Accueil");
-        mainMenu.add(menuAccueil);
+            memberManagementItem = new JMenuItem("Gestion de membre");
+                mainMenu.add(memberManagementItem);
+
+        optionMenu = new JMenu("?");
+            aboutItem= new JMenuItem("À propos");
+                optionMenu.add(aboutItem);
+            helpItem= new JMenuItem("Aide");
+                optionMenu.add(helpItem);
+            logOutItem= new JMenuItem("Déconnexion");
+                optionMenu.add(logOutItem);
 
         // Ajouter les menus dans la barre de menu
         this.add(mainMenu);
+        this.add(optionMenu);
 
     }
 }
