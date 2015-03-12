@@ -1,5 +1,7 @@
 package fr.moveo.applicationlourde.frames;
 
+import fr.moveo.applicationlourde.panels.ScreenMain;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -12,7 +14,7 @@ public class WindowMain extends JFrame {
     private MenuBar menu;
 
     // PANELS
-    private WindowMain home;
+    private ScreenMain home;
 
 
     //  AUTRES
@@ -20,8 +22,8 @@ public class WindowMain extends JFrame {
 
     public WindowMain(){
         menu = new MenuBar();
-        
-        home = new WindowMain();
+
+        home = new ScreenMain();
         this.add(home);
 
         homecolor= new Color(27, 155, 148);
