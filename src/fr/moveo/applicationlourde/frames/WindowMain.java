@@ -20,12 +20,10 @@ public class WindowMain extends JFrame {
     //  AUTRES
     private Color homecolor;
 
+    // #CONSTRUCTEUR#
     public WindowMain(String nom){
 
-        //FOND D'ECRAN
-        //this.setContentPane(new ImageFond("images/Logo.png"));
-
-        // le conteneur principal se servira d'une grille de placement de type  BorderLayout
+        // Ce frame utilisera une grille de placement de type BorderLayout
         this.getContentPane().setLayout(new BorderLayout());
 
         menu = new MenuBar();
