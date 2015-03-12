@@ -15,6 +15,7 @@ import javax.swing.JPanel;
 public class ScreenMain extends JPanel{
     JButton button;
     JLabel message;
+    JTextField searchBar;
 
     public ScreenMain(){
       /*  button = new JButton("cliquer ici");
@@ -25,12 +26,15 @@ public class ScreenMain extends JPanel{
             this.add(passwordLabel); */
         message = new JLabel("");
             this.add(message);
+        searchBar = new JTextField("Recherche");
+            this.add(searchBar);
+
 
 
         // **************CONFIGURATION DU PANEL ********************** //
         GridLayout grid = new GridLayout();// type de layout managers (2 lignes et 3 colonnes)
-        grid.setColumns(3);
-        grid.setRows(2);
+        grid.setColumns(1);
+        grid.setRows(5);
         grid.setHgap(5); //5px d'espace horizontal entre les colonnes
         grid.setVgap(5); //5px d'espace vertical entre les colonnes
         this.setLayout(grid);
@@ -43,7 +47,7 @@ public class ScreenMain extends JPanel{
     public void paintComponent(Graphics g){
         try {
             Image img = ImageIO.read(new File("res/img/Logo.png"));
-            g.drawImage(img, 0, 0, this);
+            g.drawImage(img, 120, 0, this);
             //Pour une image de fond
             //g.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), this);
         } catch (IOException e) {
