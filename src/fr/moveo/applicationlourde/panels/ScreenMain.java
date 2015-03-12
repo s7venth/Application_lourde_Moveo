@@ -14,6 +14,7 @@ import javax.swing.JPanel;
  */
 public class ScreenMain extends JPanel{
     JButton button;
+    JLabel message;
 
     public ScreenMain(){
       /*  button = new JButton("cliquer ici");
@@ -22,7 +23,8 @@ public class ScreenMain extends JPanel{
             this.add(mailLabel);
         passwordLabel = new JLabel("Mot de passe :");
             this.add(passwordLabel); */
-
+        message = new JLabel("");
+            this.add(message);
 
 
         // **************CONFIGURATION DU PANEL ********************** //
@@ -55,5 +57,13 @@ public class ScreenMain extends JPanel{
 
     public void setButton(JButton button) {
         this.button = button;
+    }
+
+    public JLabel getMessage() {
+        return message;
+    }
+
+    public void setMessage(JLabel message) {
+        this.message = message;
     }
 }

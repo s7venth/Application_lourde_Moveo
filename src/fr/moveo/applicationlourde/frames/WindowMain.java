@@ -5,11 +5,13 @@ import fr.moveo.applicationlourde.panels.ScreenMain;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 /**
  * Created by Sylvain on 11/03/15.
  */
-public class WindowMain extends JFrame {
+public class WindowMain extends JFrame implements ActionListener {
 
     // MENU
     private MenuBar menu;
@@ -26,8 +28,11 @@ public class WindowMain extends JFrame {
         // Ce frame utilisera une grille de placement de type BorderLayout
         this.getContentPane().setLayout(new BorderLayout());
 
+        // Le menu
         menu = new MenuBar();
             this.setJMenuBar(menu); // Integration de la barre de menu
+            menu.getLogOutItem().addActionListener(this);
+
         home = new ScreenMain();
         this.add(home);
 
@@ -56,5 +61,10 @@ public class WindowMain extends JFrame {
     }
 
 
-
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if(e.getSource()==menu.getLogOutItem()){
+            home.getMessage().setText("Au revoir");
+        }
+    }
 }

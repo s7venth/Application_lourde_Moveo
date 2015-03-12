@@ -1,6 +1,7 @@
 package fr.moveo.applicationlourde.autres;
 
 import javax.swing.*;
+import java.awt.event.ActionListener;
 
 /**
  * Created by Sylvain on 11/03/15.
@@ -31,5 +32,21 @@ public class MenuBar extends JMenuBar {
         this.add(mainMenu);
         this.add(optionMenu);
 
+    }
+
+    public JMenuItem getAboutItem() {
+        return aboutItem;
+    }
+
+    public JMenuItem getHelpItem() {
+        return helpItem;
+    }
+
+    public JMenuItem getLogOutItem() {
+        return logOutItem;
+    }
+
+    public JMenuItem getMemberManagementItem() {
+        return memberManagementItem;
     }
 }
