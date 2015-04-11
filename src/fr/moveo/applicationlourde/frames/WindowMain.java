@@ -13,16 +13,16 @@ import java.awt.event.ActionListener;
  */
 public class WindowMain extends JFrame implements ActionListener {
 
-    // MENU
+    // DECLARATION DU MENU
     private MenuBar menu;
 
-    // PANELS
+    // DECLARATION DES PANELS
     private ScreenMain home;
 
-    //  AUTRES
-    private Color homecolor;
+    // AUTRES DECLARATIONS
+    Color homeColor;
 
-    // #CONSTRUCTEUR#
+    // CONSTRUCTEUR
     public WindowMain(String nom){
 
         // Ce frame utilisera une grille de placement de type BorderLayout
@@ -36,20 +36,23 @@ public class WindowMain extends JFrame implements ActionListener {
         home = new ScreenMain();
         this.add(home);
 
-        homecolor= new Color(83, 155, 0);
+        this.windowConfiguration(nom);
 
-        // **************CONFIGURATION DE LA FENETRE ************** //
+    }
 
-        this.setBackground(homecolor); // Couleur de fond
-        this.setIconImage(Toolkit.getDefaultToolkit().getImage("images/Logo.png")); 	//Icone
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Arrete completement le processus [X]
+    // Procedure permettant de configuration la fenêtre
+    public void windowConfiguration(String nom){
+
+        this.homeColor = new Color(5, 100, 200);
+        this.setBackground(homeColor); // Couleur de fond
+        this.setIconImage(Toolkit.getDefaultToolkit().getImage("res/img/icon.png")); 	//Icône en haut à gauche
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Arrête complètement le processus avec le bouton [X]
         this.setTitle("Bienvenue "+nom);  //Définit un titre pour notre fenêtre
-        this.setSize(700, 400); // Taille fenetre en pixel (h,v) h=horizontal v=vertical
-        this.setLocationRelativeTo(null);  // Centre la fenetre par defaut
-        this.setResizable(false); // Empêche le redimensionnement
-        this.setVisible(true); //Rendre visible la fenetre
+        this.setSize(700, 400); // Taille fenêtre en pixel (h,v) h=horizontal v=vertical
+        this.setLocationRelativeTo(null);  // Centre la fenêtre par défaut
+        this.setResizable(false); // Empêche le redimensionnement de la fenêtre
+        this.setVisible(true); //Rendre visible la fenêtre
 
-        // ********************************************************** //
     }
 
     public void setPanel(JPanel pan){
@@ -59,7 +62,6 @@ public class WindowMain extends JFrame implements ActionListener {
         this.setVisible(true);
 
     }
-
 
     @Override
     public void actionPerformed(ActionEvent e) {

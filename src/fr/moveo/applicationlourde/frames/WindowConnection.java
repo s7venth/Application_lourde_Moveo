@@ -12,32 +12,31 @@ import java.awt.event.ActionListener;
  */
 public class WindowConnection extends JFrame implements ActionListener {
 
-    // PANELS
-        private ScreenConnection screen;
+    // DECLARATION DES PANELS
+    private ScreenConnection screen;
 
-    //  AUTRES
-    private Color homecolor;
-
+    // CONSTRUCTEUR
     public WindowConnection(){
         screen = new ScreenConnection();
             this.add(screen);
 
-        homecolor = new Color(5,100,200);
+        screen.getLoginButton().addActionListener(this);
+        this.windowConfiguration();
+    }
 
-        screen.getButton().addActionListener(this);
+    // Procedure permettant de configuration la fenêtre
+    public void windowConfiguration(){
 
-        // **************CONFIGURATION DE LA FENETRE ************** //
-
-        this.setBackground(homecolor); // Couleur de fond
-        this.setIconImage(Toolkit.getDefaultToolkit().getImage("res/img/icone.jpg")); 	//Icone en haut à gauche
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Arrete completement le processus avec le bouton [X]
+        Color homeColor = new Color(5, 100, 200);
+        this.setBackground(homeColor); // Couleur de fond
+        this.setIconImage(Toolkit.getDefaultToolkit().getImage("res/img/icon.png")); 	//Icône en haut à gauche
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Arrête complètement le processus avec le bouton [X]
         this.setTitle("Moveo");  //Définit un titre pour notre fenêtre
-        this.setSize(400, 200); // Taille fenetre en pixel (h,v) h=horizontal v=vertical
-        this.setLocationRelativeTo(null);  // Centre la fenetre par defaut
-        this.setResizable(false); // Empêche le redimensionnement
-        this.setVisible(true); //Rendre visible la fenetre
+        this.setSize(400, 200); // Taille fenêtre en pixel (h,v) h=horizontal v=vertical
+        this.setLocationRelativeTo(null);  // Centre la fenêtre par défaut
+        this.setResizable(false); // Empêche le redimensionnement de la fenêtre
+        this.setVisible(true); //Rendre visible la fenêtre
 
-        // ********************************************************** //
     }
 
     @Override

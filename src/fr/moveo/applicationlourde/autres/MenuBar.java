@@ -8,19 +8,16 @@ import java.awt.event.ActionListener;
  */
 public class MenuBar extends JMenuBar {
 
-    // Les menus
-    private JMenu mainMenu,optionMenu;
-
     //Les sous menus
     private JMenuItem memberManagementItem,logOutItem,aboutItem,helpItem;
 
     public MenuBar(){
 
-        mainMenu = new JMenu("Menu Principal");
+        JMenu mainMenu = new JMenu("Menu Principal");
             memberManagementItem = new JMenuItem("Gestion de membre");
                 mainMenu.add(memberManagementItem);
 
-        optionMenu = new JMenu("?");
+        JMenu optionMenu = new JMenu("?");
             aboutItem= new JMenuItem("À propos");
                 optionMenu.add(aboutItem);
             helpItem= new JMenuItem("Aide");
