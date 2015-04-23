@@ -1,7 +1,7 @@
-package fr.moveo.applicationlourde.frames;
+package fr.moveo.applicationlourde.Views.frames;
 
 import fr.moveo.applicationlourde.autres.MenuBar;
-import fr.moveo.applicationlourde.panels.ScreenMain;
+import fr.moveo.applicationlourde.Views.panels.ScreenMain;
 
 import javax.swing.*;
 import java.awt.*;

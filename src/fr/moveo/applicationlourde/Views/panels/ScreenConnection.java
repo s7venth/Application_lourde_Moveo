@@ -1,4 +1,4 @@
-package fr.moveo.applicationlourde.panels;
+package fr.moveo.applicationlourde.Views.panels;
 
 import javax.swing.*;
 import java.awt.*;
@@ -28,12 +28,19 @@ public class ScreenConnection extends JPanel {
     }
 
     public void screenConfiguration(){
-        GridLayout grid = new GridLayout();// type de layout managers en forme de grille
-        grid.setColumns(2);                // Ajout de 2 colonnes
-        grid.setRows(3);                   // Ajout de 2 lignes
-        grid.setHgap(8);                   // 5px d'espace horizontal entre les colonnes
-        grid.setVgap(10);                  // 5px d'espace vertical entre les colonnes
-        this.setLayout(grid);              // Mettre en place la grille
+        this.setLayout(new GridBagLayout());              // Mettre en place la grille
+        GridBagConstraints contraintes = new GridBagConstraints();// type de layout managers en forme de grille
+
+        contraintes.gridx = 0;
+        contraintes.gridy = 0;
+        contraintes.gridwidth = 2;
+        contraintes.gridheight = 2;
+        contraintes.fill = GridBagConstraints.BOTH;
+        contraintes.weightx = 1;
+        contraintes.weighty = 1; // 5px d'espace vertical entre les colonnes
+
+
+
         this.setOpaque(true);
         //this.setPreferredSize(new Dimension(900,300)); // taille de l'écran
         // this.setBackground(Color.WHITE); //Définition de sa couleur de fond

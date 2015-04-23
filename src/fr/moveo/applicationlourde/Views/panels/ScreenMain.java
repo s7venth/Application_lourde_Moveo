@@ -1,13 +1,7 @@
-package fr.moveo.applicationlourde.panels;
+package fr.moveo.applicationlourde.Views.panels;
 
-import java.awt.Graphics;
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.image.FilteredImageSource;
-import java.io.File;
-import java.io.IOException;
-import java.awt.Image;
 import javax.swing.JPanel;
 
 /**

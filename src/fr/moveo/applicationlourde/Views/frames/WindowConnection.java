@@ -1,6 +1,6 @@
-package fr.moveo.applicationlourde.frames;
+package fr.moveo.applicationlourde.Views.frames;
 
-import fr.moveo.applicationlourde.panels.ScreenConnection;
+import fr.moveo.applicationlourde.Views.panels.ScreenConnection;
 
 import javax.swing.*;
 import java.awt.*;
@@ -31,8 +31,8 @@ public class WindowConnection extends JFrame implements ActionListener {
         this.setBackground(homeColor); // Couleur de fond
         this.setIconImage(Toolkit.getDefaultToolkit().getImage("res/img/icon.png")); 	//Icône en haut à gauche
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Arrête complètement le processus avec le bouton [X]
-        this.setTitle("Moveo");  //Définit un titre pour notre fenêtre
-        this.setSize(400, 200); // Taille fenêtre en pixel (h,v) h=horizontal v=vertical
+        this.setTitle("fenetre");  //Définit un titre pour notre fenêtre
+        this.setSize(300, 150); // Taille fenêtre en pixel (h,v) h=horizontal v=vertical
         this.setLocationRelativeTo(null);  // Centre la fenêtre par défaut
         this.setResizable(false); // Empêche le redimensionnement de la fenêtre
         this.setVisible(true); //Rendre visible la fenêtre
