@@ -16,12 +16,6 @@ public class ScreenMain extends JPanel{
     PrintImage logo;
 
     public ScreenMain(){
-      /*  button = new JButton("cliquer ici");
-            this.add(button); */
-       /* mailLabel = new JLabel("Identidiant :");
-            this.add(mailLabel);
-        passwordLabel = new JLabel("Mot de passe :");
-            this.add(passwordLabel); */
         logo = new PrintImage("res/img/Logo.png");
             this.add(logo);
         message = new JLabel("");
@@ -37,15 +31,10 @@ public class ScreenMain extends JPanel{
     }
 
     public void screenConfiguration(){
-        GridLayout grid = new GridLayout();// type de layout managers (2 lignes et 3 colonnes)
-        grid.setColumns(1);
-        grid.setRows(5);
-        grid.setHgap(50); //5px d'espace horizontal entre les colonnes
-        grid.setVgap(50); //5px d'espace vertical entre les colonnes
-        this.setLayout(grid);
         this.setOpaque(false); // mettre l'écran en transparent
-        this.setPreferredSize(new Dimension(600,400)); // taille de l'écran
+        this.setPreferredSize(new Dimension(600, 400)); // taille de l'écran
         this.setBackground(Color.GREEN);//Définition de sa couleur de fond
+        this.setVisible(true);
     }
 
     public JButton getButton() {

@@ -6,6 +6,7 @@ import java.awt.event.WindowEvent;
 
 /**
  * Created by Sylvain on 23/04/15.
+ * Premier listener qui permet d'afficher une popu si on veut quitter l'application
  */
 public class MyListener extends WindowAdapter {
 
