@@ -35,6 +35,7 @@ public class WindowConnection extends JFrame implements ActionListener {
         this.setSize(300, 150); // Taille fenêtre en pixel (h,v) h=horizontal v=vertical
         this.setLocationRelativeTo(null);  // Centre la fenêtre par défaut
         this.setResizable(false); // Empêche le redimensionnement de la fenêtre
+        pack();
         this.setVisible(true); //Rendre visible la fenêtre
 
     }
