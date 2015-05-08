@@ -4,7 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 
 /**
- * Created by Sylvain on 12/03/15.
+ * ceci est le panel de connection. le layout est un gridBagLayout de facon à pouvoir bien organiser la fenetre
  */
 public class ScreenConnection extends JPanel {
     JButton loginButton;
@@ -16,7 +16,7 @@ public class ScreenConnection extends JPanel {
         this.setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
         for (int i=0; i<12; i++){
-            array[i] = new JLabel("     ");
+            array[i] = new JLabel("          ");
         }
         gbc.gridx = 0;
         gbc.gridy = 0;
@@ -72,25 +72,6 @@ public class ScreenConnection extends JPanel {
 
         this.setOpaque(true);
     }
-/*
-    public void screenConfiguration(){
-        this.setLayout(new GridBagLayout());              // Mettre en place la grille
-        GridBagConstraints contraintes = new GridBagConstraints();// type de layout managers en forme de grille
-
-        contraintes.gridx = 0;
-        contraintes.gridy = 0;
-        contraintes.gridwidth = 2;
-        contraintes.gridheight = 2;
-        contraintes.fill = GridBagConstraints.BOTH;
-        contraintes.weightx = 1;
-        contraintes.weighty = 1; // 5px d'espace vertical entre les colonnes
-
-
-
-        this.setOpaque(true);
-        //this.setPreferredSize(new Dimension(900,300)); // taille de l'écran
-        // this.setBackground(Color.WHITE); //Définition de sa couleur de fond
-    }*/
 
     public JTextField getMailEditText() {
         return mailEditText;
