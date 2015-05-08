@@ -12,21 +12,31 @@ public class ScreenConnection extends JPanel {
     JTextField mailEditText,passwordEditText;
 
     public ScreenConnection(){
+        this.setLayout(new GridBagLayout());
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = 1;
+        gbc.gridheight = 1;
+        gbc.gridwidth = 2;
+        gbc.fill = GridBagConstraints.BOTH;
         mailLabel = new JLabel("Identifiant :");
-            this.add(mailLabel);
+        this.add(mailLabel, gbc);
+        gbc.gridx = 2;
         mailEditText = new JTextField();
-            this.add(mailEditText);
+        this.add(mailEditText, gbc);
+        gbc.gridy = 2;
+        gbc.gridx = 0;
         passwordLabel =  new JLabel("Mot de passe :");
-            this.add(passwordLabel);
+        this.add(passwordLabel, gbc);
+        gbc.gridx = 2;
         passwordEditText = new JTextField();
-            this.add(passwordEditText);
+        this.add(passwordEditText, gbc);
+        gbc.gridx = 1;
+        gbc.gridy = 3;
         loginButton = new JButton("Se connecter");
-            this.add(loginButton);
-
-        this.screenConfiguration();
-
+        this.add(loginButton, gbc);
     }
-
+/*
     public void screenConfiguration(){
         this.setLayout(new GridBagLayout());              // Mettre en place la grille
         GridBagConstraints contraintes = new GridBagConstraints();// type de layout managers en forme de grille
@@ -44,7 +54,7 @@ public class ScreenConnection extends JPanel {
         this.setOpaque(true);
         //this.setPreferredSize(new Dimension(900,300)); // taille de l'écran
         // this.setBackground(Color.WHITE); //Définition de sa couleur de fond
-    }
+    }*/
 
     public JTextField getMailEditText() {
         return mailEditText;
