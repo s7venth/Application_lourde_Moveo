@@ -50,7 +50,8 @@ public class WindowMain extends JFrame implements ActionListener {
         this.setTitle("Bienvenue "+nom);  //Définit un titre pour notre fenêtre
         this.setSize(700, 400); // Taille fenêtre en pixel (h,v) h=horizontal v=vertical
         this.setLocationRelativeTo(null);  // Centre la fenêtre par défaut
-        this.setResizable(false); // Empêche le redimensionnement de la fenêtre
+        this.setResizable(true); // Empêche le redimensionnement de la fenêtre
+        pack();
         this.setVisible(true); //Rendre visible la fenêtre
 
     }

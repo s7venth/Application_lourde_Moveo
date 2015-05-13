@@ -3,31 +3,47 @@ package fr.moveo.applicationlourde.Views.panels;
 import javax.swing.*;
 import java.awt.*;
 import javax.swing.JPanel;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
 /**
- * Created by Sylvain on 11/03/15.
+ * page principale du logiciel
  */
-public class ScreenMain extends JPanel{
+public class ScreenMain extends JPanel implements ListSelectionListener{
 
     // VARIABLES
-    JButton button;
-    JLabel message;
-    JTextField searchBar;
-    PrintImage logo;
+    JTabbedPane jTabbedPane = new JTabbedPane();
+    JPanel jCards = new JPanel(new CardLayout());
+    Sheet jIDSheet = new Sheet();
+    Sheet jTrip = new Sheet();
+    Sheet jComments = new Sheet();
+    JLabel message = new JLabel("");
+    UserSheet userSheet = new UserSheet();
+    JList list = new JList();
 
     public ScreenMain(){
-        logo = new PrintImage("res/img/Logo.png");
-            this.add(logo);
-        message = new JLabel("");
-            this.add(message);
-        searchBar = new JTextField("Recherche");
-            this.add(searchBar);
-        logo = new PrintImage("res/img/Logo.png");
-            this.add(logo);
-
+        this.setLayout(new BorderLayout());
+        String[] userList = {"amélie", "sebastien", "sylvain", "alexandre", "yasser", "yohan", "jean-denis"};
+        list = new JList(userList);
+        list.addListSelectionListener(this);
+        this.add(list, BorderLayout.WEST);
+        this.add(userSheet, BorderLayout.CENTER);
         this.screenConfiguration();
+        this.add(message, BorderLayout.SOUTH);
 
+        // panel des différentes fiches qui s'afficheront en fonction des onglets
+        jCards.add(jIDSheet);
+        jIDSheet.setBackground(Color.BLUE);
+        jCards.add(jTrip);
+        jTrip.setBackground(Color.RED);
+        jCards.add(jComments);
+        jComments.setBackground(Color.GREEN);
 
+        //rajout des boutons dans le panel d'onglets
+        jTabbedPane.addTab("Fiche Utilisateur", jIDSheet);
+        jTabbedPane.addTab("Voyages", jTrip);
+        jTabbedPane.addTab("Commentaires", jComments);
+        add(jTabbedPane, BorderLayout.CENTER);
     }
 
     public void screenConfiguration(){
@@ -37,19 +53,13 @@ public class ScreenMain extends JPanel{
         this.setVisible(true);
     }
 
-    public JButton getButton() {
-        return button;
-    }
-
-    public void setButton(JButton button) {
-        this.button = button;
-    }
 
     public JLabel getMessage() {
         return message;
     }
 
-    public void setMessage(JLabel message) {
-        this.message = message;
+
+    @Override
+    public void valueChanged(ListSelectionEvent e) {
     }
 }

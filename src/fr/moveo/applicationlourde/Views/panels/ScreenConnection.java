@@ -39,7 +39,7 @@ public class ScreenConnection extends JPanel {
         gbc.gridx = 1;
         gbc.gridwidth = 2;
         gbc.fill = GridBagConstraints.BOTH;
-        mailLabel = new JLabel("Identifiant :");
+        mailLabel = new JLabel("email :");
         this.add(mailLabel, gbc);
         gbc.gridx = 3;
         mailEditText = new JTextField();

@@ -10,15 +10,15 @@ import java.awt.event.ActionListener;
 
 /**
  * Created by Sylvain on 12/03/15.
- * Fenetre de connection. Censé etre la premiere fenetre qui doit apparaitre.ÇÇ
+ * Fenetre de connection. Censé etre la premiere fenetre qui doit apparaitre.
  */
-public class WindowConnection extends JFrame implements ActionListener {
+public class WindowConnexion extends JFrame implements ActionListener {
 
     // DECLARATION DES PANELS
     private ScreenConnection screen;
 
     // CONSTRUCTEUR
-    public WindowConnection(){
+    public WindowConnexion(){
         screen = new ScreenConnection();
             this.add(screen);
 

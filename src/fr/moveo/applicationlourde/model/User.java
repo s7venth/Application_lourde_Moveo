@@ -12,6 +12,11 @@ public class User {
     String firstName, lastName, birthday, email, password, country, city;
     Date register, lastConnexion;
 
+    public User(int id, String firstName, String lastName) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
 
     public User(String firstName, String lastName, String password, String email) {
 
@@ -24,16 +29,8 @@ public class User {
     @Override
     public String toString() {
         return "User{" +
-                "id=" + id +
-                ", firstName='" + firstName + '\'' +
+                "firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
-                ", birthday='" + birthday + '\'' +
-                ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
-                ", country='" + country + '\'' +
-                ", city='" + city + '\'' +
-                ", register=" + register +
-                ", lastConnexion=" + lastConnexion +
                 '}';
     }
 
