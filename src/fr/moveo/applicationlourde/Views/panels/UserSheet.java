@@ -10,58 +10,46 @@ import java.awt.event.ActionListener;
  * c'est un cardLayout pour faire plusieurs onglets sur un utilisateurs
  */
 public class UserSheet extends JPanel {
+    //VARIABLES
     GridBagLayout gridBagLayout = new GridBagLayout();
     GridBagConstraints gridBagConstraints = new GridBagConstraints();
-    JLabel jLabel[] = new JLabel[20];
-    //VARIABLES
+    JLabel idLabel, firstNameLabel, lastNameLabel, birthdayLabel, emailLabel, passwordLabel,
+            countryLabel, cityLabel, registerLabel, lastConnexionLabel;
 
     //CONSTRUCTEUR
     public UserSheet() {
+        idLabel = new JLabel("Id");
+        firstNameLabel = new JLabel("Prénom");
+        lastNameLabel = new JLabel("Nom");
+        birthdayLabel = new JLabel("Date de Naissance");
+        passwordLabel = new JLabel("Mot de passe");
+        countryLabel = new JLabel("Pays");
+        cityLabel = new JLabel("Ville");
+        registerLabel = new JLabel("date d'enregistrement");
+        lastConnexionLabel = new JLabel("Date de derniere connexion");
         setLayout(gridBagLayout);
-        for (int i=0; i<20;i++){
-            jLabel[i]=new JLabel("Label numéro"+i);
-        }
         gridBagConstraints.gridx=0;
         gridBagConstraints.gridy=0;
         gridBagConstraints.gridheight = 1;
         gridBagConstraints.gridwidth = 1;
-        add(jLabel[0], gridBagConstraints);
-        gridBagConstraints.gridx = 1;
-        add(jLabel[1], gridBagConstraints);
-        gridBagConstraints.gridx = 2;
-        add(jLabel[2], gridBagConstraints);
-        gridBagConstraints.gridx = 3;
-        add(jLabel[3], gridBagConstraints);
-        gridBagConstraints.gridx = 4;
-        add(jLabel[4], gridBagConstraints);
-        gridBagConstraints.gridx = 5;
-        add(jLabel[5], gridBagConstraints);
+        add(idLabel, gridBagConstraints);
         gridBagConstraints.gridy = 1;
-        gridBagConstraints.gridx = 0;
-        add(jLabel[6], gridBagConstraints);
-        gridBagConstraints.gridx = 1;
-        add(jLabel[7], gridBagConstraints);
-        gridBagConstraints.gridx = 2;
-        add(jLabel[8], gridBagConstraints);
-        gridBagConstraints.gridx = 3;
-        add(jLabel[9], gridBagConstraints);
-        gridBagConstraints.gridx = 4;
-        add(jLabel[10], gridBagConstraints);
-        gridBagConstraints.gridx = 5;
-        add(jLabel[11], gridBagConstraints);
+        add(firstNameLabel, gridBagConstraints);
         gridBagConstraints.gridy = 2;
-        gridBagConstraints.gridx = 0;
-        add(jLabel[12], gridBagConstraints);
-        gridBagConstraints.gridx = 1;
-        add(jLabel[13], gridBagConstraints);
-        gridBagConstraints.gridx = 2;
-        add(jLabel[14], gridBagConstraints);
-        gridBagConstraints.gridx = 3;
-        add(jLabel[15], gridBagConstraints);
-        gridBagConstraints.gridx = 4;
-        add(jLabel[16], gridBagConstraints);
-        gridBagConstraints.gridx = 5;
-        add(jLabel[17], gridBagConstraints);
+        add(lastNameLabel, gridBagConstraints);
+        gridBagConstraints.gridy = 3;
+        add(birthdayLabel, gridBagConstraints);
+        gridBagConstraints.gridy = 4;
+        add(passwordLabel, gridBagConstraints);
+        gridBagConstraints.gridy = 5;
+        add(countryLabel, gridBagConstraints);
+        gridBagConstraints.gridy = 6;
+        add(cityLabel, gridBagConstraints);
+        gridBagConstraints.gridy = 7;
+        add(registerLabel, gridBagConstraints);
+        gridBagConstraints.gridy = 8;
+        add(lastConnexionLabel, gridBagConstraints);
+        gridBagConstraints.gridy = 9;
     }
 
 

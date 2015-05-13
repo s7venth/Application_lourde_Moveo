@@ -14,7 +14,7 @@ public class ScreenMain extends JPanel implements ListSelectionListener{
     // VARIABLES
     JTabbedPane jTabbedPane = new JTabbedPane();
     JPanel jCards = new JPanel(new CardLayout());
-    Sheet jIDSheet = new Sheet();
+    UserSheet jIDSheet = new UserSheet();
     Sheet jTrip = new Sheet();
     Sheet jComments = new Sheet();
     JLabel message = new JLabel("");
