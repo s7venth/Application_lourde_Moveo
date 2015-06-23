@@ -2,8 +2,6 @@ package fr.moveo.applicationlourde.Views.panels;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 /**
  * Classe qui permet d'afficher la fiche d'un utilisateur
@@ -40,16 +38,18 @@ public class UserSheet extends JPanel {
         gridBagConstraints.gridy = 3;
         add(birthdayLabel, gridBagConstraints);
         gridBagConstraints.gridy = 4;
-        add(passwordLabel, gridBagConstraints);
+        add(emailLabel, gridBagConstraints);
         gridBagConstraints.gridy = 5;
-        add(countryLabel, gridBagConstraints);
+        add(passwordLabel, gridBagConstraints);
         gridBagConstraints.gridy = 6;
-        add(cityLabel, gridBagConstraints);
+        add(countryLabel, gridBagConstraints);
         gridBagConstraints.gridy = 7;
-        add(registerLabel, gridBagConstraints);
+        add(cityLabel, gridBagConstraints);
         gridBagConstraints.gridy = 8;
-        add(lastConnexionLabel, gridBagConstraints);
+        add(registerLabel, gridBagConstraints);
         gridBagConstraints.gridy = 9;
+        add(lastConnexionLabel, gridBagConstraints);
+        gridBagConstraints.gridy = 10;
     }
 
 
