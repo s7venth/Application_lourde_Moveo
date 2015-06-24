@@ -1,5 +1,8 @@
 package fr.moveo.applicationlourde.model;
 
+import fr.moveo.applicationlourde.services.Connection;
+
+import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -145,6 +148,14 @@ public class User {
         result = 31 * result + (register != null ? register.hashCode() : 0);
         result = 31 * result + (lastConnexion != null ? lastConnexion.hashCode() : 0);
         return result;
+    }
+
+    public ArrayList<User> getUsers() {
+		String url = "http://s3.smpk.fr/pp/tuto/pocket.json";
+		ArrayList<User> userArrayList = new ArrayList<User>();
+		Connection connection = new Connection();
+		connection.getRequest(url);
+		return userArrayList;
     }
 
 }
