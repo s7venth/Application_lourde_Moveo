@@ -1,7 +1,12 @@
 package fr.moveo.applicationlourde.Views.panels;
 
+import fr.moveo.applicationlourde.model.User;
+import fr.moveo.applicationlourde.services.AbstractMethods;
+import fr.moveo.applicationlourde.services.Connection;
+
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 import javax.swing.JPanel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -22,10 +27,16 @@ public class ScreenMain extends JPanel implements ListSelectionListener{
     JList list = new JList();
 
     public ScreenMain(){
-        this.setLayout(new BorderLayout());
-        String[] userList = {"amélie", "sebastien", "sylvain", "alexandre", "yasser", "yohan", "jean-denis"};
-        list = new JList(userList);
+        AbstractMethods abstractMethods = new AbstractMethods();
+        ArrayList<User> userList = abstractMethods.getUsers();
+        String users = "";
+        for (int i=0;i<userList.size();i++){
+            users += userList.get(i).getLastName()+" "+userList.get(i).getFirstName();
+        }
+        String[] result = {users};
+        list = new JList(result);
         list.addListSelectionListener(this);
+        this.setLayout(new BorderLayout());
         this.add(list, BorderLayout.WEST);
         this.add(userSheet, BorderLayout.CENTER);
         this.screenConfiguration();

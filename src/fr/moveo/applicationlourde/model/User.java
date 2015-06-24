@@ -1,9 +1,15 @@
 package fr.moveo.applicationlourde.model;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import fr.moveo.applicationlourde.services.Connection;
+import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by alexMac on 08/05/15.
@@ -14,6 +20,9 @@ public class User {
     int id;
     String firstName, lastName, birthday, email, password, country, city;
     Date register, lastConnexion;
+
+    public User() {
+    }
 
     public User(int id, String firstName, String lastName) {
         this.id = id;
@@ -149,13 +158,4 @@ public class User {
         result = 31 * result + (lastConnexion != null ? lastConnexion.hashCode() : 0);
         return result;
     }
-
-    public ArrayList<User> getUsers() {
-		String url = "http://s3.smpk.fr/pp/tuto/pocket.json";
-		ArrayList<User> userArrayList = new ArrayList<User>();
-		Connection connection = new Connection();
-		connection.getRequest(url);
-		return userArrayList;
-    }
-
 }

@@ -1,31 +1,52 @@
 package fr.moveo.applicationlourde.services;
 
 
-import com.google.api.client.http.*;
-import com.google.api.client.http.javanet.NetHttpTransport;
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.HttpClients;
 
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
+import java.util.List;
 
 /**
- * Created by travail on 23/06/15.
+ * the connection class allow to
  */
 public class Connection {
-	static final HttpTransport HTTP_TRANSPORT = new NetHttpTransport();
-	public void getRequest(String urlRequest) {
-		GenericUrl url = new GenericUrl(urlRequest);
-		try {
-			HttpRequest httpRequest= HTTP_TRANSPORT.createRequestFactory().buildGetRequest(url);
-			HttpResponse httpResponse = httpRequest.execute();
-			System.out.println(httpResponse.getStatusCode());
-			InputStream is = httpResponse.getContent();
-			int character;
-			while ((character = is.read()) !=-1){
-				System.out.println((char) character);
-			}
-			httpResponse.disconnect();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
+
+    //FIXME ajouter la véritable url de connection
+    String url = "";
+
+    public StringBuffer getJsonFromUrl(List<NameValuePair> postParameters){
+        StringBuffer result = new StringBuffer();
+        String line = "";
+        try {
+            HttpClient httpclient = HttpClients.createDefault();
+            HttpPost httppost = new HttpPost("http://www.a-domain.com/foo/");
+            // Request parameters and other properties.
+            httppost.setEntity(new UrlEncodedFormEntity(postParameters, "UTF-8"));
+            //Execute and get the response.
+            HttpResponse response = httpclient.execute(httppost);
+            HttpEntity entity = response.getEntity();
+            InputStream inputStream = entity.getContent();
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+            while ((line = bufferedReader.readLine()) != null){
+                result.append(line);
+            }
+            bufferedReader.close();
+            inputStream.close();
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        } catch (ClientProtocolException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
 }
+
