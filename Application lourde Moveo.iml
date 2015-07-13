@@ -10,5 +10,6 @@
     <orderEntry type="library" name="Google HTTP Client Library" level="project" />
     <orderEntry type="library" name="org.apache.http" level="project" />
     <orderEntry type="library" name="gson-2.3.1" level="project" />
+    <orderEntry type="library" name="lib" level="project" />
   </component>
 </module>

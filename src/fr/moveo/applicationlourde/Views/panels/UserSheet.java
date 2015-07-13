@@ -19,6 +19,7 @@ public class UserSheet extends JPanel {
         idLabel = new JLabel("Id");
         firstNameLabel = new JLabel("Prénom");
         lastNameLabel = new JLabel("Nom");
+        emailLabel = new JLabel("email :");
         birthdayLabel = new JLabel("Date de Naissance");
         passwordLabel = new JLabel("Mot de passe");
         countryLabel = new JLabel("Pays");
