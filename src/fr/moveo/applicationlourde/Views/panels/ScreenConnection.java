@@ -77,6 +77,10 @@ public class ScreenConnection extends JPanel {
         return mailEditText;
     }
 
+    public JTextField getPasswordEditText() {
+        return passwordEditText;
+    }
+
     public JButton getLoginButton() {
         return loginButton;
     }

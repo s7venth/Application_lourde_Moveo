@@ -1,8 +1,6 @@
 package fr.moveo.applicationlourde.Views.panels;
 
-import fr.moveo.applicationlourde.model.User;
 import fr.moveo.applicationlourde.services.AbstractMethods;
-import fr.moveo.applicationlourde.services.Connection;
 
 import javax.swing.*;
 import java.awt.*;
@@ -28,6 +26,7 @@ public class ScreenMain extends JPanel implements ListSelectionListener{
 
     public ScreenMain(){
         AbstractMethods abstractMethods = new AbstractMethods();
+        /*
         ArrayList<User> userList = abstractMethods.getUsers();
         String users = "";
         for (int i=0;i<userList.size();i++){
@@ -36,6 +35,7 @@ public class ScreenMain extends JPanel implements ListSelectionListener{
         String[] result = {users};
         list = new JList(result);
         list.addListSelectionListener(this);
+        */
         this.setLayout(new BorderLayout());
         this.add(list, BorderLayout.WEST);
         this.add(userSheet, BorderLayout.CENTER);

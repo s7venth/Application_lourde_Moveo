@@ -1,7 +1,11 @@
 package fr.moveo.applicationlourde.Views.frames;
 
+import com.google.gson.Gson;
 import fr.moveo.applicationlourde.Events.MyListener;
 import fr.moveo.applicationlourde.Views.panels.ScreenConnection;
+import fr.moveo.applicationlourde.model.User;
+import fr.moveo.applicationlourde.services.AbstractMethods;
+import fr.moveo.applicationlourde.services.Connection;
 
 import javax.swing.*;
 import java.awt.*;
@@ -39,13 +43,25 @@ public class WindowConnexion extends JFrame implements ActionListener {
         this.setLocationRelativeTo(null);  // Centre la fenêtre par défaut
         this.setResizable(false); // Empêche le redimensionnement de la fenêtre
         pack();
-        this.setVisible(true); //Rendre visible la fenêtre
+        this.setVisible(true); //Rendre visible la fenêtre admin@moveo.fr admin
 
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        this.dispose();
-        new WindowMain(screen.getMailEditText().getText());
+        Connection connection = new Connection();
+        Gson gson = new Gson();
+        User moderator = new User();
+        StringBuffer result = new StringBuffer();
+        AbstractMethods abstractMethods = new AbstractMethods();
+        result = connection.getJsonFromUrl(abstractMethods.loggin(screen.getMailEditText().getText(),screen.getPasswordEditText().getText()));
+        System.out.print("le json en string : "+result.toString());
+        moderator = gson.fromJson(result.toString(), User.class);
+
+        if (result!=null && result.toString() == "acces refuse"){
+            this.dispose();
+            new WindowMain(screen.getMailEditText().getText());
+        }
+        else JOptionPane.showMessageDialog(null,result);
     }
 }
