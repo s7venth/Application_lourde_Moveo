@@ -56,7 +56,7 @@ public class WindowConnexion extends JFrame implements ActionListener {
         //bout de code pour tester l'application avec connexion internet
         AbstractMethods abstractMethods = new AbstractMethods();
         if (screen.getMailEditText().getText().equals("")|| screen.getPasswordEditText().getText().equals("")){
-            JOptionPane.showMessageDialog(null, "veuillez remplir un des champs");
+            JOptionPane.showMessageDialog(null, "veuillez remplir les deux champs");
         }else{
             result = abstractMethods.loggin(screen.getMailEditText().getText(),screen.getPasswordEditText().getText());
             JSONObject json = new JSONObject(result.toString());
