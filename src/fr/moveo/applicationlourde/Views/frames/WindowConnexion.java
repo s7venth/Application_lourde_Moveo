@@ -1,11 +1,11 @@
 package fr.moveo.applicationlourde.Views.frames;
 
-import com.google.gson.Gson;
 import fr.moveo.applicationlourde.Events.MyListener;
 import fr.moveo.applicationlourde.Views.panels.ScreenConnection;
 import fr.moveo.applicationlourde.model.User;
 import fr.moveo.applicationlourde.services.AbstractMethods;
 import fr.moveo.applicationlourde.services.Connection;
+import org.json.JSONObject;
 
 import javax.swing.*;
 import java.awt.*;
@@ -49,19 +49,29 @@ public class WindowConnexion extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        Connection connection = new Connection();
-        Gson gson = new Gson();
         User moderator = new User();
         StringBuffer result = new StringBuffer();
-        AbstractMethods abstractMethods = new AbstractMethods();
-        result = connection.getJsonFromUrl(abstractMethods.loggin(screen.getMailEditText().getText(),screen.getPasswordEditText().getText()));
-        System.out.print("le json en string : "+result.toString());
-        moderator = gson.fromJson(result.toString(), User.class);
 
-        if (result!=null && result.toString() == "acces refuse"){
+        //bout de code pour tester l'application avec connexion internet
+        AbstractMethods abstractMethods = new AbstractMethods();
+        result = abstractMethods.loggin(screen.getMailEditText().getText(),screen.getPasswordEditText().getText());
+        JSONObject json = new JSONObject(result.toString());
+        moderator.setLastName(json.getJSONObject("moderator").getString("moderator_name"));
+        moderator.setId(json.getJSONObject("moderator").getInt("moderator_id"));
+        moderator.setEmail(json.getJSONObject("moderator").getString("moderator_email"));
+        boolean is_admin = (1 == json.getJSONObject("moderator").getInt("is_admin"));
+        moderator.setIsAdmin(is_admin);
+
+        //bout de code pour tester l'application hors connexion
+        /*
+        moderator.setLastName("administrateur");
+        moderator.setIsAdmin(true);
+        */
+        System.out.print("le moderator en string : "+moderator.toString());
+        if (result.toString()!="acces refuse"){
             this.dispose();
-            new WindowMain(screen.getMailEditText().getText());
+            new WindowMain(moderator);
         }
-        else JOptionPane.showMessageDialog(null,result);
+        else JOptionPane.showMessageDialog(null, result.toString());
     }
 }

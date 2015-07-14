@@ -2,6 +2,7 @@ package fr.moveo.applicationlourde.Views.frames;
 
 import fr.moveo.applicationlourde.autres.MenuBar;
 import fr.moveo.applicationlourde.Views.panels.ScreenMain;
+import fr.moveo.applicationlourde.model.User;
 
 import javax.swing.*;
 import java.awt.*;
@@ -23,7 +24,7 @@ public class WindowMain extends JFrame implements ActionListener {
     Color homeColor;
 
     // CONSTRUCTEUR
-    public WindowMain(String nom){
+    public WindowMain(User user){
 
         // Ce frame utilisera une grille de placement de type BorderLayout
         this.getContentPane().setLayout(new BorderLayout());
@@ -33,10 +34,10 @@ public class WindowMain extends JFrame implements ActionListener {
             this.setJMenuBar(menu); // Integration de la barre de menu
             menu.getLogOutItem().addActionListener(this);
 
-        home = new ScreenMain();
+        home = new ScreenMain(user);
         this.add(home);
 
-        this.windowConfiguration(nom);
+        this.windowConfiguration(user.getLastName());
 
     }
 

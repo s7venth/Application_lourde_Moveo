@@ -1,5 +1,6 @@
 package fr.moveo.applicationlourde.Views.panels;
 
+import fr.moveo.applicationlourde.model.User;
 import fr.moveo.applicationlourde.services.AbstractMethods;
 
 import javax.swing.*;
@@ -24,7 +25,7 @@ public class ScreenMain extends JPanel implements ListSelectionListener{
     UserSheet userSheet = new UserSheet();
     JList list = new JList();
 
-    public ScreenMain(){
+    public ScreenMain(User moderator){
         AbstractMethods abstractMethods = new AbstractMethods();
         /*
         ArrayList<User> userList = abstractMethods.getUsers();

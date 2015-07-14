@@ -11,21 +11,30 @@ import java.util.List;
  */
 public class AbstractMethods {
     private final String USER_AGENT = "chrome";
+    private Connection connection = new Connection();
     /**
      * method used to get all the users of the application
      * @return an array of user
      */
+
     public List<NameValuePair> getUsers(){
         List<NameValuePair> urlParameters = new ArrayList<NameValuePair>();
         urlParameters.add(new BasicNameValuePair("tag","getUsers"));
         return urlParameters;
     }
-    public List<NameValuePair> loggin(String email, String password) {
+
+    public StringBuffer getUsersTest(){
+        List<NameValuePair> urlParameters = new ArrayList<NameValuePair>();
+        urlParameters.add(new BasicNameValuePair("tag","getUsers"));
+        return connection.getJsonFromUrl(urlParameters);
+    }
+
+    public StringBuffer loggin(String email, String password) {
 
         List<NameValuePair> urlParameters = new ArrayList<NameValuePair>();
         urlParameters.add(new BasicNameValuePair("tag","login"));
         urlParameters.add(new BasicNameValuePair("email",email));
         urlParameters.add(new BasicNameValuePair("password", password));
-        return urlParameters;
+        return connection.getJsonFromUrl(urlParameters);
     }
 }
