@@ -25,18 +25,20 @@ public class ScreenMain extends JPanel implements ListSelectionListener{
     UserSheet userSheet = new UserSheet();
     JList list = new JList();
 
-    public ScreenMain(User moderator){
+    public JList getList() {
+        return list;
+    }
+
+    public void setList(JList list) {
+        this.list = list;
+    }
+
+    public ScreenMain(User moderator, ArrayList<User>  userList){
         AbstractMethods abstractMethods = new AbstractMethods();
-        /*
-        ArrayList<User> userList = abstractMethods.getUsers();
-        String users = "";
-        for (int i=0;i<userList.size();i++){
-            users += userList.get(i).getLastName()+" "+userList.get(i).getFirstName();
-        }
-        String[] result = {users};
-        list = new JList(result);
+
+        DefaultListModel user = abstractMethods.setUserList(userList);
+        list = new JList(user.toArray());
         list.addListSelectionListener(this);
-        */
         this.setLayout(new BorderLayout());
         this.add(list, BorderLayout.WEST);
         this.add(userSheet, BorderLayout.CENTER);

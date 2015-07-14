@@ -4,18 +4,20 @@ import javax.swing.*;
 import java.awt.event.ActionListener;
 
 /**
- * Created by Sylvain on 11/03/15.
+ * Class menu qui ajoute une bar de menu
  */
 public class MenuBar extends JMenuBar {
 
     //Les sous menus
-    private JMenuItem memberManagementItem,logOutItem,aboutItem,helpItem;
+    private JMenuItem memberManagementItem,logOutItem,aboutItem,helpItem, updateButtonMenu;
 
     public MenuBar(){
 
         JMenu mainMenu = new JMenu("Menu Principal");
             memberManagementItem = new JMenuItem("Gestion de membre");
                 mainMenu.add(memberManagementItem);
+            updateButtonMenu = new JMenuItem("actualiser");
+                mainMenu.add(updateButtonMenu);
 
         JMenu optionMenu = new JMenu("?");
             aboutItem= new JMenuItem("À propos");
@@ -45,5 +47,9 @@ public class MenuBar extends JMenuBar {
 
     public JMenuItem getMemberManagementItem() {
         return memberManagementItem;
+    }
+
+    public JMenuItem getUpdateButtonMenu() {
+        return updateButtonMenu;
     }
 }

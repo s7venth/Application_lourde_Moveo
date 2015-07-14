@@ -18,8 +18,8 @@ import java.util.List;
 
 public class User {
     int id;
-    String firstName, lastName, birthday, email, password, country, city;
-    Date register, lastConnexion;
+    String firstName, lastName, email, password, country, city;
+    Date register, lastConnexion, birthday;
     boolean isAdmin;
 
     public User() {
@@ -71,11 +71,11 @@ public class User {
         this.lastName = lastName;
     }
 
-    public String getBirthday() {
+    public Date getBirthday() {
         return birthday;
     }
 
-    public void setBirthday(String birthday) {
+    public void setBirthday(Date birthday) {
         this.birthday = birthday;
     }
 

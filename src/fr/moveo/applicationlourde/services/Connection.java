@@ -19,29 +19,23 @@ import java.util.List;
 public class Connection {
 
     //FIXME ajouter la varitable url de connection
-    String url = "";
+    String url = "http://moveo.besaba.com/moderator.php";
 
     public StringBuffer getJsonFromUrl(List<NameValuePair> postParameters){
         StringBuffer result = new StringBuffer();
         String line = "";
         try {
             HttpClient httpclient = HttpClients.createDefault();
-            HttpPost httppost = new HttpPost("http://moveo.besaba.com/moderator.php");
-            System.out.println( "le httppost : "+httppost);
-            System.out.println( "le postParameters : "+postParameters);
+            HttpPost httppost = new HttpPost(url);
             // Request parameters and other properties.
-            System.out.print(new UrlEncodedFormEntity(postParameters, "UTF-8"));
             httppost.setEntity(new UrlEncodedFormEntity(postParameters, "UTF-8"));
             //Execute and get the response.
             HttpResponse response = httpclient.execute(httppost);
-            System.out.println( "le response : "+response);
             HttpEntity entity = response.getEntity();
-            System.out.println( "le entity : "+entity);
             InputStream inputStream = entity.getContent();
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
             while ((line = bufferedReader.readLine()) != null){
                 result.append(line);
-                System.out.println("le result : " + result);
             }
             bufferedReader.close();
             inputStream.close();

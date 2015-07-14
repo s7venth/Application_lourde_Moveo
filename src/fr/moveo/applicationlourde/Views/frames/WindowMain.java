@@ -3,11 +3,13 @@ package fr.moveo.applicationlourde.Views.frames;
 import fr.moveo.applicationlourde.autres.MenuBar;
 import fr.moveo.applicationlourde.Views.panels.ScreenMain;
 import fr.moveo.applicationlourde.model.User;
+import fr.moveo.applicationlourde.services.AbstractMethods;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 /**
  * Created by Sylvain on 11/03/15.
@@ -24,7 +26,7 @@ public class WindowMain extends JFrame implements ActionListener {
     Color homeColor;
 
     // CONSTRUCTEUR
-    public WindowMain(User user){
+    public WindowMain(User moderator, ArrayList<User> userList){
 
         // Ce frame utilisera une grille de placement de type BorderLayout
         this.getContentPane().setLayout(new BorderLayout());
@@ -33,11 +35,12 @@ public class WindowMain extends JFrame implements ActionListener {
         menu = new MenuBar();
             this.setJMenuBar(menu); // Integration de la barre de menu
             menu.getLogOutItem().addActionListener(this);
+            menu.getUpdateButtonMenu().addActionListener(this);
 
-        home = new ScreenMain(user);
+        home = new ScreenMain(moderator, userList);
         this.add(home);
 
-        this.windowConfiguration(user.getLastName());
+        this.windowConfiguration(moderator.getLastName());
 
     }
 
@@ -67,7 +70,17 @@ public class WindowMain extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if(e.getSource()==menu.getLogOutItem()){
+        Object  source=e.getSource();
+        if (source == menu.getUpdateButtonMenu()){
+            home.getMessage().setText(e.getSource().toString());
+            StringBuffer stringBuffer = new StringBuffer();
+            AbstractMethods abstractMethods = new AbstractMethods();
+            stringBuffer = abstractMethods.getUsersTest();
+            System.out.println("le getUser en toString : " + stringBuffer.toString());
+            home.setList(new JList(abstractMethods.setUserList(abstractMethods.getArrayList(stringBuffer))));
+        }
+
+        else if(source ==menu.getLogOutItem()){
             home.getMessage().setText("Au revoir");
         }
     }

@@ -11,6 +11,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 /**
  * Created by Sylvain on 12/03/15.
@@ -62,15 +63,18 @@ public class WindowConnexion extends JFrame implements ActionListener {
         boolean is_admin = (1 == json.getJSONObject("moderator").getInt("is_admin"));
         moderator.setIsAdmin(is_admin);
 
+        ArrayList<User> userList = abstractMethods.getArrayList(abstractMethods.getUsersTest());
+
+
         //bout de code pour tester l'application hors connexion
-        /*
+/*
         moderator.setLastName("administrateur");
         moderator.setIsAdmin(true);
         */
-        System.out.print("le moderator en string : "+moderator.toString());
+        System.out.println("le moderator en string : " + moderator.toString());
         if (result.toString()!="acces refuse"){
             this.dispose();
-            new WindowMain(moderator);
+            new WindowMain(moderator, userList);
         }
         else JOptionPane.showMessageDialog(null, result.toString());
     }
