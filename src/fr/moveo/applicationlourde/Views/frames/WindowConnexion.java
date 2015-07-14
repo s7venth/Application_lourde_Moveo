@@ -55,27 +55,37 @@ public class WindowConnexion extends JFrame implements ActionListener {
 
         //bout de code pour tester l'application avec connexion internet
         AbstractMethods abstractMethods = new AbstractMethods();
-        result = abstractMethods.loggin(screen.getMailEditText().getText(),screen.getPasswordEditText().getText());
-        JSONObject json = new JSONObject(result.toString());
-        moderator.setLastName(json.getJSONObject("moderator").getString("moderator_name"));
-        moderator.setId(json.getJSONObject("moderator").getInt("moderator_id"));
-        moderator.setEmail(json.getJSONObject("moderator").getString("moderator_email"));
-        boolean is_admin = (1 == json.getJSONObject("moderator").getInt("is_admin"));
-        moderator.setIsAdmin(is_admin);
+        if (screen.getMailEditText().getText().equals("")|| screen.getPasswordEditText().getText().equals("")){
+            JOptionPane.showMessageDialog(null, "veuillez remplir un des champs");
+        }else{
+            result = abstractMethods.loggin(screen.getMailEditText().getText(),screen.getPasswordEditText().getText());
+            JSONObject json = new JSONObject(result.toString());
+            if (json.getInt("message")==0){
+                JOptionPane.showMessageDialog(null, "le modérateur n'existe pas");
+            }
+            System.out.println("le resultat : "+ result.toString());
+            moderator.setLastName(json.getJSONObject("moderator").getString("moderator_name"));
+            moderator.setId(json.getJSONObject("moderator").getInt("moderator_id"));
+            moderator.setEmail(json.getJSONObject("moderator").getString("moderator_email"));
+            boolean is_admin = (1 == json.getJSONObject("moderator").getInt("is_admin"));
+            moderator.setIsAdmin(is_admin);
+            System.out.println("le modérator : " + moderator.toString());
 
-        ArrayList<User> userList = abstractMethods.getArrayList(abstractMethods.getUsersTest());
+            ArrayList<User> userList = abstractMethods.getArrayList(abstractMethods.getUsersTest());
 
 
-        //bout de code pour tester l'application hors connexion
+            //bout de code pour tester l'application hors connexion
 /*
         moderator.setLastName("administrateur");
         moderator.setIsAdmin(true);
         */
-        System.out.println("le moderator en string : " + moderator.toString());
-        if (result.toString()!="acces refuse"){
-            this.dispose();
-            new WindowMain(moderator, userList);
+            System.out.println("le moderator en string : " + moderator.toString());
+            if (result.toString()!="acces refuse"){
+                this.dispose();
+                new WindowMain(moderator, userList);
+            }
+            else JOptionPane.showMessageDialog(null, result.toString());
         }
-        else JOptionPane.showMessageDialog(null, result.toString());
+
     }
 }
