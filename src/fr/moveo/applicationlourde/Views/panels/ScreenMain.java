@@ -13,51 +13,67 @@ import javax.swing.event.ListSelectionListener;
 /**
  * page principale du logiciel
  */
-public class ScreenMain extends JPanel implements ListSelectionListener{
+public class ScreenMain extends JPanel{
 
     // VARIABLES
+    User user;
+    ArrayList usersList = new ArrayList();
     JTabbedPane jTabbedPane = new JTabbedPane();
-    JPanel jCards = new JPanel(new CardLayout());
-    UserSheet jIDSheet = new UserSheet();
-    Sheet jTrip = new Sheet();
-    Sheet jComments = new Sheet();
+    JPanel jCards = new JPanel();
+    CardLayout card = new CardLayout();
+    UserSheet userSheet;
+    Sheet jTrip,jComments;
     JLabel message = new JLabel("");
-    UserSheet userSheet = new UserSheet();
-    JList list = new JList();
-
-    public JList getList() {
-        return list;
-    }
-
-    public void setList(JList list) {
-        this.list = list;
-    }
+    JList list;
 
     public ScreenMain(User moderator, ArrayList<User>  userList){
-        AbstractMethods abstractMethods = new AbstractMethods();
+        jCards.setLayout(card);
+        DefaultListModel listModel = new DefaultListModel();
+        usersList = userList;
+        for (int i = 0; i < usersList.size(); i++) {
+            User user = (User) usersList.get(i);
+            userSheet = new UserSheet(user);
+            listModel.addElement(user);
+            jCards.add(userSheet, user.toString());
+        }
+        jTrip = new Sheet();
+        jComments = new Sheet();
+        user = new User();
+        list = new JList(listModel);
+        list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        list.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                if (!e.getValueIsAdjusting()){
+                    Object obj = list.getSelectedValue();
+                    User user = (User) obj;
+                    jCards.add(userSheet);
+                    CardLayout cL = (CardLayout) (jCards.getLayout());
+                    cL.show(jCards, user.toString());
+                    System.out.println(user.toString());
+                }
 
-        DefaultListModel user = abstractMethods.setUserList(userList);
-        list = new JList(user.toArray());
-        list.addListSelectionListener(this);
+            }
+        });
+
         this.setLayout(new BorderLayout());
-        this.add(list, BorderLayout.WEST);
-        this.add(userSheet, BorderLayout.CENTER);
-        this.screenConfiguration();
+        this.add(new JScrollPane(list), BorderLayout.WEST);
         this.add(message, BorderLayout.SOUTH);
+        this.screenConfiguration();
+
 
         // panel des différentes fiches qui s'afficheront en fonction des onglets
-        jCards.add(jIDSheet);
-        jIDSheet.setBackground(Color.BLUE);
         jCards.add(jTrip);
         jTrip.setBackground(Color.RED);
         jCards.add(jComments);
         jComments.setBackground(Color.GREEN);
 
         //rajout des boutons dans le panel d'onglets
-        jTabbedPane.addTab("Fiche Utilisateur", jIDSheet);
+        jTabbedPane.addTab("Fiche Utilisateur", jCards);
         jTabbedPane.addTab("Voyages", jTrip);
         jTabbedPane.addTab("Commentaires", jComments);
-        add(jTabbedPane, BorderLayout.CENTER);
+        this.add(jTabbedPane, BorderLayout.CENTER);
+
     }
 
     public void screenConfiguration(){
@@ -73,7 +89,5 @@ public class ScreenMain extends JPanel implements ListSelectionListener{
     }
 
 
-    @Override
-    public void valueChanged(ListSelectionEvent e) {
-    }
+//
 }

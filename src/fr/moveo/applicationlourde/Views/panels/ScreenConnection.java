@@ -2,6 +2,8 @@ package fr.moveo.applicationlourde.Views.panels;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 /**
  * ceci est le panel de connection. le layout est un gridBagLayout de facon à pouvoir bien organiser la fenetre

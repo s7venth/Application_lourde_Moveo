@@ -60,14 +60,6 @@ public class WindowMain extends JFrame implements ActionListener {
 
     }
 
-    public void setPanel(JPanel pan){
-        this.setVisible(false);
-       // this.tempo.removeAll();
-        // this.tempo.add(pan,BorderLayout.CENTER);
-        this.setVisible(true);
-
-    }
-
     @Override
     public void actionPerformed(ActionEvent e) {
         Object  source=e.getSource();
@@ -77,7 +69,7 @@ public class WindowMain extends JFrame implements ActionListener {
             AbstractMethods abstractMethods = new AbstractMethods();
             stringBuffer = abstractMethods.getUsersTest();
             System.out.println("le getUser en toString : " + stringBuffer.toString());
-            home.setList(new JList(abstractMethods.setUserList(abstractMethods.getArrayList(stringBuffer))));
+//            home.setList(new JList(abstractMethods.setUserList(abstractMethods.getArrayList(stringBuffer))));
         }
 
         else if(source ==menu.getLogOutItem()){

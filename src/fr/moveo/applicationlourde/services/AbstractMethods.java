@@ -32,7 +32,7 @@ public class AbstractMethods {
 
     public StringBuffer getUsersTest(){
         List<NameValuePair> urlParameters = new ArrayList<NameValuePair>();
-        urlParameters.add(new BasicNameValuePair("tag","getUsers"));
+        urlParameters.add(new BasicNameValuePair("tag", "getUsers"));
         return connection.getJsonFromUrl(urlParameters);
     }
 
@@ -42,24 +42,37 @@ public class AbstractMethods {
         JSONArray userTable = json.getJSONArray("user");
         for (int i = 0; i < userTable.length(); i++) {
             User user = new User();
-            user.setId(userTable.getJSONObject(i).getInt("user_id"));
-            user.setLastName(userTable.getJSONObject(i).getString("user_last_name"));
-            user.setFirstName(userTable.getJSONObject(i).getString("user_first_name"));
-            user.setEmail(userTable.getJSONObject(i).getString("user_email"));
-            /*
-            System.out.println(userTable.getJSONObject(i).getString("user_birthday"));
-            String dateStr = userTable.getJSONObject(i).getString("user_birthday");
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
             try {
-                Date birthDate = sdf.parse(dateStr);
-                user.setBirthday(birthDate);
-            } catch (ParseException e) {
+                user.setId(userTable.getJSONObject(i).getInt("user_id"));
+                user.setLastName(userTable.getJSONObject(i).getString("user_last_name"));
+                user.setFirstName(userTable.getJSONObject(i).getString("user_first_name"));
+                user.setEmail(userTable.getJSONObject(i).getString("user_email"));
+                System.out.println(userTable.getJSONObject(i).getString("user_birthday"));
+                if(userTable.getJSONObject(i).has("user_birthday")&&!userTable.getJSONObject(i).isNull("user_birthday")){
+                    String dateStr = userTable.getJSONObject(i).getString("user_birthday");
+                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                    try {
+                        Date birthDate = sdf.parse(dateStr);
+                        user.setBirthday(birthDate);
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+                } else try {
+                    Date birthDate = new SimpleDateFormat("yyyy-MM-dd").parse("0000-00-00");
+                    user.setBirthday(birthDate);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                if(userTable.getJSONObject(i).has("user_birthday")&&!userTable.getJSONObject(i).isNull("user_birthday")){
+                    user.setCountry(userTable.getJSONObject(i).getString("user_country"));
+                }else user.setCountry("no data");
+                if(userTable.getJSONObject(i).has("user_birthday")&&!userTable.getJSONObject(i).isNull("user_birthday")){
+                    user.setCity(userTable.getJSONObject(i).getString("user_city"));
+                }else user.setCity("no data");
+                userArrayList.add(user);
+            }catch (NullPointerException e){
                 e.printStackTrace();
             }
-            user.setCountry(userTable.getJSONObject(i).getString("user_country"));
-            user.setCity(userTable.getJSONObject(i).getString("user_city"));
-            */
-            userArrayList.add(user);
         }
         System.out.println("la list d'utilisateurs : "+userTable.toString());
         System.out.println("ArrayList : "+userArrayList.toString());
@@ -71,9 +84,8 @@ public class AbstractMethods {
         DefaultListModel listModel = new DefaultListModel();
         //Remplir le model
         int size = userArrayList.size();
-        for(int index=0; index<size; index++)
-        {
-            listModel.addElement(userArrayList.get(index).getLastName()+" "+userArrayList.get(index).getFirstName());
+        for (int i = 0; i < size; i++) {
+            listModel.addElement(userArrayList.get(i));
         }
         return listModel;
     }
