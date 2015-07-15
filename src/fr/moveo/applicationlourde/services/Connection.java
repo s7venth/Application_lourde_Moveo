@@ -26,14 +26,42 @@ import java.util.List;
 public class Connection {
 
     //FIXME ajouter la varitable url de connection
-    String url = "http://moveo.besaba.com/moderator.php";
+    String urlModerator = "http://moveo.besaba.com/moderator.php";
+    String urlTrip = "http://moveo.besaba.com/trip.php";
 
     public StringBuffer getJsonFromUrl(List<NameValuePair> postParameters){
         StringBuffer result = new StringBuffer();
         String line = "";
         try {
             HttpClient httpclient = HttpClients.createDefault();
-            HttpPost httppost = new HttpPost(url);
+            HttpPost httppost = new HttpPost(urlModerator);
+            // Request parameters and other properties.
+            httppost.setEntity(new UrlEncodedFormEntity(postParameters, "UTF-8"));
+            //Execute and get the response.
+            HttpResponse response = httpclient.execute(httppost);
+            HttpEntity entity = response.getEntity();
+            InputStream inputStream = entity.getContent();
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+            while ((line = bufferedReader.readLine()) != null){
+                result.append(line);
+            }
+            bufferedReader.close();
+            inputStream.close();
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        } catch (ClientProtocolException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+    public StringBuffer getJsonFromUrlTrip(List<NameValuePair> postParameters){
+        StringBuffer result = new StringBuffer();
+        String line = "";
+        try {
+            HttpClient httpclient = HttpClients.createDefault();
+            HttpPost httppost = new HttpPost(urlTrip);
             // Request parameters and other properties.
             httppost.setEntity(new UrlEncodedFormEntity(postParameters, "UTF-8"));
             //Execute and get the response.

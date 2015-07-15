@@ -17,6 +17,7 @@ import java.util.ArrayList;
 public class WindowMain extends JFrame implements ActionListener {
 
     // DECLARATION DU MENU
+    User moderatorMain;
     private MenuBar menu;
 
     // DECLARATION DES PANELS
@@ -27,7 +28,7 @@ public class WindowMain extends JFrame implements ActionListener {
 
     // CONSTRUCTEUR
     public WindowMain(User moderator, ArrayList<User> userList){
-
+        moderatorMain = moderator;
         // Ce frame utilisera une grille de placement de type BorderLayout
         this.getContentPane().setLayout(new BorderLayout());
 
@@ -60,20 +61,25 @@ public class WindowMain extends JFrame implements ActionListener {
 
     }
 
+    /**
+     * Methode qui contient tout les evenements d'action sur le menu
+     * @param e
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         Object  source=e.getSource();
         if (source == menu.getUpdateButtonMenu()){
             home.getMessage().setText(e.getSource().toString());
-            StringBuffer stringBuffer = new StringBuffer();
             AbstractMethods abstractMethods = new AbstractMethods();
-            stringBuffer = abstractMethods.getUsersTest();
-            System.out.println("le getUser en toString : " + stringBuffer.toString());
-//            home.setList(new JList(abstractMethods.setUserList(abstractMethods.getArrayList(stringBuffer))));
+            ArrayList<User> userArrayList = abstractMethods.getArrayList(abstractMethods.getUsers());
+            System.out.println("le getUser en toString : " +userArrayList.toString());
+            home = new ScreenMain(this.moderatorMain, userArrayList);
+            home.setVisible(true);
+            home.getMessage().setText("Liste mis à jour");
         }
 
         else if(source ==menu.getLogOutItem()){
-            home.getMessage().setText("Au revoir");
+            this.dispose();
         }
     }
 }

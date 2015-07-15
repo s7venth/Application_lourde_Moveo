@@ -22,7 +22,7 @@ public class ScreenMain extends JPanel{
     JPanel jCards = new JPanel();
     CardLayout card = new CardLayout();
     UserSheet userSheet;
-    Sheet jTrip,jComments;
+    TripSheet tripSheet, commentsSheet;
     JLabel message = new JLabel("");
     JList list;
 
@@ -33,11 +33,11 @@ public class ScreenMain extends JPanel{
         for (int i = 0; i < usersList.size(); i++) {
             User user = (User) usersList.get(i);
             userSheet = new UserSheet(user);
+            tripSheet = new TripSheet(user);
             listModel.addElement(user);
             jCards.add(userSheet, user.toString());
+            jCards.add(tripSheet, user.toString());
         }
-        jTrip = new Sheet();
-        jComments = new Sheet();
         user = new User();
         list = new JList(listModel);
         list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -63,15 +63,15 @@ public class ScreenMain extends JPanel{
 
 
         // panel des différentes fiches qui s'afficheront en fonction des onglets
-        jCards.add(jTrip);
-        jTrip.setBackground(Color.RED);
-        jCards.add(jComments);
-        jComments.setBackground(Color.GREEN);
+        jCards.add(tripSheet);
+        tripSheet.setBackground(Color.RED);
+        jCards.add(commentsSheet);
+        commentsSheet.setBackground(Color.GREEN);
 
         //rajout des boutons dans le panel d'onglets
         jTabbedPane.addTab("Fiche Utilisateur", jCards);
-        jTabbedPane.addTab("Voyages", jTrip);
-        jTabbedPane.addTab("Commentaires", jComments);
+        jTabbedPane.addTab("Voyages", tripSheet);
+        jTabbedPane.addTab("Commentaires", commentsSheet);
         this.add(jTabbedPane, BorderLayout.CENTER);
 
     }

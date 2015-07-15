@@ -1,5 +1,6 @@
 package fr.moveo.applicationlourde.services;
 
+import fr.moveo.applicationlourde.model.Trip;
 import fr.moveo.applicationlourde.model.User;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
@@ -17,23 +18,47 @@ import java.util.List;
  * This class is used to be le methods class.
  */
 public class AbstractMethods {
-    private final String USER_AGENT = "chrome";
+    public static final String GET_USER = "getUsers";
+    public static final String USER_LAST_NAME = "user_last_name";
+    public static final String USER_ID = "user_id";
+    public static final String USER_FIRST_NAME = "user_first_name";
+    public static final String USER_EMAIL = "user_email";
+    public static final String USER_BIRTHDAY = "user_birthday";
+    public static final String USER_COUNTRY = "user_country";
+    public static final String USER_CITY = "user_city";
+    public static final String GET_TRIP_LIST = "getTripList";
+    public static final String TRIP_ID = "trip_id";
+    public static final String TRIP_NAME = "trip_name";
+    public static final String TRIP_COUNTRY = "trip_country";
+    public static final String TRIP_COMMENT_COUNT = "trip_comment_count";
+
     private Connection connection = new Connection();
     /**
      * method used to get all the users of the application
      * @return an array of user
      */
 
-    public List<NameValuePair> getUsers(){
+    public StringBuffer loggin(String email, String password) {
+
         List<NameValuePair> urlParameters = new ArrayList<NameValuePair>();
-        urlParameters.add(new BasicNameValuePair("tag","getUsers"));
-        return urlParameters;
+        urlParameters.add(new BasicNameValuePair("tag","login"));
+        urlParameters.add(new BasicNameValuePair("email",email));
+        urlParameters.add(new BasicNameValuePair("password", password));
+        return connection.getJsonFromUrl(urlParameters);
     }
 
-    public StringBuffer getUsersTest(){
+
+    public StringBuffer getUsers(){
         List<NameValuePair> urlParameters = new ArrayList<NameValuePair>();
-        urlParameters.add(new BasicNameValuePair("tag", "getUsers"));
+        urlParameters.add(new BasicNameValuePair("tag", GET_USER));
         return connection.getJsonFromUrl(urlParameters);
+    }
+
+    public StringBuffer getTripList(String userId){
+        List<NameValuePair> urlParameters = new ArrayList<NameValuePair>();
+        urlParameters.add(new BasicNameValuePair("tag",GET_TRIP_LIST));
+        urlParameters.add(new BasicNameValuePair(USER_ID,userId));
+        return connection.getJsonFromUrlTrip(urlParameters);
     }
 
     public ArrayList<User> getArrayList(StringBuffer jsonReceived){
@@ -43,13 +68,13 @@ public class AbstractMethods {
         for (int i = 0; i < userTable.length(); i++) {
             User user = new User();
             try {
-                user.setId(userTable.getJSONObject(i).getInt("user_id"));
-                user.setLastName(userTable.getJSONObject(i).getString("user_last_name"));
-                user.setFirstName(userTable.getJSONObject(i).getString("user_first_name"));
-                user.setEmail(userTable.getJSONObject(i).getString("user_email"));
-                System.out.println(userTable.getJSONObject(i).getString("user_birthday"));
-                if(userTable.getJSONObject(i).has("user_birthday")&&!userTable.getJSONObject(i).isNull("user_birthday")){
-                    String dateStr = userTable.getJSONObject(i).getString("user_birthday");
+                user.setId(userTable.getJSONObject(i).getInt(USER_ID));
+                user.setLastName(userTable.getJSONObject(i).getString(USER_LAST_NAME));
+                user.setFirstName(userTable.getJSONObject(i).getString(USER_FIRST_NAME));
+                user.setEmail(userTable.getJSONObject(i).getString(USER_EMAIL));
+                System.out.println(userTable.getJSONObject(i).getString(USER_BIRTHDAY));
+                if(userTable.getJSONObject(i).has(USER_BIRTHDAY)&&!userTable.getJSONObject(i).isNull(USER_BIRTHDAY)){
+                    String dateStr = userTable.getJSONObject(i).getString(USER_BIRTHDAY);
                     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
                     try {
                         Date birthDate = sdf.parse(dateStr);
@@ -63,39 +88,42 @@ public class AbstractMethods {
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
-                if(userTable.getJSONObject(i).has("user_birthday")&&!userTable.getJSONObject(i).isNull("user_birthday")){
-                    user.setCountry(userTable.getJSONObject(i).getString("user_country"));
+                if(userTable.getJSONObject(i).has(USER_BIRTHDAY)&&!userTable.getJSONObject(i).isNull(USER_BIRTHDAY)){
+                    if (!(userTable.getJSONObject(i).getString(USER_COUNTRY).compareTo("null")==0)){
+                        user.setCountry(userTable.getJSONObject(i).getString(USER_COUNTRY));
+                    }else user.setCountry("no data");
                 }else user.setCountry("no data");
-                if(userTable.getJSONObject(i).has("user_birthday")&&!userTable.getJSONObject(i).isNull("user_birthday")){
-                    user.setCity(userTable.getJSONObject(i).getString("user_city"));
+                if(userTable.getJSONObject(i).has(USER_BIRTHDAY)&&!userTable.getJSONObject(i).isNull(USER_BIRTHDAY)){
+                    user.setCity(userTable.getJSONObject(i).getString(USER_CITY));
                 }else user.setCity("no data");
                 userArrayList.add(user);
             }catch (NullPointerException e){
                 e.printStackTrace();
             }
         }
-        System.out.println("la list d'utilisateurs : "+userTable.toString());
-        System.out.println("ArrayList : "+userArrayList.toString());
+        System.out.println("la list d'utilisateurs : " + userTable.toString());
+        System.out.println("ArrayList : " + userArrayList.toString());
         return userArrayList;
     }
 
-    public DefaultListModel setUserList(ArrayList<User> userArrayList){
-        //Création du model
-        DefaultListModel listModel = new DefaultListModel();
-        //Remplir le model
-        int size = userArrayList.size();
-        for (int i = 0; i < size; i++) {
-            listModel.addElement(userArrayList.get(i));
+    public ArrayList<Trip> getArrayListTrip (StringBuffer jsonReceived){
+        ArrayList<Trip> tripArrayList = new ArrayList<Trip>();
+        JSONObject json = new JSONObject(jsonReceived.toString());
+        JSONArray tripTable = json.getJSONArray("trip");
+        for (int i = 0; i < tripTable.length(); i++) {
+            Trip trip = new Trip();
+            try {
+                trip.setId(tripTable.getJSONObject(i).getInt(TRIP_ID));
+                trip.setName(tripTable.getJSONObject(i).getString(TRIP_NAME));
+                trip.setCountry(tripTable.getJSONObject(i).getString(TRIP_COUNTRY));
+                trip.setCommentCount(tripTable.getJSONObject(i).getInt(TRIP_COMMENT_COUNT));
+                tripArrayList.add(trip);
+            }catch (NullPointerException e){
+                e.printStackTrace();
+            }
         }
-        return listModel;
-    }
-
-    public StringBuffer loggin(String email, String password) {
-
-        List<NameValuePair> urlParameters = new ArrayList<NameValuePair>();
-        urlParameters.add(new BasicNameValuePair("tag","login"));
-        urlParameters.add(new BasicNameValuePair("email",email));
-        urlParameters.add(new BasicNameValuePair("password", password));
-        return connection.getJsonFromUrl(urlParameters);
+        System.out.println("la list d'utilisateurs : " + tripTable.toString());
+        System.out.println("ArrayList : " + tripArrayList.toString());
+        return tripArrayList;
     }
 }

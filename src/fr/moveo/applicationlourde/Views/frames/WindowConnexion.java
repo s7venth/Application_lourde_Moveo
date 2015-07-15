@@ -4,7 +4,6 @@ import fr.moveo.applicationlourde.Events.MyListener;
 import fr.moveo.applicationlourde.Views.panels.ScreenConnection;
 import fr.moveo.applicationlourde.model.User;
 import fr.moveo.applicationlourde.services.AbstractMethods;
-import fr.moveo.applicationlourde.services.Connection;
 import org.json.JSONObject;
 
 import javax.swing.*;
@@ -75,7 +74,7 @@ public class WindowConnexion extends JFrame implements ActionListener {
                 moderator.setIsAdmin(is_admin);
                 System.out.println("le modérator : " + moderator.toString());
 
-                ArrayList<User> userList = abstractMethods.getArrayList(abstractMethods.getUsersTest());
+                ArrayList<User> userList = abstractMethods.getArrayList(abstractMethods.getUsers());
 
 
                 //bout de code pour tester l'application hors connexion
