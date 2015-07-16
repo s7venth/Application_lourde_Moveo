@@ -20,7 +20,11 @@ import java.util.List;
  * This class is used to be le methods class.
  */
 public class AbstractMethods {
+
+    // je fais des variable static pour une meilleure gestion à l'avenir
     public static final String GET_USER = "getUsers";
+    public static final String DELETE_USER = "deleteUser";
+    public static final String UPDATE_USER = "updateProfil";
     public static final String USER_LAST_NAME = "user_last_name";
     public static final String USER_ID = "user_id";
     public static final String USER_FIRST_NAME = "user_first_name";
@@ -55,6 +59,25 @@ public class AbstractMethods {
         return connection.getJsonFromUrl(urlParameters);
     }
 
+    public StringBuffer deleteUser(String userId){
+        List<NameValuePair> accountRequest = new ArrayList<NameValuePair>();
+        accountRequest.add(new BasicNameValuePair("tag", DELETE_USER));
+        accountRequest.add(new BasicNameValuePair("userId", userId));
+        return connection.getJsonFromUrlUser(accountRequest);
+    }
+
+    public StringBuffer updateUser(String id, String lastName, String firstName, String birthday, String city, String country){
+        List<NameValuePair> modifyUserForm = new ArrayList<NameValuePair>();
+        modifyUserForm.add(new BasicNameValuePair("tag", UPDATE_USER));
+        modifyUserForm.add(new BasicNameValuePair("userId", id));
+        modifyUserForm.add(new BasicNameValuePair("lastName", lastName));
+        modifyUserForm.add(new BasicNameValuePair("firstName", firstName));
+        modifyUserForm.add(new BasicNameValuePair("birthday", birthday));
+        modifyUserForm.add(new BasicNameValuePair("city", city));
+        modifyUserForm.add(new BasicNameValuePair("country", country));
+        return connection.getJsonFromUrl(modifyUserForm);
+    }
+
     public StringBuffer getTripList(String userId){
         List<NameValuePair> urlParameters = new ArrayList<NameValuePair>();
         urlParameters.add(new BasicNameValuePair("tag", GET_TRIP_LIST));
@@ -76,7 +99,6 @@ public class AbstractMethods {
                 user.setLastName(userTable.getJSONObject(i).getString(USER_LAST_NAME));
                 user.setFirstName(userTable.getJSONObject(i).getString(USER_FIRST_NAME));
                 user.setEmail(userTable.getJSONObject(i).getString(USER_EMAIL));
-                System.out.println(userTable.getJSONObject(i).getString(USER_BIRTHDAY));
                 if(userTable.getJSONObject(i).has(USER_BIRTHDAY)&&!userTable.getJSONObject(i).isNull(USER_BIRTHDAY)){
                     String dateStr = userTable.getJSONObject(i).getString(USER_BIRTHDAY);
                     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -111,7 +133,6 @@ public class AbstractMethods {
     public ArrayList<Trip> getArrayListTrip (StringBuffer jsonReceived){
         ArrayList<Trip> tripArrayList = new ArrayList<Trip>();
         JSONObject json = new JSONObject(jsonReceived.toString());
-        System.out.println("le json : "+json.toString());
         if (json.has("trip")){
             JSONArray tripTable = json.getJSONArray("trip");
             for (int i = 0; i < tripTable.length(); i++) {
@@ -128,15 +149,12 @@ public class AbstractMethods {
                     e.printStackTrace();
                 }
             }
-            System.out.println("la list des trip : " + tripTable.toString());
         }else {
             if (json.getInt("error")==1){
                 Trip trip = new Trip();
                 tripArrayList.add(trip);
-                System.out.println(json.getString("message"));
             }
         }
-        System.out.println("ArrayList : " + tripArrayList.toString());
         return tripArrayList;
     }
 

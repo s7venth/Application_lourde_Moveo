@@ -62,7 +62,6 @@ public class WindowConnexion extends JFrame implements ActionListener {
         }else{
             result = abstractMethods.loggin(screen.getMailEditText().getText(),screen.getPasswordEditText().getText());
             JSONObject json = new JSONObject(result.toString());
-            System.out.println("la réponse en string : " + json.toString());
             if (json.getInt("error")==1){
                 JOptionPane.showMessageDialog(null, "le modérateur n'existe pas");
             }else {

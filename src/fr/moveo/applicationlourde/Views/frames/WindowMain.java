@@ -74,6 +74,7 @@ public class WindowMain extends JFrame implements ActionListener {
             ArrayList<User> userArrayList = abstractMethods.getArrayList(abstractMethods.getUsers());
             System.out.println("le getUser en toString : " +userArrayList.toString());
             home = new ScreenMain(this.moderatorMain, userArrayList);
+            pack();
             home.setVisible(true);
             home.getMessage().setText("Liste mis à jour");
         }
