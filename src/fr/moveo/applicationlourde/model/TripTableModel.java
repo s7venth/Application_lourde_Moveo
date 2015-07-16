@@ -4,6 +4,7 @@ import javax.swing.table.AbstractTableModel;
 import java.util.List;
 
 /**
+ *
  * Created by alex on 16/07/15.
  */
 public class TripTableModel  extends AbstractTableModel {

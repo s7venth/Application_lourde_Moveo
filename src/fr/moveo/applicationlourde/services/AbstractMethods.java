@@ -57,14 +57,17 @@ public class AbstractMethods {
 
     public StringBuffer getTripList(String userId){
         List<NameValuePair> urlParameters = new ArrayList<NameValuePair>();
-        urlParameters.add(new BasicNameValuePair("tag",GET_TRIP_LIST));
-        urlParameters.add(new BasicNameValuePair(USER_ID,userId));
+        urlParameters.add(new BasicNameValuePair("tag", GET_TRIP_LIST));
+        urlParameters.add(new BasicNameValuePair(USER_ID, userId));
         return connection.getJsonFromUrlTrip(urlParameters);
     }
 
     public ArrayList<User> getArrayList(StringBuffer jsonReceived){
         ArrayList<User> userArrayList = new ArrayList<User>();
         JSONObject json = new JSONObject(jsonReceived.toString());
+        if (json.getInt("error")==1){
+            JOptionPane.showMessageDialog(null, json.getString("message"));
+        }
         JSONArray userTable = json.getJSONArray("user");
         for (int i = 0; i < userTable.length(); i++) {
             User user = new User();
@@ -102,28 +105,37 @@ public class AbstractMethods {
                 e.printStackTrace();
             }
         }
-        System.out.println("la list d'utilisateurs : " + userTable.toString());
-        System.out.println("ArrayList : " + userArrayList.toString());
         return userArrayList;
     }
 
     public ArrayList<Trip> getArrayListTrip (StringBuffer jsonReceived){
         ArrayList<Trip> tripArrayList = new ArrayList<Trip>();
         JSONObject json = new JSONObject(jsonReceived.toString());
-        JSONArray tripTable = json.getJSONArray("trip");
-        for (int i = 0; i < tripTable.length(); i++) {
-            Trip trip = new Trip();
-            try {
-                trip.setId(tripTable.getJSONObject(i).getInt(TRIP_ID));
-                trip.setName(tripTable.getJSONObject(i).getString(TRIP_NAME));
-                trip.setCountry(tripTable.getJSONObject(i).getString(TRIP_COUNTRY));
-                trip.setCommentCount(tripTable.getJSONObject(i).getInt(TRIP_COMMENT_COUNT));
+        System.out.println("le json : "+json.toString());
+        if (json.has("trip")){
+            JSONArray tripTable = json.getJSONArray("trip");
+            for (int i = 0; i < tripTable.length(); i++) {
+                Trip trip = new Trip();
+                try {
+                    trip.setId(tripTable.getJSONObject(i).getInt(TRIP_ID));
+                    trip.setName(tripTable.getJSONObject(i).getString(TRIP_NAME));
+                    trip.setCountry(tripTable.getJSONObject(i).getString(TRIP_COUNTRY));
+                    if(tripTable.getJSONObject(i).has(TRIP_COMMENT_COUNT)&&!tripTable.getJSONObject(i).isNull(TRIP_COMMENT_COUNT)){
+                        trip.setCommentCount(tripTable.getJSONObject(i).getInt(TRIP_COMMENT_COUNT));
+                    } else trip.setCommentCount(0);
+                    tripArrayList.add(trip);
+                }catch (NullPointerException e){
+                    e.printStackTrace();
+                }
+            }
+            System.out.println("la list des trip : " + tripTable.toString());
+        }else {
+            if (json.getInt("error")==1){
+                Trip trip = new Trip();
                 tripArrayList.add(trip);
-            }catch (NullPointerException e){
-                e.printStackTrace();
+                System.out.println(json.getString("message"));
             }
         }
-        System.out.println("la list d'utilisateurs : " + tripTable.toString());
         System.out.println("ArrayList : " + tripArrayList.toString());
         return tripArrayList;
     }

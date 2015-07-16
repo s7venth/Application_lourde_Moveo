@@ -66,13 +66,11 @@ public class WindowConnexion extends JFrame implements ActionListener {
             if (json.getInt("error")==1){
                 JOptionPane.showMessageDialog(null, "le modérateur n'existe pas");
             }else {
-                System.out.println("le resultat : "+ result.toString());
                 moderator.setLastName(json.getJSONObject("moderator").getString("moderator_name"));
                 moderator.setId(json.getJSONObject("moderator").getInt("moderator_id"));
                 moderator.setEmail(json.getJSONObject("moderator").getString("moderator_email"));
                 boolean is_admin = (1 == json.getJSONObject("moderator").getInt("is_admin"));
                 moderator.setIsAdmin(is_admin);
-                System.out.println("le modérator : " + moderator.toString());
 
                 ArrayList<User> userList = abstractMethods.getArrayList(abstractMethods.getUsers());
 
@@ -82,7 +80,6 @@ public class WindowConnexion extends JFrame implements ActionListener {
                 moderator.setLastName("administrateur");
                 moderator.setIsAdmin(true);
                  */
-                System.out.println("le moderator en string : " + moderator.toString());
                 if (result.toString()!="acces refuse"){
                     this.dispose();
                     new WindowMain(moderator, userList);

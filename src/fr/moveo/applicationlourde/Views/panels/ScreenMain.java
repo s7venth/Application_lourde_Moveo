@@ -24,7 +24,8 @@ public class ScreenMain extends JPanel{
     JPanel jCards = new JPanel();
     CardLayout card = new CardLayout();
     UserSheet userSheet;
-    TripSheet tripSheet, commentsSheet;
+    TripSheet tripSheet;
+    Sheet commentsSheet = new Sheet();
     JLabel message = new JLabel("");
     JList list;
 
@@ -39,7 +40,7 @@ public class ScreenMain extends JPanel{
             jCards.add(userSheet, user.toString());
             tripsList = abstractMethods.getArrayListTrip(abstractMethods.getTripList(Integer.toString(user.getId())));
             tripSheet = new TripSheet(tripsList);
-            jCards.add(tripSheet, user.toString());
+//            jCards.add(tripSheet, user.toString());
         }
         user = new User();
         list = new JList(listModel);
@@ -47,7 +48,7 @@ public class ScreenMain extends JPanel{
         list.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
             @Override
             public void valueChanged(ListSelectionEvent e) {
-                if (!e.getValueIsAdjusting()){
+                if (!e.getValueIsAdjusting()) {
                     Object obj = list.getSelectedValue();
                     User user = (User) obj;
                     jCards.add(userSheet);
