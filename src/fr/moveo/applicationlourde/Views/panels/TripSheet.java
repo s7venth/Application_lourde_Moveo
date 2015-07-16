@@ -2,6 +2,7 @@ package fr.moveo.applicationlourde.Views.panels;
 
 import fr.moveo.applicationlourde.model.Trip;
 import fr.moveo.applicationlourde.model.User;
+import fr.moveo.applicationlourde.services.AbstractMethods;
 
 import javax.swing.*;
 import java.awt.*;
@@ -13,29 +14,15 @@ import java.util.ArrayList;
 public class TripSheet extends JPanel {
     //VARIABLES
     Trip trip = new Trip();
-
-    GridLayout gridLayout = new GridLayout(12,4);
-    JLabel idLabel, nameLabel, descriptionLabel, countryLabel, dateCreation;
-    JTextField idTextfield = new JTextField();
-    JTextField firstNameTextfield = new JTextField();
-    JTextField lastNameTextfield = new JTextField();
-    JTextField birthdayTextfield = new JTextField();
-    JTextField emailTextfield = new JTextField();
-    JTextField passwordTextfield = new JTextField();
-    JTextField countryTextfield = new JTextField();
-    JTextField cityTextfield = new JTextField();
-    JTextField registerTextfield = new JTextField();
-    JTextField lastConnexionTextfield = new JTextField();
+    ArrayList<Trip> tripList= new ArrayList<Trip>();
+    AbstractMethods abstractMethods = new AbstractMethods();
 
     //CONSTRUCTEUR
-    public TripSheet(User user) {
+    public TripSheet(ArrayList<Trip> tripArrayList) {
 
-        idLabel = new JLabel("Id");
-        nameLabel = new JLabel("Nom");
-        descriptionLabel = new JLabel("Description");
-        countryLabel = new JLabel("Pays");
-        dateCreation = new JLabel("Date de derniere connexion");
-        setLayout(gridLayout);
+        JTable tableau = new JTable(abstractMethods.getTableTrip(tripArrayList));
+
+        this.add(new JScrollPane(tableau), BorderLayout.CENTER);
     }
 
 

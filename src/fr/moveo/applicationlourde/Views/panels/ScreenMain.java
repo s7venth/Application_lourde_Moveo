@@ -17,7 +17,9 @@ public class ScreenMain extends JPanel{
 
     // VARIABLES
     User user;
+    AbstractMethods abstractMethods = new AbstractMethods();
     ArrayList usersList = new ArrayList();
+    ArrayList tripsList = new ArrayList();
     JTabbedPane jTabbedPane = new JTabbedPane();
     JPanel jCards = new JPanel();
     CardLayout card = new CardLayout();
@@ -33,9 +35,10 @@ public class ScreenMain extends JPanel{
         for (int i = 0; i < usersList.size(); i++) {
             User user = (User) usersList.get(i);
             userSheet = new UserSheet(user);
-            tripSheet = new TripSheet(user);
             listModel.addElement(user);
             jCards.add(userSheet, user.toString());
+            tripsList = abstractMethods.getArrayListTrip(abstractMethods.getTripList(Integer.toString(user.getId())));
+            tripSheet = new TripSheet(tripsList);
             jCards.add(tripSheet, user.toString());
         }
         user = new User();

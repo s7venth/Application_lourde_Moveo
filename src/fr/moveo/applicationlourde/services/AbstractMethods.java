@@ -1,6 +1,7 @@
 package fr.moveo.applicationlourde.services;
 
 import fr.moveo.applicationlourde.model.Trip;
+import fr.moveo.applicationlourde.model.TripTableModel;
 import fr.moveo.applicationlourde.model.User;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
@@ -8,6 +9,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import java.text.ParseException;
 import java.util.Date;
 import java.text.SimpleDateFormat;
@@ -46,7 +48,6 @@ public class AbstractMethods {
         urlParameters.add(new BasicNameValuePair("password", password));
         return connection.getJsonFromUrl(urlParameters);
     }
-
 
     public StringBuffer getUsers(){
         List<NameValuePair> urlParameters = new ArrayList<NameValuePair>();
@@ -125,5 +126,10 @@ public class AbstractMethods {
         System.out.println("la list d'utilisateurs : " + tripTable.toString());
         System.out.println("ArrayList : " + tripArrayList.toString());
         return tripArrayList;
+    }
+
+    public TripTableModel getTableTrip(ArrayList<Trip> tripArrayList){
+        TripTableModel TripTableModel = new TripTableModel(tripArrayList);
+        return TripTableModel;
     }
 }

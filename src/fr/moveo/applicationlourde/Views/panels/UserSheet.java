@@ -18,10 +18,6 @@ public class UserSheet extends JPanel {
         this.user = user;
     }
 
-    /*
-        GridBagLayout gridBagLayout = new GridBagLayout();
-        GridBagConstraints gridBagConstraints = new GridBagConstraints();
-        */
     GridLayout gridLayout = new GridLayout(12,2);
     JLabel idLabel, firstNameLabel, lastNameLabel, birthdayLabel, emailLabel, passwordLabel,
             countryLabel, cityLabel, registerLabel, lastConnexionLabel;
@@ -79,52 +75,6 @@ public class UserSheet extends JPanel {
         this.add(registerTextfield,17);
         this.add(lastConnexionLabel,18);
         this.add(lastConnexionTextfield,19);
-        /*
-        setLayout(gridBagLayout);
-        gridBagConstraints.gridx=0;
-        gridBagConstraints.gridy=0;
-        gridBagConstraints.gridheight = 1;
-        gridBagConstraints.gridwidth = 1;
-        add(idLabel, gridBagConstraints);
-        gridBagConstraints.gridy = 1;
-        add(firstNameLabel, gridBagConstraints);
-        gridBagConstraints.gridy = 2;
-        add(lastNameLabel, gridBagConstraints);
-        gridBagConstraints.gridy = 3;
-        add(birthdayLabel, gridBagConstraints);
-        gridBagConstraints.gridy = 4;
-        add(emailLabel, gridBagConstraints);
-        gridBagConstraints.gridy = 5;
-        add(passwordLabel, gridBagConstraints);
-        gridBagConstraints.gridy = 6;
-        add(countryLabel, gridBagConstraints);
-        gridBagConstraints.gridy = 7;
-        add(cityLabel, gridBagConstraints);
-        gridBagConstraints.gridy = 8;
-        add(registerLabel, gridBagConstraints);
-        gridBagConstraints.gridy = 9;
-        add(lastConnexionLabel, gridBagConstraints);
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridheight = 3;
-        add(idTextfield, gridBagConstraints);
-        gridBagConstraints.gridy = 2;
-        add(lastNameTextfield, gridBagConstraints);
-        gridBagConstraints.gridy = 3;
-        add(birthdayTextfield, gridBagConstraints);
-        gridBagConstraints.gridy = 4;
-        add(emailTextfield, gridBagConstraints);
-        gridBagConstraints.gridy = 5;
-        add(passwordTextfield, gridBagConstraints);
-        gridBagConstraints.gridy = 6;
-        add(countryTextfield, gridBagConstraints);
-        gridBagConstraints.gridy = 7;
-        add(cityTextfield, gridBagConstraints);
-        gridBagConstraints.gridy = 8;
-        add(registerTextfield, gridBagConstraints);
-        gridBagConstraints.gridy = 9;
-        add(lastConnexionTextfield, gridBagConstraints);
-        */
     }
 
 
