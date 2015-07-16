@@ -73,12 +73,6 @@ public class WindowConnexion extends JFrame implements ActionListener {
 
                 ArrayList<User> userList = abstractMethods.getArrayList(abstractMethods.getUsers());
 
-
-                //bout de code pour tester l'application hors connexion
-                /*
-                moderator.setLastName("administrateur");
-                moderator.setIsAdmin(true);
-                 */
                 if (result.toString()!="acces refuse"){
                     this.dispose();
                     new WindowMain(moderator, userList);
