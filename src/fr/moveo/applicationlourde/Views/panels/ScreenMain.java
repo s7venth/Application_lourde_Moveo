@@ -26,7 +26,6 @@
         CardLayout card = new CardLayout();
         UserSheet userSheet;
         TripSheet tripSheet;
-        Sheet commentsSheet = new Sheet();
         JLabel message = new JLabel("");
         JList list;
 
@@ -70,20 +69,17 @@
 
             // panel des différentes fiches qui s'afficheront en fonction des onglets
             tripSheet.setBackground(Color.RED);
-            jCards.add(commentsSheet);
-            commentsSheet.setBackground(Color.GREEN);
 
             //rajout des boutons dans le panel d'onglets
             jTabbedPane.addTab("Fiche Utilisateur", jCards);
             jTabbedPane.addTab("Voyages", jCard2);
-            jTabbedPane.addTab("Commentaires", commentsSheet);
             this.add(jTabbedPane, BorderLayout.CENTER);
 
         }
 
         public void screenConfiguration() {
                 this.setOpaque(false); // mettre l'écran en transparent
-            this.setPreferredSize(new Dimension(600, 400)); // taille de l'écran
+            this.setPreferredSize(new Dimension(650, 450)); // taille de l'écran
             this.setBackground(Color.GREEN);//Définition de sa couleur de fond
             this.setVisible(true);
         }
