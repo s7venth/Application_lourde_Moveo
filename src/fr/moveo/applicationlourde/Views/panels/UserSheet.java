@@ -1,6 +1,5 @@
 package fr.moveo.applicationlourde.Views.panels;
 
-import fr.moveo.applicationlourde.Events.MyListener;
 import fr.moveo.applicationlourde.model.User;
 import fr.moveo.applicationlourde.services.AbstractMethods;
 
@@ -8,10 +7,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
 
 /**
  * Classe qui permet d'afficher la fiche d'un utilisateur

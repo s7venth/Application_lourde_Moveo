@@ -1,15 +1,6 @@
 package fr.moveo.applicationlourde.model;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-import fr.moveo.applicationlourde.services.Connection;
-import org.apache.http.NameValuePair;
-import org.apache.http.message.BasicNameValuePair;
-
-import java.lang.reflect.Type;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 /**
  * Created by alexMac on 08/05/15.

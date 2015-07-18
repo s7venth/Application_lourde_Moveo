@@ -9,7 +9,6 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
 import java.text.ParseException;
 import java.util.Date;
 import java.text.SimpleDateFormat;

@@ -1,7 +1,6 @@
 package fr.moveo.applicationlourde.Views.panels;
 
 import fr.moveo.applicationlourde.model.Trip;
-import fr.moveo.applicationlourde.model.User;
 import fr.moveo.applicationlourde.services.AbstractMethods;
 
 import javax.swing.*;

@@ -1,7 +1,6 @@
 package fr.moveo.applicationlourde.autres;
 
 import javax.swing.*;
-import java.awt.event.ActionListener;
 
 /**
  * Class menu qui ajoute une bar de menu
