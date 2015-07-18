@@ -11,9 +11,9 @@ public class TripTableModel  extends AbstractTableModel {
     private List<Trip> nbTrip ;
     private String[] columns ;
 
-    public TripTableModel(List<Trip> TripList){
+    public TripTableModel(List<Trip> tripList){
         super();
-        nbTrip = TripList ;
+        nbTrip = tripList ;
         columns = new String[]{"id","nom_voyage", "pays_voyage","nb_commentaires"};
     }
 

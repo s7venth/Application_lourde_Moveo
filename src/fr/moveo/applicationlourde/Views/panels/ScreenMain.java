@@ -40,14 +40,10 @@
                 userSheet = new UserSheet(user);
                 listModel.addElement(user);
                 jCards.add(userSheet, user.toString());
-                System.out.println("user : "+user.toString());
-            }
-            for (int i = 0; i < usersList.size(); i++) {
-                User user = (User) usersList.get(i);
                 tripsList = abstractMethods.getArrayListTrip(abstractMethods.getTripList(Integer.toString(user.getId())));
                 tripSheet = new TripSheet(tripsList);
                 jCard2.add(tripSheet, user.toString()+"1");
-                System.out.println("user : " + user.toString());
+                System.out.println("user : "+user.toString());
             }
             user = new User();
             list = new JList(listModel);

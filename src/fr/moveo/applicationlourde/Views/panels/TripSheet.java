@@ -12,8 +12,6 @@ import java.util.ArrayList;
  */
 public class TripSheet extends JPanel {
     //VARIABLES
-    Trip trip = new Trip();
-    ArrayList<Trip> tripList= new ArrayList<Trip>();
     AbstractMethods abstractMethods = new AbstractMethods();
 
     //CONSTRUCTEUR
@@ -23,8 +21,4 @@ public class TripSheet extends JPanel {
 
         this.add(new JScrollPane(tableau), BorderLayout.CENTER);
     }
-
-
-    //METHODES
-
 }
