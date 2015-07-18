@@ -158,7 +158,6 @@ public class AbstractMethods {
     }
 
     public TripTableModel getTableTrip(ArrayList<Trip> tripArrayList){
-        TripTableModel TripTableModel = new TripTableModel(tripArrayList);
-        return TripTableModel;
+        return new TripTableModel(tripArrayList);
     }
 }
