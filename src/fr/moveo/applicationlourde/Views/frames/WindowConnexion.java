@@ -56,12 +56,12 @@ public class WindowConnexion extends JFrame implements ActionListener {
 
         AbstractMethods abstractMethods = new AbstractMethods();
         if (screen.getMailEditText().getText().equals("")|| screen.getPasswordEditText().getText().equals("")){
-            JOptionPane.showMessageDialog(null, "veuillez remplir les deux champs");
+            JOptionPane.showMessageDialog(null, "veuillez remplir les deux champs","Attention",JOptionPane.ERROR_MESSAGE);
         }else{
             result = abstractMethods.loggin(screen.getMailEditText().getText(),screen.getPasswordEditText().getText());
             JSONObject json = new JSONObject(result.toString());
             if (json.getInt("error")==1){
-                JOptionPane.showMessageDialog(null, "le modérateur n'existe pas");
+                JOptionPane.showMessageDialog(null, "le modérateur n'existe pas","Oups",JOptionPane.WARNING_MESSAGE);
             }else {
                 moderator.setLastName(json.getJSONObject("moderator").getString("moderator_name"));
                 moderator.setId(json.getJSONObject("moderator").getInt("moderator_id"));
@@ -75,7 +75,7 @@ public class WindowConnexion extends JFrame implements ActionListener {
                     this.dispose();
                     new WindowMain(moderator, userList);
                 }
-                else JOptionPane.showMessageDialog(null, result.toString());
+                else JOptionPane.showMessageDialog(null, result.toString(),"REFUSE",JOptionPane.WARNING_MESSAGE);
             }
         }
     }

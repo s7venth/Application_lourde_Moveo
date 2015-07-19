@@ -12,6 +12,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 /**
+ * JFrame principale
  * Created by Sylvain on 11/03/15.
  */
 public class WindowMain extends JFrame implements ActionListener {
@@ -36,6 +37,8 @@ public class WindowMain extends JFrame implements ActionListener {
         menu = new MenuBar();
             this.setJMenuBar(menu); // Integration de la barre de menu
             menu.getLogOutItem().addActionListener(this);
+            menu.getAboutItem().addActionListener(this);
+            menu.getHelpItem().addActionListener(this);
             menu.getUpdateButtonMenu().addActionListener(this);
 
         home = new ScreenMain(moderator, userList);
@@ -67,16 +70,21 @@ public class WindowMain extends JFrame implements ActionListener {
      */
     @Override
     public void actionPerformed(ActionEvent e) {
-        Object  source=e.getSource();
+        Object source=e.getSource();
         if (source == menu.getUpdateButtonMenu()){
             home.getMessage().setText(e.getSource().toString());
             AbstractMethods abstractMethods = new AbstractMethods();
             ArrayList<User> userArrayList = abstractMethods.getArrayList(abstractMethods.getUsers());
             System.out.println("le getUser en toString : " +userArrayList.toString());
             home = new ScreenMain(this.moderatorMain, userArrayList);
-            pack();
-            home.setVisible(true);
-            home.getMessage().setText("Liste mis à jour");
+            this.add(home);
+            revalidate();
+        }
+        else if(source == menu.getAboutItem()){
+            JOptionPane.showMessageDialog(null,"Moveo application Lourde version 0.0.1", "About", JOptionPane.INFORMATION_MESSAGE);
+        }
+        else if(source == menu.getHelpItem()){
+            JOptionPane.showMessageDialog(null,"Aide non disponible pour le moment.", "HELP", JOptionPane.INFORMATION_MESSAGE);
         }
 
         else if(source ==menu.getLogOutItem()){

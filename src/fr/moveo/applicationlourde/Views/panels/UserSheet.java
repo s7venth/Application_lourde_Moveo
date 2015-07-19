@@ -95,8 +95,8 @@ public class UserSheet extends JPanel implements ActionListener {
             String userBirthday = birthdayTextfield.getText() ;
             String userCity = cityTextfield.getText();
             String userCountry = countryTextfield.getText();
-            abstractMethods.updateUser(userId, userLastName,userFirstName,userBirthday, userCity,userCountry);
-
+            StringBuffer response = abstractMethods.updateUser(userId, userLastName, userFirstName, userBirthday, userCity, userCountry);
+            System.out.println("la réponse : "+response);
 
         }else if (e.getSource()==delete){
             String userId = idTextfield.getText();
