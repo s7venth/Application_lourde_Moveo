@@ -1,6 +1,5 @@
-#Liste des choses ‡ faire
+#Moveo
 
-## web
+##Application Lourde
 
-creer un objet qui va recevoir une url
-generer une url qui est une string
+ceci est le code source de l'application lourde moveo qui permet de gerer les utilisateurs du r√©seau sociale moveo.
