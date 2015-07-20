@@ -1,5 +1,6 @@
 package fr.moveo.applicationlourde.Views.frames;
 
+import com.apple.eawt.Application;
 import fr.moveo.applicationlourde.Events.MyListener;
 import fr.moveo.applicationlourde.Views.panels.ScreenConnection;
 import fr.moveo.applicationlourde.model.User;
@@ -27,7 +28,7 @@ public class WindowConnexion extends JFrame implements ActionListener {
     public WindowConnexion(){
         jLabel = new JLabel(icon);
         screen = new ScreenConnection();
-        this.add(jLabel,BorderLayout.NORTH);
+        this.add(jLabel, BorderLayout.NORTH);
         this.add(screen, BorderLayout.CENTER);
 
         screen.getLoginButton().addActionListener(this);
@@ -40,7 +41,8 @@ public class WindowConnexion extends JFrame implements ActionListener {
         addWindowListener(myListener);
         Color homeColor = new Color(5, 100, 200);
         this.setBackground(homeColor); // Couleur de fond
-        this.setIconImage(Toolkit.getDefaultToolkit().getImage("res/img/Logo.png"));
+        Application application = Application.getApplication();// spécifique aux ordi Apple
+        application.setDockIconImage(Toolkit.getDefaultToolkit().getImage("res/img/icon.png"));//definit l'image pour les dock d'apple
         this.setIconImage(Toolkit.getDefaultToolkit().getImage("res/img/icon.png")); 	//Icône en haut à gauche
         this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE); // Arrête complètement le processus avec le bouton [X]
         this.setTitle("Connexion");  //Définit un titre pour notre fenêtre
