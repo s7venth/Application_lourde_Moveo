@@ -1,9 +1,6 @@
 package fr.moveo.applicationlourde.services;
 
-import fr.moveo.applicationlourde.model.Comment;
-import fr.moveo.applicationlourde.model.Trip;
-import fr.moveo.applicationlourde.model.TripTableModel;
-import fr.moveo.applicationlourde.model.User;
+import fr.moveo.applicationlourde.model.*;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
@@ -214,5 +211,9 @@ public class AbstractMethods {
 
     public TripTableModel getTableTrip(ArrayList<Trip> tripArrayList){
         return new TripTableModel(tripArrayList);
+    }
+
+    public CommentTableModel getTableComment(ArrayList<Comment> commentArrayList){
+        return new CommentTableModel((commentArrayList));
     }
 }
