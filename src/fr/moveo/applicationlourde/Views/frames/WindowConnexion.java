@@ -20,11 +20,15 @@ public class WindowConnexion extends JFrame implements ActionListener {
 
     // DECLARATION DES PANELS
     private ScreenConnection screen;
+    ImageIcon icon = new ImageIcon("res/img/Logo.png");
+    JLabel jLabel;
 
     // CONSTRUCTEUR
     public WindowConnexion(){
+        jLabel = new JLabel(icon);
         screen = new ScreenConnection();
-            this.add(screen);
+        this.add(jLabel,BorderLayout.NORTH);
+        this.add(screen, BorderLayout.CENTER);
 
         screen.getLoginButton().addActionListener(this);
         this.windowConfiguration();
@@ -36,12 +40,13 @@ public class WindowConnexion extends JFrame implements ActionListener {
         addWindowListener(myListener);
         Color homeColor = new Color(5, 100, 200);
         this.setBackground(homeColor); // Couleur de fond
+        this.setIconImage(Toolkit.getDefaultToolkit().getImage("res/img/Logo.png"));
         this.setIconImage(Toolkit.getDefaultToolkit().getImage("res/img/icon.png")); 	//Icône en haut à gauche
         this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE); // Arrête complètement le processus avec le bouton [X]
-        this.setTitle("fenetre");  //Définit un titre pour notre fenêtre
-        this.setSize(300, 150); // Taille fenêtre en pixel (h,v) h=horizontal v=vertical
+        this.setTitle("Connexion");  //Définit un titre pour notre fenêtre
+        this.setSize(500, 5000); // Taille fenêtre en pixel (h,v) h=horizontal v=vertical
         this.setLocationRelativeTo(null);  // Centre la fenêtre par défaut
-        this.setResizable(false); // Empêche le redimensionnement de la fenêtre
+        this.setResizable(true); // Empêche le redimensionnement de la fenêtre
         pack();
         this.setVisible(true); //Rendre visible la fenêtre admin@moveo.fr admin
 
