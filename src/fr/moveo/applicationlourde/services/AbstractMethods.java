@@ -1,5 +1,6 @@
 package fr.moveo.applicationlourde.services;
 
+import fr.moveo.applicationlourde.model.Comment;
 import fr.moveo.applicationlourde.model.Trip;
 import fr.moveo.applicationlourde.model.TripTableModel;
 import fr.moveo.applicationlourde.model.User;
@@ -37,6 +38,9 @@ public class AbstractMethods {
     public static final String TRIP_COUNTRY = "trip_country";
     public static final String TRIP_COMMENT_COUNT = "trip_comment_count";
     public static final String GET_COMMENT_LIST_BY_USER = "getCommentListByUser";
+    public static final String COMMENT_ID = "comment_id";
+    public static final String COMMENT_MESSAGE = "comment_message";
+    public static final String COMMENT_DATE_INSERTED = "comment_added_datetime";
 
     private Connection connection = new Connection();
     /**
@@ -163,6 +167,49 @@ public class AbstractMethods {
             }
         }
         return tripArrayList;
+    }
+
+    public ArrayList<Comment> getArrayListComments (StringBuffer jsonReceived){
+        ArrayList<Comment> commentArrayList = new ArrayList<Comment>();
+        JSONObject json = new JSONObject(jsonReceived.toString());
+        if (json.has("comment")){
+            JSONArray commentTable = json.getJSONArray("comment");
+            for (int i = 0; i < commentTable.length(); i++) {
+                Comment comment = new Comment();
+                try {
+                    comment.setCommentId(commentTable.getJSONObject(i).getInt(COMMENT_ID));
+                    comment.setCommentMessage(commentTable.getJSONObject(i).getString(COMMENT_MESSAGE));
+                    if(commentTable.getJSONObject(i).has(COMMENT_DATE_INSERTED)&&!commentTable.getJSONObject(i).isNull(COMMENT_DATE_INSERTED)){
+                        String dateStr = commentTable.getJSONObject(i).getString(COMMENT_DATE_INSERTED);
+                        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                        try {
+                            Date insertionDate = sdf.parse(dateStr);
+                            comment.setCommentCreation(insertionDate);
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                        }
+                    } else try {
+                        Date insertionDate = new SimpleDateFormat("yyyy-MM-dd").parse("0000-00-00");
+                        comment.setCommentCreation(insertionDate);
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+                    comment.setTripId(commentTable.getJSONObject(i).getInt(TRIP_ID));
+                    comment.setUserId(commentTable.getJSONObject(i).getInt(USER_ID));
+                    comment.setCommentUserLastName(commentTable.getJSONObject(i).getString(USER_LAST_NAME));
+                    comment.setCommentUserFirstName(commentTable.getJSONObject(i).getString(USER_FIRST_NAME));
+                    commentArrayList.add(comment);
+                }catch (NullPointerException e){
+                    e.printStackTrace();
+                }
+            }
+        }else {
+            if (json.getInt("error")==1){
+                Comment comment = new Comment();
+                commentArrayList.add(comment);
+            }
+        }
+        return commentArrayList;
     }
 
     public TripTableModel getTableTrip(ArrayList<Trip> tripArrayList){

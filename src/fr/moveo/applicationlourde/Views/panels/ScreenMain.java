@@ -23,6 +23,7 @@
         JTabbedPane jTabbedPane = new JTabbedPane();
         JPanel jCards = new JPanel();
         JPanel jCard2 = new JPanel();
+        JPanel jCard3 = new JPanel();
         CardLayout card = new CardLayout();
         UserSheet userSheet;
         TripSheet tripSheet;
@@ -32,6 +33,7 @@
         public ScreenMain(User moderator, ArrayList<User> userList) {
             jCards.setLayout(card);
             jCard2.setLayout(card);
+            jCard3.setLayout(card);
             DefaultListModel listModel = new DefaultListModel();
             usersList = userList;
             for (int i = 0; i < usersList.size(); i++) {
