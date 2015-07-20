@@ -8,13 +8,11 @@ import javax.swing.*;
 public class MenuBar extends JMenuBar {
 
     //Les sous menus
-    private JMenuItem memberManagementItem,logOutItem,aboutItem,helpItem, updateButtonMenu;
+    private JMenuItem logOutItem,aboutItem,helpItem, updateButtonMenu;
 
     public MenuBar(){
 
         JMenu mainMenu = new JMenu("Menu Principal");
-            memberManagementItem = new JMenuItem("Gestion de membre");
-                mainMenu.add(memberManagementItem);
             updateButtonMenu = new JMenuItem("actualiser");
                 mainMenu.add(updateButtonMenu);
 
@@ -42,10 +40,6 @@ public class MenuBar extends JMenuBar {
 
     public JMenuItem getLogOutItem() {
         return logOutItem;
-    }
-
-    public JMenuItem getMemberManagementItem() {
-        return memberManagementItem;
     }
 
     public JMenuItem getUpdateButtonMenu() {

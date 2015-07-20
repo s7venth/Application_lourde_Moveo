@@ -36,6 +36,7 @@ public class AbstractMethods {
     public static final String TRIP_NAME = "trip_name";
     public static final String TRIP_COUNTRY = "trip_country";
     public static final String TRIP_COMMENT_COUNT = "trip_comment_count";
+    public static final String GET_COMMENT_LIST_BY_USER = "getCommentListByUser";
 
     private Connection connection = new Connection();
     /**
@@ -80,6 +81,13 @@ public class AbstractMethods {
     public StringBuffer getTripList(String userId){
         List<NameValuePair> urlParameters = new ArrayList<NameValuePair>();
         urlParameters.add(new BasicNameValuePair("tag", GET_TRIP_LIST));
+        urlParameters.add(new BasicNameValuePair(USER_ID, userId));
+        return connection.getJsonFromUrlTrip(urlParameters);
+    }
+
+    public StringBuffer getCommentListByUser(String userId){
+        List<NameValuePair> urlParameters = new ArrayList<NameValuePair>();
+        urlParameters.add(new BasicNameValuePair("tag", GET_COMMENT_LIST_BY_USER));
         urlParameters.add(new BasicNameValuePair(USER_ID, userId));
         return connection.getJsonFromUrlTrip(urlParameters);
     }
