@@ -18,11 +18,14 @@ import java.util.List;
  * the connection class allow to
  */
 public class Connection {
-
-    //FIXME ajouter la varitable url de connection
+/*
     String urlModerator = "http://moveo.besaba.com/moderator.php";
     String urlTrip = "http://moveo.besaba.com/trip.php";
     String urlUser = "http://moveo.besaba.com/user.php";
+    */
+    String urlModerator = "http://moveo.16mb.com/moderator.php";
+    String urlTrip = "http://moveo.16mb.com/trip.php";
+    String urlUser = "http://moveo.16mb.com/user.php";
 
     public StringBuffer getJsonFromUrl(List<NameValuePair> postParameters){
         StringBuffer result = new StringBuffer();
