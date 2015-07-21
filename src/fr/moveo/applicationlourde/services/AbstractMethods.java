@@ -71,12 +71,13 @@ public class AbstractMethods {
         List<NameValuePair> modifyUserForm = new ArrayList<NameValuePair>();
         modifyUserForm.add(new BasicNameValuePair("tag", UPDATE_USER));
         modifyUserForm.add(new BasicNameValuePair("userId", id));
-        modifyUserForm.add(new BasicNameValuePair("lastName", lastName));
         modifyUserForm.add(new BasicNameValuePair("firstName", firstName));
-        modifyUserForm.add(new BasicNameValuePair("birthday", birthday));
-        modifyUserForm.add(new BasicNameValuePair("city", city));
+        modifyUserForm.add(new BasicNameValuePair("lastName", lastName));
         modifyUserForm.add(new BasicNameValuePair("country", country));
-        return connection.getJsonFromUrl(modifyUserForm);
+        modifyUserForm.add(new BasicNameValuePair("city", city));
+        modifyUserForm.add(new BasicNameValuePair("birthday", birthday));
+        System.out.println("le modifyuserform : "+modifyUserForm.toString());
+        return connection.getJsonFromUrlUser(modifyUserForm);
     }
 
     public StringBuffer getTripList(String userId){

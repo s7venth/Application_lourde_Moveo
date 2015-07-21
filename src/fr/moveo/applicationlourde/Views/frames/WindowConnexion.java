@@ -66,6 +66,7 @@ public class WindowConnexion extends JFrame implements ActionListener {
             JOptionPane.showMessageDialog(null, "veuillez remplir les deux champs","Attention",JOptionPane.ERROR_MESSAGE);
         }else{
             result = abstractMethods.loggin(screen.getMailEditText().getText(),screen.getPasswordEditText().getText());
+            System.out.println(result);
             JSONObject json = new JSONObject(result.toString());
             if (json.getInt("error")==1){
                 JOptionPane.showMessageDialog(null, "le modérateur n'existe pas","Oups",JOptionPane.WARNING_MESSAGE);

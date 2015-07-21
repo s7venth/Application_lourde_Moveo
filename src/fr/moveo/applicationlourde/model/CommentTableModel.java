@@ -13,7 +13,7 @@ public class CommentTableModel extends AbstractTableModel{
     public CommentTableModel(List<Comment> listComment) {
         super();
         nbComment = listComment;
-        columns = new String[]{"Id utilisateur","Nom Utilisateur","Voyage Id","Message"};
+        columns = new String[]{"Message","Nom Utilisateur","Voyage Id"};
     }
 
     @Override
@@ -30,17 +30,16 @@ public class CommentTableModel extends AbstractTableModel{
     public Object getValueAt(int rowIndex, int columnIndex) {
         Comment comment = nbComment.get(rowIndex);
         switch (columnIndex){
-            case 0: return comment.getUserId();
+            case 0: return comment.getCommentMessage();
             case 1: return comment.getCommentUserLastName();
             case 2: return comment.getTripId();
-            case 3: return comment.getCommentMessage();
             default:return null;
         }
     }
 
     @Override
     public String getColumnName(int column) {
-        return super.getColumnName(column);
+        return columns[column];
     }
 
     @Override

@@ -48,7 +48,7 @@
                 jCard2.add(tripSheet, user.toString()+"1");
                 commentsList = abstractMethods.getArrayListComments(abstractMethods.getCommentListByUser(Integer.toString(user.getId())));
                 commentSheet = new CommentSheet(commentsList);
-                jCard2.add(commentSheet, user.toString()+"2");
+                jCard3.add(commentSheet, user.toString()+"2");
                 System.out.println("user : "+user.toString());
             }
             user = new User();
