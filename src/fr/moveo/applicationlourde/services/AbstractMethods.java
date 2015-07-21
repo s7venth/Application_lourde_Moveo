@@ -112,6 +112,11 @@ public class AbstractMethods {
         return connection.getJsonFromUrl(urlUser, modifyUserForm);
     }
 
+    /**
+     * method used to get all the trip of a user
+     * @param userId the userid needed to get all his trip
+     * @return a stringBuffer with the respond
+     */
     public StringBuffer getTripList(String userId){
         List<NameValuePair> urlParameters = new ArrayList<NameValuePair>();
         urlParameters.add(new BasicNameValuePair("tag", GET_TRIP_LIST));
@@ -119,6 +124,11 @@ public class AbstractMethods {
         return connection.getJsonFromUrl(urlTrip,urlParameters);
     }
 
+    /**
+     * method used to get all the comment given by the user
+     * @param userId the userId needed to get all his comments
+     * @return a respond in a format StringBuffer
+     */
     public StringBuffer getCommentListByUser(String userId){
         List<NameValuePair> urlParameters = new ArrayList<NameValuePair>();
         urlParameters.add(new BasicNameValuePair("tag", GET_COMMENT_LIST_BY_USER));
