@@ -21,7 +21,7 @@ public class WindowConnexion extends JFrame implements ActionListener {
 
     // DECLARATION DES PANELS
     private ScreenConnection screen;
-    ImageIcon icon = new ImageIcon("res/img/Logo.png");
+    ImageIcon icon = new ImageIcon("res/fr.moveo.applicationlourde/Logo.png");
     JLabel jLabel;
 
     // CONSTRUCTEUR
@@ -42,8 +42,8 @@ public class WindowConnexion extends JFrame implements ActionListener {
         Color homeColor = new Color(5, 100, 200);
         this.setBackground(homeColor); // Couleur de fond
         Application application = Application.getApplication();// spécifique aux ordi Apple
-        application.setDockIconImage(Toolkit.getDefaultToolkit().getImage("res/img/icon.png"));//definit l'image pour les dock d'apple
-        this.setIconImage(Toolkit.getDefaultToolkit().getImage("res/img/icon.png")); 	//Icône en haut à gauche
+        application.setDockIconImage(Toolkit.getDefaultToolkit().getImage("res/fr.moveo.applicationlourde/icon.png"));//definit l'image pour les dock d'apple
+        this.setIconImage(Toolkit.getDefaultToolkit().getImage("res/fr.moveo.applicationlourde/icon.png")); 	//Icône en haut à gauche
         this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE); // Arrête complètement le processus avec le bouton [X]
         this.setTitle("Connexion");  //Définit un titre pour notre fenêtre
         this.setSize(500, 5000); // Taille fenêtre en pixel (h,v) h=horizontal v=vertical
