@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * This class is used to be le methods class.
+ * This class contains all the methods used by the application to communicate with the web service.
  */
 public class AbstractMethods {
 
@@ -38,35 +38,67 @@ public class AbstractMethods {
     public static final String COMMENT_ID = "comment_id";
     public static final String COMMENT_MESSAGE = "comment_message";
     public static final String COMMENT_DATE_INSERTED = "comment_added_datetime";
+    public static final String GET_INBOX = "getInbox";
 
+    /*
+        private String urlModerator = "http://moveo.besaba.com/moderator.php";
+        private String urlTrip = "http://moveo.besaba.com/trip.php";
+        private String urlUser = "http://moveo.besaba.com/user.php";
+        private String urlDialog = "http://moveo.besaba.com/dialog.php";
+        */
+    private static final String urlModerator = "http://moveo.16mb.com/moderator.php";
+    private static final String urlTrip = "http://moveo.16mb.com/trip.php";
+    private static final String urlUser = "http://moveo.16mb.com/user.php";
+    private static final String urlDialog = "http://moveo.16mb.com/dialog.php";
     private Connection connection = new Connection();
-    /**
-     * method used to get all the users of the application
-     * @return an array of user
-     */
 
+    /**
+     * method used to log the moderator
+     * @param email the email of the moderator
+     * @param password the password of the moderator
+     * @return a respond by the web service in a StringBuffer
+     */
     public StringBuffer loggin(String email, String password) {
 
         List<NameValuePair> urlParameters = new ArrayList<NameValuePair>();
         urlParameters.add(new BasicNameValuePair("tag","login"));
         urlParameters.add(new BasicNameValuePair("email",email));
         urlParameters.add(new BasicNameValuePair("password", password));
-        return connection.getJsonFromUrl(urlParameters);
+        return connection.getJsonFromUrl(urlModerator, urlParameters);
     }
 
+    /**
+     * method used to get all the users of the application
+     * @return a respond in a stringBuffer
+     */
     public StringBuffer getUsers(){
         List<NameValuePair> urlParameters = new ArrayList<NameValuePair>();
         urlParameters.add(new BasicNameValuePair("tag", GET_USER));
-        return connection.getJsonFromUrl(urlParameters);
+        return connection.getJsonFromUrl(urlModerator, urlParameters);
     }
 
+    /**
+     * method used to delete a user by the moderator
+     * @param userId the ID of the user that need to be delete
+     * @return a respond by the web service in a StringBuffer
+     */
     public StringBuffer deleteUser(String userId){
         List<NameValuePair> accountRequest = new ArrayList<NameValuePair>();
         accountRequest.add(new BasicNameValuePair("tag", DELETE_USER));
         accountRequest.add(new BasicNameValuePair("userId", userId));
-        return connection.getJsonFromUrlUser(accountRequest);
+        return connection.getJsonFromUrl(urlUser, accountRequest);
     }
 
+    /**
+     * method used to update a user
+     * @param id the id of the user
+     * @param lastName of the user
+     * @param firstName of the user
+     * @param birthday of the user
+     * @param city of the user
+     * @param country of the user
+     * @return a response of the web service in a StringBuffer
+     */
     public StringBuffer updateUser(String id, String lastName, String firstName, String birthday, String city, String country){
         List<NameValuePair> modifyUserForm = new ArrayList<NameValuePair>();
         modifyUserForm.add(new BasicNameValuePair("tag", UPDATE_USER));
@@ -76,22 +108,29 @@ public class AbstractMethods {
         modifyUserForm.add(new BasicNameValuePair("country", country));
         modifyUserForm.add(new BasicNameValuePair("city", city));
         modifyUserForm.add(new BasicNameValuePair("birthday", birthday));
-        System.out.println("le modifyuserform : "+modifyUserForm.toString());
-        return connection.getJsonFromUrlUser(modifyUserForm);
+        System.out.println("le modifyuserform : " + modifyUserForm.toString());
+        return connection.getJsonFromUrl(urlUser, modifyUserForm);
     }
 
     public StringBuffer getTripList(String userId){
         List<NameValuePair> urlParameters = new ArrayList<NameValuePair>();
         urlParameters.add(new BasicNameValuePair("tag", GET_TRIP_LIST));
         urlParameters.add(new BasicNameValuePair(USER_ID, userId));
-        return connection.getJsonFromUrlTrip(urlParameters);
+        return connection.getJsonFromUrl(urlTrip,urlParameters);
     }
 
     public StringBuffer getCommentListByUser(String userId){
         List<NameValuePair> urlParameters = new ArrayList<NameValuePair>();
         urlParameters.add(new BasicNameValuePair("tag", GET_COMMENT_LIST_BY_USER));
         urlParameters.add(new BasicNameValuePair(USER_ID, userId));
-        return connection.getJsonFromUrlTrip(urlParameters);
+        return connection.getJsonFromUrl(urlTrip, urlParameters);
+    }
+
+    public StringBuffer getInboxByUser (String userId){
+        List<NameValuePair> urlParameters = new ArrayList<NameValuePair>();
+        urlParameters.add(new BasicNameValuePair("tag", GET_INBOX));
+        urlParameters.add(new BasicNameValuePair(USER_ID, userId));
+        return connection.getJsonFromUrl(urlDialog, urlParameters);
     }
 
     public ArrayList<User> getArrayList(StringBuffer jsonReceived){

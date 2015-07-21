@@ -15,24 +15,22 @@ import java.net.UnknownHostException;
 import java.util.List;
 
 /**
- * the connection class allow to
+ * the connection class allow to create a connection with the web service.
  */
 public class Connection {
-/*
-    String urlModerator = "http://moveo.besaba.com/moderator.php";
-    String urlTrip = "http://moveo.besaba.com/trip.php";
-    String urlUser = "http://moveo.besaba.com/user.php";
-    */
-    String urlModerator = "http://moveo.16mb.com/moderator.php";
-    String urlTrip = "http://moveo.16mb.com/trip.php";
-    String urlUser = "http://moveo.16mb.com/user.php";
 
-    public StringBuffer getJsonFromUrl(List<NameValuePair> postParameters){
+    /**
+     * This method is used to send information to an url with params
+     * @param url the url needed to cennect
+     * @param postParameters a list of key,value as params
+     * @return a respond with 3 tag : error, success and message
+     */
+    public StringBuffer getJsonFromUrl(String url, List<NameValuePair> postParameters){
         StringBuffer result = new StringBuffer();
         String line = "";
         try {
             HttpClient httpclient = HttpClients.createDefault();
-            HttpPost httppost = new HttpPost(urlModerator);
+            HttpPost httppost = new HttpPost(url);
             // Request parameters and other properties.
             httppost.setEntity(new UrlEncodedFormEntity(postParameters, "UTF-8"));
             //Execute and get the response.
@@ -48,60 +46,6 @@ public class Connection {
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         } catch (UnknownHostException e) {
-            e.printStackTrace();
-        } catch (ClientProtocolException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return result;
-    }
-    public StringBuffer getJsonFromUrlTrip(List<NameValuePair> postParameters){
-        StringBuffer result = new StringBuffer();
-        String line = "";
-        try {
-            HttpClient httpclient = HttpClients.createDefault();
-            HttpPost httppost = new HttpPost(urlTrip);
-            // Request parameters and other properties.
-            httppost.setEntity(new UrlEncodedFormEntity(postParameters, "UTF-8"));
-            //Execute and get the response.
-            HttpResponse response = httpclient.execute(httppost);
-            HttpEntity entity = response.getEntity();
-            InputStream inputStream = entity.getContent();
-            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
-            while ((line = bufferedReader.readLine()) != null){
-                result.append(line);
-            }
-            bufferedReader.close();
-            inputStream.close();
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        } catch (ClientProtocolException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return result;
-    }
-    public StringBuffer getJsonFromUrlUser(List<NameValuePair> postParameters){
-        StringBuffer result = new StringBuffer();
-        String line = "";
-        try {
-            HttpClient httpclient = HttpClients.createDefault();
-            HttpPost httppost = new HttpPost(urlUser);
-            // Request parameters and other properties.
-            httppost.setEntity(new UrlEncodedFormEntity(postParameters, "UTF-8"));
-            //Execute and get the response.
-            HttpResponse response = httpclient.execute(httppost);
-            HttpEntity entity = response.getEntity();
-            InputStream inputStream = entity.getContent();
-            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
-            while ((line = bufferedReader.readLine()) != null){
-                result.append(line);
-            }
-            bufferedReader.close();
-            inputStream.close();
-        } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         } catch (ClientProtocolException e) {
             e.printStackTrace();
