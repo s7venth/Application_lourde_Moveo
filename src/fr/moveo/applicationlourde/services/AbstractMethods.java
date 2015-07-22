@@ -136,6 +136,11 @@ public class AbstractMethods {
         return connection.getJsonFromUrl(urlTrip, urlParameters);
     }
 
+    /**
+     * method used to get the message contained in the box of a user
+     * @param userId the userID needed to select the user we needed to get all his messages
+     * @return a respond in a format of StringBuffer
+     */
     public StringBuffer getInboxByUser (String userId){
         List<NameValuePair> urlParameters = new ArrayList<NameValuePair>();
         urlParameters.add(new BasicNameValuePair("tag", GET_INBOX));
@@ -143,6 +148,11 @@ public class AbstractMethods {
         return connection.getJsonFromUrl(urlDialog, urlParameters);
     }
 
+    /**
+     * method that convert a StringBuffer into an Arraylist of user. the StringBuffer must contain users
+     * @param jsonReceived the StringBuffer needed to be convert
+     * @return an Arraylist of users.
+     */
     public ArrayList<User> getArrayList(StringBuffer jsonReceived){
         ArrayList<User> userArrayList = new ArrayList<User>();
         JSONObject json = new JSONObject(jsonReceived.toString());
@@ -150,44 +160,54 @@ public class AbstractMethods {
             JOptionPane.showMessageDialog(null, json.getString("message"));
         }
         JSONArray userTable = json.getJSONArray("user");
-        for (int i = 0; i < userTable.length(); i++) {
-            User user = new User();
-            try {
-                user.setId(userTable.getJSONObject(i).getInt(USER_ID));
-                user.setLastName(userTable.getJSONObject(i).getString(USER_LAST_NAME));
-                user.setFirstName(userTable.getJSONObject(i).getString(USER_FIRST_NAME));
-                user.setEmail(userTable.getJSONObject(i).getString(USER_EMAIL));
-                if(userTable.getJSONObject(i).has(USER_BIRTHDAY)&&!userTable.getJSONObject(i).isNull(USER_BIRTHDAY)){
-                    String dateStr = userTable.getJSONObject(i).getString(USER_BIRTHDAY);
-                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-                    try {
-                        Date birthDate = sdf.parse(dateStr);
+        if (!json.has("user")||json.isNull("user")){
+            JOptionPane.showMessageDialog(null,"the json must have a user key","WARNING",JOptionPane.WARNING_MESSAGE);
+        }
+        else{
+            for (int i = 0; i < userTable.length(); i++) {
+                User user = new User();
+                try {
+                    user.setId(userTable.getJSONObject(i).getInt(USER_ID));
+                    user.setLastName(userTable.getJSONObject(i).getString(USER_LAST_NAME));
+                    user.setFirstName(userTable.getJSONObject(i).getString(USER_FIRST_NAME));
+                    user.setEmail(userTable.getJSONObject(i).getString(USER_EMAIL));
+                    if(userTable.getJSONObject(i).has(USER_BIRTHDAY)&&!userTable.getJSONObject(i).isNull(USER_BIRTHDAY)){
+                        String dateStr = userTable.getJSONObject(i).getString(USER_BIRTHDAY);
+                        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                        try {
+                            Date birthDate = sdf.parse(dateStr);
+                            user.setBirthday(birthDate);
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                        }
+                    } else try {
+                        Date birthDate = new SimpleDateFormat("yyyy-MM-dd").parse("0000-00-00");
                         user.setBirthday(birthDate);
                     } catch (ParseException e) {
                         e.printStackTrace();
                     }
-                } else try {
-                    Date birthDate = new SimpleDateFormat("yyyy-MM-dd").parse("0000-00-00");
-                    user.setBirthday(birthDate);
-                } catch (ParseException e) {
+                    if(userTable.getJSONObject(i).has(USER_BIRTHDAY)&&!userTable.getJSONObject(i).isNull(USER_BIRTHDAY)){
+                        if (!(userTable.getJSONObject(i).getString(USER_COUNTRY).compareTo("null")==0)){
+                            user.setCountry(userTable.getJSONObject(i).getString(USER_COUNTRY));
+                        }else user.setCountry("no data");
+                    }else user.setCountry("no data");
+                    if(userTable.getJSONObject(i).has(USER_BIRTHDAY)&&!userTable.getJSONObject(i).isNull(USER_BIRTHDAY)){
+                        user.setCity(userTable.getJSONObject(i).getString(USER_CITY));
+                    }else user.setCity("no data");
+                    userArrayList.add(user);
+                }catch (NullPointerException e){
                     e.printStackTrace();
                 }
-                if(userTable.getJSONObject(i).has(USER_BIRTHDAY)&&!userTable.getJSONObject(i).isNull(USER_BIRTHDAY)){
-                    if (!(userTable.getJSONObject(i).getString(USER_COUNTRY).compareTo("null")==0)){
-                        user.setCountry(userTable.getJSONObject(i).getString(USER_COUNTRY));
-                    }else user.setCountry("no data");
-                }else user.setCountry("no data");
-                if(userTable.getJSONObject(i).has(USER_BIRTHDAY)&&!userTable.getJSONObject(i).isNull(USER_BIRTHDAY)){
-                    user.setCity(userTable.getJSONObject(i).getString(USER_CITY));
-                }else user.setCity("no data");
-                userArrayList.add(user);
-            }catch (NullPointerException e){
-                e.printStackTrace();
             }
         }
         return userArrayList;
     }
 
+    /**
+     * method used to convert a stringBuffer into an Arraylist of trip
+     * @param jsonReceived The StringBuffer needed to be converted
+     * @return an Arraylist of Trips.
+     */
     public ArrayList<Trip> getArrayListTrip (StringBuffer jsonReceived){
         ArrayList<Trip> tripArrayList = new ArrayList<Trip>();
         JSONObject json = new JSONObject(jsonReceived.toString());
@@ -216,6 +236,11 @@ public class AbstractMethods {
         return tripArrayList;
     }
 
+    /**
+     * Method used to convert a StringBuffer into an ArrayList of Comment
+     * @param jsonReceived the StringBuffer needed to be converted
+     * @return an ArrayList of comments
+     */
     public ArrayList<Comment> getArrayListComments (StringBuffer jsonReceived){
         ArrayList<Comment> commentArrayList = new ArrayList<Comment>();
         JSONObject json = new JSONObject(jsonReceived.toString());
@@ -259,10 +284,20 @@ public class AbstractMethods {
         return commentArrayList;
     }
 
+    /**
+     * method used to convert an ArrayList of trip into a table of trip
+     * @param tripArrayList the arrayList of trip needed to be converted into a table of trip
+     * @return a table of trip
+     */
     public TripTableModel getTableTrip(ArrayList<Trip> tripArrayList){
         return new TripTableModel(tripArrayList);
     }
 
+    /**
+     * method used to convert an ArrayList of comments into a table of comment
+     * @param commentArrayList the arraylist of comment needed to be converted into a table of comment
+     * @return a table of Comment
+     */
     public CommentTableModel getTableComment(ArrayList<Comment> commentArrayList){
         return new CommentTableModel((commentArrayList));
     }

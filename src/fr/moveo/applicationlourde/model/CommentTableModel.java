@@ -4,7 +4,7 @@ import javax.swing.table.AbstractTableModel;
 import java.util.List;
 
 /**
- * Created by alexandrequere on 20/07/2015.
+ * the model class used to create a table of Comment
  */
 public class CommentTableModel extends AbstractTableModel{
     private List<Comment> nbComment;

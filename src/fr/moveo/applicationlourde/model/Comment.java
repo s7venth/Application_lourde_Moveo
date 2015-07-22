@@ -3,16 +3,29 @@ package fr.moveo.applicationlourde.model;
 import java.util.Date;
 
 /**
- * Created by alexandrequere on 20/07/2015.
+ * Class Comment
  */
 public class Comment {
     private int commentId, userId, tripId;
     private String commentMessage, commentUserLastName, commentUserFirstName;
     private Date commentCreation;
 
+    /**
+     * the constructor
+     */
     public Comment() {
     }
 
+    /**
+     * the second constructor
+     * @param commentId the id of the comment
+     * @param userId the userId of the user who emit comment
+     * @param tripId the tripId concerned by this comment
+     * @param commentMessage the message of the comment
+     * @param commentUserLastName the lastname of the user who emit comment
+     * @param commentUserFirstName the firstname of the user who emit comment
+     * @param commentCreation the date of creation of the comment
+     */
     public Comment(int commentId, int userId, int tripId, String commentMessage, String commentUserLastName, String commentUserFirstName, Date commentCreation) {
         this.commentId = commentId;
         this.userId = userId;
