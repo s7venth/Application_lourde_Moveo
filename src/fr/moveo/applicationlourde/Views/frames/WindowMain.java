@@ -68,12 +68,13 @@ public class WindowMain extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         Object source=e.getSource();
         if (source == menu.getUpdateButtonMenu()){
-            home.getMessage().setText(e.getSource().toString());
+            this.remove(home);
             AbstractMethods abstractMethods = new AbstractMethods();
             ArrayList<User> userArrayList = abstractMethods.getArrayList(abstractMethods.getUsers());
             System.out.println("le getUser en toString : " +userArrayList.toString());
             home = new ScreenMain(this.moderatorMain, userArrayList);
             this.add(home);
+            home.getMessage().setText("mise a jour");
             revalidate();
         }
         else if(source == menu.getAboutItem()){
