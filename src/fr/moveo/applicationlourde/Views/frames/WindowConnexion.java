@@ -4,7 +4,7 @@ import com.apple.eawt.Application;
 import fr.moveo.applicationlourde.Events.MyListener;
 import fr.moveo.applicationlourde.Views.panels.ScreenConnection;
 import fr.moveo.applicationlourde.model.User;
-import fr.moveo.applicationlourde.services.AbstractMethods;
+import fr.moveo.applicationlourde.services.ConnectMethods;
 import org.json.JSONObject;
 
 import javax.swing.*;
@@ -66,12 +66,12 @@ public class WindowConnexion extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         User moderator = new User();
 
-        AbstractMethods abstractMethods = new AbstractMethods();
+        ConnectMethods connectMethods = new ConnectMethods();
         if (screen.getMailEditText().getText().equals("")|| screen.getPasswordEditText().getText().equals("")){
             JOptionPane.showMessageDialog(null, "veuillez remplir les deux champs","Attention",JOptionPane.ERROR_MESSAGE);
         }else{
             StringBuffer result = new StringBuffer();
-            result = abstractMethods.loggin(screen.getMailEditText().getText(),screen.getPasswordEditText().getText());
+            result = connectMethods.loggin(screen.getMailEditText().getText(),screen.getPasswordEditText().getText());
             System.out.println(result);
             JSONObject json = new JSONObject(result.toString());
             if (json.getInt("error")==1){
@@ -83,7 +83,7 @@ public class WindowConnexion extends JFrame implements ActionListener {
                 boolean is_admin = (1 == json.getJSONObject("moderator").getInt("is_admin"));
                 moderator.setIsAdmin(is_admin);
 
-                ArrayList<User> userList = abstractMethods.getArrayList(abstractMethods.getUsers());
+                ArrayList<User> userList = connectMethods.getArrayList(connectMethods.getUsers());
 
                 if (result.toString()!="acces refuse"){
                     this.dispose();

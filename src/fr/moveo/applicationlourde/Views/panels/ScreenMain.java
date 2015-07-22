@@ -1,7 +1,7 @@
     package fr.moveo.applicationlourde.Views.panels;
 
     import fr.moveo.applicationlourde.model.User;
-    import fr.moveo.applicationlourde.services.AbstractMethods;
+    import fr.moveo.applicationlourde.services.ConnectMethods;
 
     import javax.swing.*;
     import java.awt.*;
@@ -16,7 +16,7 @@
     public class ScreenMain extends JPanel {
 
         User user;
-        AbstractMethods abstractMethods = new AbstractMethods();
+        ConnectMethods connectMethods = new ConnectMethods();
         ArrayList usersList = new ArrayList();
         ArrayList tripsList = new ArrayList();
         ArrayList commentsList = new ArrayList();
@@ -47,10 +47,10 @@
                 userSheet = new UserSheet(user);
                 listModel.addElement(user);
                 jCards.add(userSheet, user.toString());
-                tripsList = abstractMethods.getArrayListTrip(abstractMethods.getTripList(Integer.toString(user.getId())));
+                tripsList = connectMethods.getArrayListTrip(connectMethods.getTripList(Integer.toString(user.getId())));
                 tripSheet = new TripSheet(tripsList);
                 jCard2.add(tripSheet, user.toString()+"1");
-                commentsList = abstractMethods.getArrayListComments(abstractMethods.getCommentListByUser(Integer.toString(user.getId())));
+                commentsList = connectMethods.getArrayListComments(connectMethods.getCommentListByUser(Integer.toString(user.getId())));
                 commentSheet = new CommentSheet(commentsList);
                 jCard3.add(commentSheet, user.toString()+"2");
                 System.out.println("user : "+user.toString());

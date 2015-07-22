@@ -3,7 +3,7 @@ package fr.moveo.applicationlourde.Views.frames;
 import fr.moveo.applicationlourde.autres.MenuBar;
 import fr.moveo.applicationlourde.Views.panels.ScreenMain;
 import fr.moveo.applicationlourde.model.User;
-import fr.moveo.applicationlourde.services.AbstractMethods;
+import fr.moveo.applicationlourde.services.ConnectMethods;
 
 import javax.swing.*;
 import java.awt.*;
@@ -70,8 +70,8 @@ public class WindowMain extends JFrame implements ActionListener {
         Object source=e.getSource();
         if (source == menu.getUpdateButtonMenu()){
             this.remove(home);
-            AbstractMethods abstractMethods = new AbstractMethods();
-            ArrayList<User> userArrayList = abstractMethods.getArrayList(abstractMethods.getUsers());
+            ConnectMethods connectMethods = new ConnectMethods();
+            ArrayList<User> userArrayList = connectMethods.getArrayList(connectMethods.getUsers());
             home = new ScreenMain(this.moderatorMain, userArrayList);
             this.add(home);
             home.getMessage().setText("mise a jour");
@@ -80,8 +80,8 @@ public class WindowMain extends JFrame implements ActionListener {
         else if (source == menu.getModeratorButton()){
             if (moderatorMain.isAdmin()){
                 this.remove(home);
-                AbstractMethods abstractMethods = new AbstractMethods();
-                ArrayList<User> moderatorsArrayList = abstractMethods.getArrayList(abstractMethods.getModerator());
+                ConnectMethods connectMethods = new ConnectMethods();
+                ArrayList<User> moderatorsArrayList = connectMethods.getArrayList(connectMethods.getModerator());
                 System.out.println("le getmoderators en toString : " +moderatorsArrayList.toString());
                 home = new ScreenMain(this.moderatorMain, moderatorsArrayList);
                 this.add(home);

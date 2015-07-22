@@ -16,7 +16,7 @@ import java.util.List;
 /**
  * This class contains all the methods used by the application to communicate with the web service.
  */
-public class AbstractMethods {
+public class ConnectMethods {
 
     // je fais des variable static pour une meilleure gestion à l'avenir
     public static final String GET_USER = "getUsers";

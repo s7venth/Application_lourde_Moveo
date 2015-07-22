@@ -1,7 +1,7 @@
 package fr.moveo.applicationlourde.Views.panels;
 
 import fr.moveo.applicationlourde.model.User;
-import fr.moveo.applicationlourde.services.AbstractMethods;
+import fr.moveo.applicationlourde.services.ConnectMethods;
 
 import javax.swing.*;
 import java.awt.*;
@@ -13,7 +13,7 @@ import java.awt.event.ActionListener;
  */
 public class UserSheet extends JPanel implements ActionListener {
 
-    AbstractMethods abstractMethods = new AbstractMethods();
+    ConnectMethods connectMethods = new ConnectMethods();
     GridLayout gridLayout = new GridLayout(12,2);
     JLabel idLabel, firstNameLabel, lastNameLabel, birthdayLabel, emailLabel, adminLabel,
             countryLabel, cityLabel, registerLabel, lastConnexionLabel;
@@ -98,12 +98,12 @@ public class UserSheet extends JPanel implements ActionListener {
             String userBirthday = birthdayTextfield.getText() ;
             String userCity = cityTextfield.getText();
             String userCountry = countryTextfield.getText();
-            StringBuffer response = abstractMethods.updateUser(userId, userLastName, userFirstName, userBirthday, userCity, userCountry);
+            StringBuffer response = connectMethods.updateUser(userId, userLastName, userFirstName, userBirthday, userCity, userCountry);
             System.out.println("la réponse : "+response);
         }
         else if (e.getSource()==delete){
             String userId = idTextfield.getText();
-            StringBuffer response = abstractMethods.deleteUser(userId);
+            StringBuffer response = connectMethods.deleteUser(userId);
             System.out.println("la réponse : "+response);
         }
     }
