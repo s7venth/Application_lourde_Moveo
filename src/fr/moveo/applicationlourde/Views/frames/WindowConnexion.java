@@ -15,7 +15,7 @@ import java.util.ArrayList;
 
 /**
  * Created by Sylvain on 12/03/15.
- * Fenetre de connection. Censé etre la premiere fenetre qui doit apparaitre.
+ * JFrame used to be the first JFrame created when the application is launched
  */
 public class WindowConnexion extends JFrame implements ActionListener {
 
@@ -24,7 +24,9 @@ public class WindowConnexion extends JFrame implements ActionListener {
     ImageIcon icon = new ImageIcon("res/fr.moveo.applicationlourde/Logo.png");
     JLabel jLabel;
 
-    // CONSTRUCTEUR
+    /**
+     * the constructor of the jframe
+     */
     public WindowConnexion(){
         jLabel = new JLabel(icon);
         screen = new ScreenConnection();
@@ -35,7 +37,9 @@ public class WindowConnexion extends JFrame implements ActionListener {
         this.windowConfiguration();
     }
 
-    // Procedure permettant de configuration la fenêtre
+    /**
+     * config of the jframe
+     */
     public void windowConfiguration(){
         MyListener myListener = new MyListener();
         addWindowListener(myListener);
@@ -54,17 +58,19 @@ public class WindowConnexion extends JFrame implements ActionListener {
 
     }
 
+    /**
+     * method used when the moderator click on the connection button
+     * @param e the event of the click
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         User moderator = new User();
-        StringBuffer result = new StringBuffer();
-
-        //bout de code pour tester l'application avec connexion internet
 
         AbstractMethods abstractMethods = new AbstractMethods();
         if (screen.getMailEditText().getText().equals("")|| screen.getPasswordEditText().getText().equals("")){
             JOptionPane.showMessageDialog(null, "veuillez remplir les deux champs","Attention",JOptionPane.ERROR_MESSAGE);
         }else{
+            StringBuffer result = new StringBuffer();
             result = abstractMethods.loggin(screen.getMailEditText().getText(),screen.getPasswordEditText().getText());
             System.out.println(result);
             JSONObject json = new JSONObject(result.toString());

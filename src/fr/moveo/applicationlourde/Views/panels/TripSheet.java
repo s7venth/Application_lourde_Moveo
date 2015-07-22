@@ -8,13 +8,15 @@ import java.awt.*;
 import java.util.ArrayList;
 
 /**
- * Classe qui permet d'afficher la fiche des voyages d'un utilisateur
+ * Class that contains the TripSheet
  */
 public class TripSheet extends JPanel {
-    //VARIABLES
     AbstractMethods abstractMethods = new AbstractMethods();
 
-    //CONSTRUCTEUR
+    /**
+     * the constructor of this class
+     * @param tripArrayList the ArrayList of the trips
+     */
     public TripSheet(ArrayList<Trip> tripArrayList) {
 
         JTable tableau = new JTable(abstractMethods.getTableTrip(tripArrayList));

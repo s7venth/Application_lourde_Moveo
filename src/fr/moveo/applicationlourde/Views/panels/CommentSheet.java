@@ -13,10 +13,12 @@ import java.util.ArrayList;
  * Created by alexMac on 13/05/15.
  */
 public class CommentSheet extends JPanel {
-    //VARIABLES
     AbstractMethods abstractMethods = new AbstractMethods();
 
-    //CONSTRUCTEUR
+    /**
+     * the constructor of the sheet
+     * @param commentArrayList the arraylist of Comments
+     */
     public CommentSheet(ArrayList<Comment> commentArrayList) {
 
         JTable tableau = new JTable(abstractMethods.getTableComment(commentArrayList));

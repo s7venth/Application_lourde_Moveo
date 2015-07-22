@@ -4,7 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 
 /**
- * ceci est le panel de connection. le layout est un gridBagLayout de facon à pouvoir bien organiser la fenetre
+ * JPanel of the connexion window. first panel used
  */
 public class ScreenConnection extends JPanel {
     JButton loginButton;
@@ -12,6 +12,9 @@ public class ScreenConnection extends JPanel {
     JLabel[]array = new JLabel[12];
     JTextField mailEditText,passwordEditText;
 
+    /**
+     * the constructor of the JPanel
+     */
     public ScreenConnection(){
         this.setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
@@ -73,14 +76,26 @@ public class ScreenConnection extends JPanel {
         this.setOpaque(true);
     }
 
+    /**
+     * method used to get the content must precisly the mail of the editText
+     * @return the mail of the moderator
+     */
     public JTextField getMailEditText() {
         return mailEditText;
     }
 
+    /**
+     * method used to get the content more precisly the password of the editText
+     * @return the password of the moderator
+     */
     public JTextField getPasswordEditText() {
         return passwordEditText;
     }
 
+    /**
+     * method used to get the login button
+     * @return the loginButton
+     */
     public JButton getLoginButton() {
         return loginButton;
     }

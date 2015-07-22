@@ -11,11 +11,10 @@
     import javax.swing.event.ListSelectionListener;
 
     /**
-     * page principale du logiciel
+     * Main panel of the application
      */
     public class ScreenMain extends JPanel {
 
-        // VARIABLES
         User user;
         AbstractMethods abstractMethods = new AbstractMethods();
         ArrayList usersList = new ArrayList();
@@ -32,6 +31,11 @@
         JLabel message = new JLabel("");
         JList list;
 
+        /**
+         * the constructor of the panel
+         * @param moderator the moderator's information
+         * @param userList the list of the users that use the application
+         */
         public ScreenMain(User moderator, ArrayList<User> userList) {
             jCards.setLayout(card);
             jCard2.setLayout(card);
@@ -88,6 +92,9 @@
 
         }
 
+        /**
+         * config of the JPanel
+         */
         public void screenConfiguration() {
                 this.setOpaque(false); // mettre l'écran en transparent
             this.setPreferredSize(new Dimension(650, 450)); // taille de l'écran

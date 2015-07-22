@@ -3,8 +3,7 @@ package fr.moveo.applicationlourde.model;
 import java.util.Date;
 
 /**
- * Created by alexMac on 08/05/15.
- * classe User qui est utilisé pour afficher les utilisateurs
+ * Class model used to create a user.
  */
 
 public class User {

@@ -12,50 +12,46 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 /**
- * JFrame principale
- * Created by Sylvain on 11/03/15.
+ * Main JFrame that contains all the JPanels of the application
  */
 public class WindowMain extends JFrame implements ActionListener {
 
-    // DECLARATION DU MENU
     User moderatorMain;
     private MenuBar menu;
-
-    // DECLARATION DES PANELS
     private ScreenMain home;
-
-    // AUTRES DECLARATIONS
     Color homeColor;
 
-    // CONSTRUCTEUR
+    /**
+     * the constructor of the JFrame
+     * @param moderator the moderator's information
+     * @param userList the arraylist of all the users of the application
+     */
     public WindowMain(User moderator, ArrayList<User> userList){
         moderatorMain = moderator;
-        // Ce frame utilisera une grille de placement de type BorderLayout
         this.getContentPane().setLayout(new BorderLayout());
-
-        // Le menu
         menu = new MenuBar();
             this.setJMenuBar(menu); // Integration de la barre de menu
             menu.getLogOutItem().addActionListener(this);
             menu.getAboutItem().addActionListener(this);
             menu.getHelpItem().addActionListener(this);
             menu.getUpdateButtonMenu().addActionListener(this);
-
         home = new ScreenMain(moderator, userList);
         this.add(home);
-
         this.windowConfiguration(moderator.getLastName());
 
     }
 
-    // Procedure permettant de configuration la fenêtre
-    public void windowConfiguration(String nom){
+    /**
+     * the config of this JFrame
+     * @param name the name of the moderator
+     */
+    public void windowConfiguration(String name){
 
         this.homeColor = new Color(5, 100, 200);
         this.setBackground(homeColor); // Couleur de fond
         this.setIconImage(Toolkit.getDefaultToolkit().getImage("res/img/icon.png")); 	//Icône en haut à gauche
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Arrête complètement le processus avec le bouton [X]
-        this.setTitle("Bienvenue "+nom);  //Définit un titre pour notre fenêtre
+        this.setTitle("Bienvenue " + name);  //Définit un titre pour notre fenêtre
         this.setSize(700, 400); // Taille fenêtre en pixel (h,v) h=horizontal v=vertical
         this.setLocationRelativeTo(null);  // Centre la fenêtre par défaut
         this.setResizable(true); // Empêche le redimensionnement de la fenêtre
@@ -65,8 +61,8 @@ public class WindowMain extends JFrame implements ActionListener {
     }
 
     /**
-     * Methode qui contient tout les evenements d'action sur le menu
-     * @param e
+     * Method that contains all the events on the menuBar
+     * @param e the event of the menuBar
      */
     @Override
     public void actionPerformed(ActionEvent e) {
