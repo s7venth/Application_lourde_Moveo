@@ -13,7 +13,6 @@ import java.awt.event.ActionListener;
  */
 public class UserSheet extends JPanel implements ActionListener {
 
-    User user = new User();
     AbstractMethods abstractMethods = new AbstractMethods();
     GridLayout gridLayout = new GridLayout(12,2);
     JLabel idLabel, firstNameLabel, lastNameLabel, birthdayLabel, emailLabel, passwordLabel,
