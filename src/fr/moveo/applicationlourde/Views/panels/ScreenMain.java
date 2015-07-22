@@ -44,7 +44,7 @@
             usersList = userList;
             for (int i = 0; i < usersList.size(); i++) {
                 User user = (User) usersList.get(i);
-                userSheet = new UserSheet(user);
+                userSheet = new UserSheet(user, moderator);
                 listModel.addElement(user);
                 jCards.add(userSheet, user.toString());
                 tripsList = connectMethods.getArrayListTrip(connectMethods.getTripList(Integer.toString(user.getId())));

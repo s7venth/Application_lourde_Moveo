@@ -12,7 +12,7 @@ import java.awt.event.ActionListener;
  * Class than contains the users informations
  */
 public class UserSheet extends JPanel implements ActionListener {
-
+    User moderatorUser;
     ConnectMethods connectMethods = new ConnectMethods();
     GridLayout gridLayout = new GridLayout(12,2);
     JLabel idLabel, firstNameLabel, lastNameLabel, birthdayLabel, emailLabel, adminLabel,
@@ -33,8 +33,8 @@ public class UserSheet extends JPanel implements ActionListener {
      * constructor of the userSheet
      * @param user the information of the user
      */
-    public UserSheet(User user) {
-
+    public UserSheet(User user, User moderator) {
+        moderatorUser = moderator;
         idLabel = new JLabel("Id");
         firstNameLabel = new JLabel("Prénom");
         lastNameLabel = new JLabel("Nom");
@@ -45,8 +45,13 @@ public class UserSheet extends JPanel implements ActionListener {
         cityLabel = new JLabel("Ville");
         registerLabel = new JLabel("date d'enregistrement");
         lastConnexionLabel = new JLabel("Date de derniere connexion");
-        update = new JButton("Modifier");
-        delete = new JButton("Supprimer");
+        if (!moderator.isAdmin()){
+            update = new JButton("Modifier l'utilisateur");
+            delete = new JButton("Supprimer l'utilisateur");
+        }else{
+            update = new JButton("Modifier le moderateur");
+            delete = new JButton("Supprimer le moderateur");
+        }
 
         idTextfield.setText(Integer.toString(user.getId()));
         lastNameTextfield.setText(user.getLastName());
@@ -101,7 +106,7 @@ public class UserSheet extends JPanel implements ActionListener {
             StringBuffer response = connectMethods.updateUser(userId, userLastName, userFirstName, userBirthday, userCity, userCountry);
             System.out.println("la réponse : "+response);
         }
-        else if (e.getSource()==delete){
+        else if (e.getSource()==delete && !moderatorUser.isAdmin()){
             String userId = idTextfield.getText();
             StringBuffer response = connectMethods.deleteUser(userId);
             System.out.println("la réponse : "+response);
