@@ -8,7 +8,7 @@ import javax.swing.*;
 public class MenuBar extends JMenuBar {
 
     //Les sous menus
-    private JMenuItem logOutItem,aboutItem,helpItem, updateButtonMenu;
+    private JMenuItem logOutItem,aboutItem,helpItem, updateButtonMenu, moderatorButton;
 
     /**
      * the constructor of the class
@@ -18,6 +18,8 @@ public class MenuBar extends JMenuBar {
         JMenu mainMenu = new JMenu("Menu Principal");
             updateButtonMenu = new JMenuItem("actualiser");
                 mainMenu.add(updateButtonMenu);
+            moderatorButton = new JMenuItem("moderateurs");
+                mainMenu.add(moderatorButton);
 
         JMenu optionMenu = new JMenu("?");
             aboutItem= new JMenuItem("À propos");
@@ -63,5 +65,13 @@ public class MenuBar extends JMenuBar {
      */
     public JMenuItem getUpdateButtonMenu() {
         return updateButtonMenu;
+    }
+
+    /**
+     * method used to return the button moderator
+     * @return the button moderator
+     */
+    public JMenuItem getModeratorButton() {
+        return moderatorButton;
     }
 }

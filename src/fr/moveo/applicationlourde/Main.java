@@ -11,7 +11,7 @@ public class Main {
 
     /**
      * the method used to launch the application
-     * @param args
+     * @param args the args use by the application
      */
     public static void main(String[] args) {
         Runnable runnable = new Runnable() {

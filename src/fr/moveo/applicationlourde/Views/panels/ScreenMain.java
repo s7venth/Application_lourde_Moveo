@@ -102,7 +102,10 @@
             this.setVisible(true);
         }
 
-
+        /**
+         * method used to get the message in the format JLabel
+         * @return the messageButton
+         */
         public JLabel getMessage() {
             return message;
         }
