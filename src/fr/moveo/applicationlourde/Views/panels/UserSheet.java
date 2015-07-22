@@ -9,17 +9,16 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 /**
- * Classe qui permet d'afficher la fiche d'un utilisateur
- * c'est un cardLayout pour faire plusieurs onglets sur un utilisateurs
+ * Class than contains the users informations
  */
 public class UserSheet extends JPanel implements ActionListener {
-    //VARIABLES
+
     User user = new User();
     AbstractMethods abstractMethods = new AbstractMethods();
-
     GridLayout gridLayout = new GridLayout(12,2);
     JLabel idLabel, firstNameLabel, lastNameLabel, birthdayLabel, emailLabel, passwordLabel,
             countryLabel, cityLabel, registerLabel, lastConnexionLabel;
+    JButton update, delete;
     JTextField idTextfield = new JTextField();
     JTextField firstNameTextfield = new JTextField();
     JTextField lastNameTextfield = new JTextField();
@@ -31,9 +30,10 @@ public class UserSheet extends JPanel implements ActionListener {
     JTextField registerTextfield = new JTextField();
     JTextField lastConnexionTextfield = new JTextField();
 
-    JButton update, delete;
-
-    //CONSTRUCTEUR
+    /**
+     * constructor of the userSheet
+     * @param user the information of the user
+     */
     public UserSheet(User user) {
 
         idLabel = new JLabel("Id");
@@ -85,10 +85,13 @@ public class UserSheet extends JPanel implements ActionListener {
         this.add(delete, 21);
     }
 
+    /**
+     * method used when one of the button are clicked
+     * @param e the event of the action
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource()==update){
-
             String userId = idTextfield.getText();
             String userLastName = lastNameTextfield.getText();
             String userFirstName = firstNameTextfield.getText();
@@ -97,15 +100,10 @@ public class UserSheet extends JPanel implements ActionListener {
             String userCountry = countryTextfield.getText();
             StringBuffer response = abstractMethods.updateUser(userId, userLastName, userFirstName, userBirthday, userCity, userCountry);
             System.out.println("la réponse : "+response);
-
         }else if (e.getSource()==delete){
             String userId = idTextfield.getText();
             StringBuffer response = abstractMethods.deleteUser(userId);
             System.out.println("la réponse : "+response);
         }
     }
-
-
-    //METHODES
-
 }
