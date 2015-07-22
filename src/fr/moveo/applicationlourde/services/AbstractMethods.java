@@ -39,6 +39,7 @@ public class AbstractMethods {
     public static final String COMMENT_MESSAGE = "comment_message";
     public static final String COMMENT_DATE_INSERTED = "comment_added_datetime";
     public static final String GET_INBOX = "getInbox";
+    public static final String GET_MODERATORS = "getmoderators";
 
     /*
         private String urlModerator = "http://moveo.besaba.com/moderator.php";
@@ -146,6 +147,12 @@ public class AbstractMethods {
         urlParameters.add(new BasicNameValuePair("tag", GET_INBOX));
         urlParameters.add(new BasicNameValuePair(USER_ID, userId));
         return connection.getJsonFromUrl(urlDialog, urlParameters);
+    }
+
+    public StringBuffer getModerator(){
+        List<NameValuePair> urlParameters = new ArrayList<NameValuePair>();
+        urlParameters.add(new BasicNameValuePair("tag",GET_MODERATORS));
+        return connection.getJsonFromUrl(urlModerator,urlParameters);
     }
 
     /**

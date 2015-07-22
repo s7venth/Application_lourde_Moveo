@@ -15,7 +15,7 @@ public class UserSheet extends JPanel implements ActionListener {
 
     AbstractMethods abstractMethods = new AbstractMethods();
     GridLayout gridLayout = new GridLayout(12,2);
-    JLabel idLabel, firstNameLabel, lastNameLabel, birthdayLabel, emailLabel, passwordLabel,
+    JLabel idLabel, firstNameLabel, lastNameLabel, birthdayLabel, emailLabel, adminLabel,
             countryLabel, cityLabel, registerLabel, lastConnexionLabel;
     JButton update, delete;
     JTextField idTextfield = new JTextField();
@@ -23,7 +23,7 @@ public class UserSheet extends JPanel implements ActionListener {
     JTextField lastNameTextfield = new JTextField();
     JTextField birthdayTextfield = new JTextField();
     JTextField emailTextfield = new JTextField();
-    JTextField passwordTextfield = new JTextField();
+    JTextField adminTextfield = new JTextField();
     JTextField countryTextfield = new JTextField();
     JTextField cityTextfield = new JTextField();
     JTextField registerTextfield = new JTextField();
@@ -40,7 +40,7 @@ public class UserSheet extends JPanel implements ActionListener {
         lastNameLabel = new JLabel("Nom");
         emailLabel = new JLabel("email :");
         birthdayLabel = new JLabel("Date de Naissance");
-        passwordLabel = new JLabel("Mot de passe");
+        adminLabel = new JLabel("Administrateur");
         countryLabel = new JLabel("Pays");
         cityLabel = new JLabel("Ville");
         registerLabel = new JLabel("date d'enregistrement");
@@ -55,6 +55,7 @@ public class UserSheet extends JPanel implements ActionListener {
         birthdayTextfield.setText(user.getBirthday().toString());
         cityTextfield.setText(user.getCity());
         countryTextfield.setText(user.getCountry());
+        adminTextfield.setText(user.isAdmin()?"OUI":"NON");
 
         update.addActionListener(this);
         delete.addActionListener(this);
@@ -70,12 +71,12 @@ public class UserSheet extends JPanel implements ActionListener {
         this.add(birthdayTextfield,7);
         this.add(emailLabel,8);
         this.add(emailTextfield,9);
-        this.add(passwordLabel,10);
-        this.add(passwordTextfield,11);
-        this.add(countryLabel,12);
-        this.add(countryTextfield,13);
-        this.add(cityLabel,14);
-        this.add(cityTextfield,15);
+        this.add(countryLabel,10);
+        this.add(countryTextfield,11);
+        this.add(cityLabel,12);
+        this.add(cityTextfield,13);
+        this.add(adminLabel,14);
+        this.add(adminTextfield,15);
         this.add(registerLabel,16);
         this.add(registerTextfield,17);
         this.add(lastConnexionLabel,18);
@@ -99,7 +100,8 @@ public class UserSheet extends JPanel implements ActionListener {
             String userCountry = countryTextfield.getText();
             StringBuffer response = abstractMethods.updateUser(userId, userLastName, userFirstName, userBirthday, userCity, userCountry);
             System.out.println("la réponse : "+response);
-        }else if (e.getSource()==delete){
+        }
+        else if (e.getSource()==delete){
             String userId = idTextfield.getText();
             StringBuffer response = abstractMethods.deleteUser(userId);
             System.out.println("la réponse : "+response);
