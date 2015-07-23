@@ -28,11 +28,11 @@ public class UserSheet extends JPanel implements ActionListener {
     JTextField countryTextfield = new JTextField();
     JTextField cityTextfield = new JTextField();
     JTextField passwordTextfield = new JTextField();
-
     /**
      *  constructor of the userSheet
      * @param user the information of the user
      * @param moderator the information of the moderator
+     * @param admin boolean use to know if the panel should be for administrator or moderator
      */
     public UserSheet(User user, User moderator, boolean admin) {
         oneUser = user;

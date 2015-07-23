@@ -41,6 +41,7 @@
          * the constructor of the panel
          * @param moderator the moderator's information
          * @param userList the list of the users that use the application
+         * @param admin boolean use to know if the panel should be for administrator or moderator
          */
         public ScreenMain(User moderator, ArrayList<User> userList, boolean admin) {
             jCards.setLayout(card);
