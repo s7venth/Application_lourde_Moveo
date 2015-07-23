@@ -251,6 +251,7 @@ public class ConnectMethods {
                     moderator.setLastName(moderatorTable.getJSONObject(i).getString(MODERATOR_NAME));
                     moderator.setEmail(moderatorTable.getJSONObject(i).getString(MODERATOR_EMAIL));
                     moderator.setPassword(moderatorTable.getJSONObject(i).getString(MODERATOR_PASSWORD));
+                    moderator.setIsAdmin(1== moderatorTable.getJSONObject(i).getInt(IS_ADMIN));
                     moderatorArrayList.add(moderator);
                 }catch (NullPointerException e){
                     e.printStackTrace();
