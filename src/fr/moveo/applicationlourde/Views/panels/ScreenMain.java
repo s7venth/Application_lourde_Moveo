@@ -20,14 +20,17 @@
         ArrayList usersList = new ArrayList();
         ArrayList tripsList = new ArrayList();
         ArrayList commentsList = new ArrayList();
+        ArrayList reportedList = new ArrayList();
         JTabbedPane jTabbedPane = new JTabbedPane();
         JPanel jCards = new JPanel();
         JPanel jCard2 = new JPanel();
         JPanel jCard3 = new JPanel();
+        JPanel jCard4 = new JPanel();
         CardLayout card = new CardLayout();
         CommentSheet commentSheet;
         UserSheet userSheet;
         TripSheet tripSheet;
+        ToReportSheet toReportSheet;
         JLabel message = new JLabel("");
         JList list;
 
@@ -40,6 +43,7 @@
             jCards.setLayout(card);
             jCard2.setLayout(card);
             jCard3.setLayout(card);
+            jCard4.setLayout(card);
             DefaultListModel listModel = new DefaultListModel();
             usersList = userList;
             for (int i = 0; i < usersList.size(); i++) {
@@ -53,6 +57,9 @@
                 commentsList = connectMethods.getArrayListComments(connectMethods.getCommentListByUser(Integer.toString(user.getId())));
                 commentSheet = new CommentSheet(commentsList);
                 jCard3.add(commentSheet, user.toString()+"2");
+                reportedList = connectMethods.getArrayListReports(connectMethods.getReportList());
+                toReportSheet = new ToReportSheet(reportedList);
+                jCard4.add(toReportSheet, user.toString()+"4");
                 System.out.println("user : "+user.toString());
             }
             user = new User();
@@ -71,7 +78,10 @@
                     cL2.show(jCard2, user.toString()+"1");
                     jCard3.add(commentSheet);
                     CardLayout cL3 = (CardLayout) (jCard3.getLayout());
-                    cL3.show(jCard3, user.toString()+"2");
+                    cL3.show(jCard3, user.toString() + "2");
+                    jCard4.add(toReportSheet);
+                    CardLayout cardLayout = (CardLayout) (jCard4.getLayout());
+                    cardLayout.show(jCard4, user.toString()+"4");
                 }
             });
 
@@ -88,6 +98,7 @@
             jTabbedPane.addTab("Fiche Utilisateur", jCards);
             jTabbedPane.addTab("Voyages", jCard2);
             jTabbedPane.addTab("Commentaires", jCard3);
+            jTabbedPane.addTab("Signalements",jCard4);
             this.add(jTabbedPane, BorderLayout.CENTER);
 
         }

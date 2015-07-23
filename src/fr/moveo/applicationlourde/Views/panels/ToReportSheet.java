@@ -1,6 +1,6 @@
 package fr.moveo.applicationlourde.Views.panels;
 
-import fr.moveo.applicationlourde.model.Trip;
+import fr.moveo.applicationlourde.model.Reports;
 import fr.moveo.applicationlourde.services.ConnectMethods;
 
 import javax.swing.*;
@@ -8,19 +8,20 @@ import java.awt.*;
 import java.util.ArrayList;
 
 /**
- * Class that contains the JPanel of a TripSheet
+ * Jpanel that contains a table of reports
  */
-public class TripSheet extends JPanel {
+public class ToReportSheet extends JPanel{
     ConnectMethods connectMethods = new ConnectMethods();
 
     /**
      * the constructor of this class
-     * @param tripArrayList the ArrayList of the trips
+     * @param ReportsArrayList the arraylist used in the table
      */
-    public TripSheet(ArrayList<Trip> tripArrayList) {
+    public ToReportSheet(ArrayList<Reports> ReportsArrayList) {
 
-        JTable tableau = new JTable(connectMethods.getTableTrip(tripArrayList));
+        JTable tableau = new JTable(connectMethods.getTableReport(ReportsArrayList));
 
         this.add(new JScrollPane(tableau), BorderLayout.CENTER);
+
     }
 }

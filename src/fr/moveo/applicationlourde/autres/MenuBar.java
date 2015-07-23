@@ -15,10 +15,10 @@ public class MenuBar extends JMenuBar {
      */
     public MenuBar(){
 
-        JMenu mainMenu = new JMenu("Menu Principal");
-            updateButtonMenu = new JMenuItem("actualiser");
+        JMenu mainMenu = new JMenu("Gestion des membres");
+            updateButtonMenu = new JMenuItem("actualiser liste utilisateurs");
                 mainMenu.add(updateButtonMenu);
-            moderatorButton = new JMenuItem("moderateurs");
+            moderatorButton = new JMenuItem("actualiser liste moderateurs");
                 mainMenu.add(moderatorButton);
 
         JMenu optionMenu = new JMenu("?");

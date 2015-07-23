@@ -20,6 +20,10 @@ public class ConnectMethods {
 
     // je fais des variable static pour une meilleure gestion à l'avenir
     public static final String GET_USER = "getUsers";
+    public static final String GET_TRIP_LIST = "getTripList";
+    public static final String GET_INBOX = "getInbox";
+    public static final String GET_MODERATORS = "getModerators";
+    public static final String GET_REPORTS = "getReported";
     public static final String DELETE_USER = "deleteUser";
     public static final String UPDATE_USER = "updateProfil";
     public static final String USER_LAST_NAME = "user_last_name";
@@ -29,7 +33,6 @@ public class ConnectMethods {
     public static final String USER_BIRTHDAY = "user_birthday";
     public static final String USER_COUNTRY = "user_country";
     public static final String USER_CITY = "user_city";
-    public static final String GET_TRIP_LIST = "getTripList";
     public static final String TRIP_ID = "trip_id";
     public static final String TRIP_NAME = "trip_name";
     public static final String TRIP_COUNTRY = "trip_country";
@@ -38,15 +41,14 @@ public class ConnectMethods {
     public static final String COMMENT_ID = "comment_id";
     public static final String COMMENT_MESSAGE = "comment_message";
     public static final String COMMENT_DATE_INSERTED = "comment_added_datetime";
-    public static final String GET_INBOX = "getInbox";
-    public static final String GET_MODERATORS = "getModerators";
+    public static final String ADD_DIALOG = "addDialog";
     public static final String ADD_MODERATOR = "addModerator";
     public static final String MODERATOR_ID = "moderator_id";
     public static final String MODERATOR_NAME = "moderator_name";
     public static final String MODERATOR_EMAIL = "moderator_email";
     public static final String MODERATOR_PASSWORD = "moderator_password";
     public static final String IS_ADMIN = "is_admin";
-    public static final String ADD_DIALOG = "addDialog";
+    public static final String PICTURE_ID = "photo_id";
 
 /*
     private String urlModerator = "http://moveo.besaba.com/moderator.php";
@@ -163,12 +165,18 @@ public class ConnectMethods {
         return connection.getJsonFromUrl(urlTrip, urlParameters);
     }
 
+    public StringBuffer getReportList(){
+        List<NameValuePair> urlParameters = new ArrayList<NameValuePair>();
+        urlParameters.add(new BasicNameValuePair("tag", GET_REPORTS));
+        return connection.getJsonFromUrl(urlModerator, urlParameters);
+    }
+
     /**
      * method used to get the message contained in the box of a user
      * @param userId the userID needed to select the user we needed to get all his messages
      * @return a respond in a format of StringBuffer
      */
-    public StringBuffer getInboxByUser (String userId){
+    public StringBuffer getInbox (String userId){
         List<NameValuePair> urlParameters = new ArrayList<NameValuePair>();
         urlParameters.add(new BasicNameValuePair("tag", GET_INBOX));
         urlParameters.add(new BasicNameValuePair(USER_ID, userId));
@@ -334,6 +342,35 @@ public class ConnectMethods {
     }
 
     /**
+     * method use to convert a stringBuffer into an ArrayList
+     * @param jsonReceived the StringBuffer needed to be converted
+     * @return the arrayList of Reports
+     */
+    public ArrayList<Reports> getArrayListReports (StringBuffer jsonReceived){
+        ArrayList<Reports> reportsArrayList = new ArrayList<Reports>();
+        JSONObject json = new JSONObject(jsonReceived.toString());
+        if (json.has("to_report")){
+            JSONArray reportsTable = json.getJSONArray("to_report");
+            for (int i = 0; i < reportsTable.length(); i++) {
+                Reports reports = new Reports();
+                try {
+                    reports.setIdUser(reportsTable.getJSONObject(i).getInt(USER_ID));
+                    reports.setIdPicture(reportsTable.getJSONObject(i).getInt(PICTURE_ID));
+                    reportsArrayList.add(reports);
+                }catch (NullPointerException e){
+                    e.printStackTrace();
+                }
+            }
+        }else {
+            if (json.getInt("error")==1){
+                Reports reports = new Reports();
+                reportsArrayList.add(reports);
+            }
+        }
+        return reportsArrayList;
+    }
+
+    /**
      * Method used to convert a StringBuffer into an ArrayList of Comment
      * @param jsonReceived the StringBuffer needed to be converted
      * @return an ArrayList of comments
@@ -397,5 +434,9 @@ public class ConnectMethods {
      */
     public CommentTableModel getTableComment(ArrayList<Comment> commentArrayList){
         return new CommentTableModel((commentArrayList));
+    }
+
+    public ReportsTableModel getTableReport(ArrayList<Reports> reportsArrayList){
+        return new ReportsTableModel((reportsArrayList));
     }
 }

@@ -3,8 +3,8 @@ package fr.moveo.applicationlourde.Views.panels;
 import javax.swing.*;
 
 /**
- * Created by alexandrequere on 23/07/2015.
+ * JPanel that contains a table of message
  */
-public class Inbox extends JPanel{
+public class InboxSheet extends JPanel{
 
 }
