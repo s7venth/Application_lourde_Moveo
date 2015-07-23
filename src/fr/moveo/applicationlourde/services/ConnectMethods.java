@@ -33,6 +33,11 @@ public class ConnectMethods {
     public static final String USER_BIRTHDAY = "user_birthday";
     public static final String USER_COUNTRY = "user_country";
     public static final String USER_CITY = "user_city";
+    public static final String SENDER_ID = "recipient_id";
+    public static final String SENDER_FIRSTNAME = "recipient_first_name";
+    public static final String SENDER_LASTNAME = "recipient_last_name";
+    public static final String SENDER_DATETIME = "sent_datetime";
+    public static final String MESSAGE = "message";
     public static final String TRIP_ID = "trip_id";
     public static final String TRIP_NAME = "trip_name";
     public static final String TRIP_COUNTRY = "trip_country";
@@ -172,14 +177,13 @@ public class ConnectMethods {
     }
 
     /**
-     * method used to get the message contained in the box of a user
-     * @param userId the userID needed to select the user we needed to get all his messages
-     * @return a respond in a format of StringBuffer
+     * method use to get all the message for the moderator
+     * @return a stringBuffer that contains all the messages
      */
-    public StringBuffer getInbox (String userId){
+    public StringBuffer getInbox (){
         List<NameValuePair> urlParameters = new ArrayList<NameValuePair>();
         urlParameters.add(new BasicNameValuePair("tag", GET_INBOX));
-        urlParameters.add(new BasicNameValuePair(USER_ID, userId));
+        urlParameters.add(new BasicNameValuePair(USER_ID, "0"));
         return connection.getJsonFromUrl(urlDialog, urlParameters);
     }
 
@@ -419,6 +423,51 @@ public class ConnectMethods {
     }
 
     /**
+     * method use to get all the message for the moderators
+     * @param jsonReceived the StringBuffer that will be converted into a array
+     * @return an array of Message
+     */
+    public ArrayList<Message> getArrayListMessage (StringBuffer jsonReceived){
+        ArrayList<Message> messageArrayList = new ArrayList<Message>();
+        JSONObject json = new JSONObject(jsonReceived.toString());
+        if (json.has("inbox")){
+            JSONArray messageTable = json.getJSONArray("inbox");
+            for (int i = 0; i < messageTable.length(); i++) {
+                Message message = new Message();
+                try {
+
+                    message.setUserid(messageTable.getJSONObject(i).getInt(SENDER_ID));
+                    message.setMessage(messageTable.getJSONObject(i).getString(MESSAGE));
+                    if(messageTable.getJSONObject(i).has(SENDER_DATETIME)&&!messageTable.getJSONObject(i).isNull(SENDER_DATETIME)){
+                        String dateStr = messageTable.getJSONObject(i).getString(SENDER_DATETIME);
+                        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                        try {
+                            Date insertionDate = sdf.parse(dateStr);
+                            message.setSentDateTime(insertionDate);
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                        }
+                    } else try {
+                        Date insertionDate = new SimpleDateFormat("yyyy-MM-dd").parse("0000-00-00");
+                        message.setSentDateTime(insertionDate);
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+                    messageArrayList.add(message);
+                }catch (NullPointerException e){
+                    e.printStackTrace();
+                }
+            }
+        }else {
+            if (json.getInt("error")==1){
+                Message message = new Message();
+                messageArrayList.add(message);
+            }
+        }
+        return messageArrayList;
+    }
+
+    /**
      * method used to convert an ArrayList of trip into a table of trip
      * @param tripArrayList the arrayList of trip needed to be converted into a table of trip
      * @return a table of trip
@@ -436,7 +485,21 @@ public class ConnectMethods {
         return new CommentTableModel((commentArrayList));
     }
 
+    /**
+     * method use to create a table of report
+     * @param reportsArrayList the arraylist that contains all the report
+     * @return a table of report
+     */
     public ReportsTableModel getTableReport(ArrayList<Reports> reportsArrayList){
         return new ReportsTableModel((reportsArrayList));
+    }
+
+    /**
+     * method use to create a table of message
+     * @param messageArrayList the arraylist of all the message
+     * @return a table of message
+     */
+    public MessageTableModel getTableMessage(ArrayList<Message> messageArrayList){
+        return new MessageTableModel(messageArrayList);
     }
 }

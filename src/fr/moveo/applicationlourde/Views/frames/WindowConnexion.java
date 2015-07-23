@@ -14,7 +14,6 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 /**
- * Created by Sylvain on 12/03/15.
  * JFrame used to be the first JFrame created when the application is launched
  */
 public class WindowConnexion extends JFrame implements ActionListener {

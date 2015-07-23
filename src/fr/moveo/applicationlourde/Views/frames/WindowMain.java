@@ -56,7 +56,7 @@ public class WindowMain extends JFrame implements ActionListener {
         this.setIconImage(Toolkit.getDefaultToolkit().getImage("res/fr.moveo.applicationlourde/icon.png")); 	//Icône en haut à gauche/Icône en haut à gauche
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Arrête complètement le processus avec le bouton [X]
         this.setTitle("Bienvenue " + name);  //Définit un titre pour notre fenêtre
-        this.setSize(700, 400); // Taille fenêtre en pixel (h,v) h=horizontal v=vertical
+        this.setSize(800, 500); // Taille fenêtre en pixel (h,v) h=horizontal v=vertical
         this.setLocationRelativeTo(null);  // Centre la fenêtre par défaut
         this.setResizable(true); // Empêche le redimensionnement de la fenêtre
         pack();

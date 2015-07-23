@@ -1,7 +1,7 @@
 package fr.moveo.applicationlourde.model;
 
 /**
- * Created by alexandrequere on 23/07/2015.
+ * class model Report
  */
 public class Reports {
     int idUser, idPicture;

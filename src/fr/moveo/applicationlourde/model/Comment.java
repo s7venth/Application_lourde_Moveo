@@ -3,7 +3,7 @@ package fr.moveo.applicationlourde.model;
 import java.util.Date;
 
 /**
- * Class Comment
+ * Class model Comment
  */
 public class Comment {
     private int commentId, userId, tripId;

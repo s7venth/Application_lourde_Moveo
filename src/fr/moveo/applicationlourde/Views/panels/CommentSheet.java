@@ -9,7 +9,6 @@ import java.util.ArrayList;
 
 /**
  * panel that show all the comments
- * Created by alexMac on 13/05/15.
  */
 public class CommentSheet extends JPanel {
     ConnectMethods connectMethods = new ConnectMethods();

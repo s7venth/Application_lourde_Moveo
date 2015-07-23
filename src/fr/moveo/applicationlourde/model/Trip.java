@@ -3,9 +3,8 @@ package fr.moveo.applicationlourde.model;
 import javax.swing.*;
 import java.util.Date;
 
-/**
- * Created by alexMac on 08/05/15.
- * Classe model Trip permettant d'utiliser les Voyages.
+/**.
+ * Classe model Trip.
  */
 
 public class Trip {
