@@ -174,6 +174,10 @@ public class ConnectMethods {
         return connection.getJsonFromUrl(urlDialog, urlParameters);
     }
 
+    /**
+     * method used to get all the moderators
+     * @return a stringBuffer of moderators
+     */
     public StringBuffer getModerator(){
         List<NameValuePair> urlParameters = new ArrayList<NameValuePair>();
         urlParameters.add(new BasicNameValuePair("tag",GET_MODERATORS));
