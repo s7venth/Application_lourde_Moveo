@@ -46,6 +46,7 @@ public class ConnectMethods {
     public static final String MODERATOR_EMAIL = "moderator_email";
     public static final String MODERATOR_PASSWORD = "moderator_password";
     public static final String IS_ADMIN = "is_admin";
+    public static final String ADD_DIALOG = "addDialog";
 
 /*
     private String urlModerator = "http://moveo.besaba.com/moderator.php";
@@ -185,6 +186,21 @@ public class ConnectMethods {
     }
 
     /**
+     * method use to send a message to a user
+     * @param userId the id of the user who will get the message
+     * @param message the message it self
+     * @return a response of the serveur in a StringBuffer
+     */
+    public StringBuffer sendMessage(String userId, String message){
+        List<NameValuePair> urlParameters = new ArrayList<NameValuePair>();
+        urlParameters.add(new BasicNameValuePair("tag",ADD_DIALOG));
+        urlParameters.add(new BasicNameValuePair("userId","O"));
+        urlParameters.add(new BasicNameValuePair("recipientId",userId));
+        urlParameters.add(new BasicNameValuePair("message",message));
+        return connection.getJsonFromUrl(urlUser,urlParameters);
+    }
+
+    /**
      * method that convert a StringBuffer into an Arraylist of user. the StringBuffer must contain users
      * @param jsonReceived the StringBuffer needed to be convert
      * @return an Arraylist of users.
@@ -262,7 +278,17 @@ public class ConnectMethods {
                 try {
                     moderator.setId(moderatorTable.getJSONObject(i).getInt(MODERATOR_ID));
                     moderator.setLastName(moderatorTable.getJSONObject(i).getString(MODERATOR_NAME));
+                    moderator.setFirstName("");
                     moderator.setEmail(moderatorTable.getJSONObject(i).getString(MODERATOR_EMAIL));
+                    Date birthDate = null;
+                    try {
+                        birthDate = new SimpleDateFormat("yyyy-MM-dd").parse("0000-00-00");
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+                    moderator.setBirthday(birthDate);
+                    moderator.setCountry("no data");
+                    moderator.setCity("no data");
                     moderator.setPassword(moderatorTable.getJSONObject(i).getString(MODERATOR_PASSWORD));
                     moderator.setIsAdmin(1== moderatorTable.getJSONObject(i).getInt(IS_ADMIN));
                     moderatorArrayList.add(moderator);

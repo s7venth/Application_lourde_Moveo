@@ -37,7 +37,7 @@ public class WindowMain extends JFrame implements ActionListener {
             menu.getLogOutItem().addActionListener(this);
             menu.getAboutItem().addActionListener(this);
             menu.getHelpItem().addActionListener(this);
-        home = new ScreenMain(moderator, userList);
+        home = new ScreenMain(moderator, userList, false);
         this.add(home);
         this.windowConfiguration(moderator.getLastName());
 
@@ -75,9 +75,9 @@ public class WindowMain extends JFrame implements ActionListener {
             this.remove(home);
             ConnectMethods connectMethods = new ConnectMethods();
             ArrayList<User> userArrayList = connectMethods.getArrayList(connectMethods.getUsers());
-            home = new ScreenMain(this.moderatorMain, userArrayList);
+            home = new ScreenMain(this.moderatorMain, userArrayList, false);
             this.add(home);
-            home.getMessage().setText("mise a jour");
+            home.getMessage().setText("Lise utilisateurs à jour");
             revalidate();
         }
         else if (source == menu.getModeratorButton()){
@@ -86,13 +86,14 @@ public class WindowMain extends JFrame implements ActionListener {
                 ConnectMethods connectMethods = new ConnectMethods();
                 ArrayList<User> moderatorsArrayList = connectMethods.getArrayListModerator(connectMethods.getModerator());
                 System.out.println("le getmoderators en toString : " +moderatorsArrayList.toString());
-                home = new ScreenMain(this.moderatorMain, moderatorsArrayList);
+                home = new ScreenMain(this.moderatorMain, moderatorsArrayList, true);
                 this.add(home);
                 home.getMessage().setText("Liste de modérateurs à jours");
                 revalidate();
             }
             else JOptionPane.showMessageDialog(null,"Vous n'etes pas Administrateur","SKYNET",JOptionPane.ERROR_MESSAGE);
         }
+
         else if(source == menu.getAboutItem()){
             JOptionPane.showMessageDialog(null,"Moveo application Lourde version 0.0.1", "About", JOptionPane.INFORMATION_MESSAGE);
         }

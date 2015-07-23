@@ -36,7 +36,7 @@
          * @param moderator the moderator's information
          * @param userList the list of the users that use the application
          */
-        public ScreenMain(User moderator, ArrayList<User> userList) {
+        public ScreenMain(User moderator, ArrayList<User> userList, boolean admin) {
             jCards.setLayout(card);
             jCard2.setLayout(card);
             jCard3.setLayout(card);
@@ -44,7 +44,7 @@
             usersList = userList;
             for (int i = 0; i < usersList.size(); i++) {
                 User user = (User) usersList.get(i);
-                userSheet = new UserSheet(user, moderator);
+                userSheet = new UserSheet(user, moderator, admin);
                 listModel.addElement(user);
                 jCards.add(userSheet, user.toString());
                 tripsList = connectMethods.getArrayListTrip(connectMethods.getTripList(Integer.toString(user.getId())));

@@ -5,7 +5,6 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
 /**
- * Created by Sylvain on 23/04/15.
  * first listener of the application
  */
 public class MyListener extends WindowAdapter {
