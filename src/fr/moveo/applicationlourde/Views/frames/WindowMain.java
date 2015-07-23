@@ -1,5 +1,6 @@
 package fr.moveo.applicationlourde.Views.frames;
 
+import com.apple.eawt.Application;
 import fr.moveo.applicationlourde.autres.MenuBar;
 import fr.moveo.applicationlourde.Views.panels.ScreenMain;
 import fr.moveo.applicationlourde.model.User;
@@ -50,7 +51,9 @@ public class WindowMain extends JFrame implements ActionListener {
 
         this.homeColor = new Color(5, 100, 200);
         this.setBackground(homeColor); // Couleur de fond
-        this.setIconImage(Toolkit.getDefaultToolkit().getImage("res/img/icon.png")); 	//Icône en haut à gauche
+        Application application = Application.getApplication();// spécifique aux ordi Apple
+        application.setDockIconImage(Toolkit.getDefaultToolkit().getImage("res/fr.moveo.applicationlourde/icon.png"));//definit l'image pour les dock d'apple
+        this.setIconImage(Toolkit.getDefaultToolkit().getImage("res/fr.moveo.applicationlourde/icon.png")); 	//Icône en haut à gauche/Icône en haut à gauche
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Arrête complètement le processus avec le bouton [X]
         this.setTitle("Bienvenue " + name);  //Définit un titre pour notre fenêtre
         this.setSize(700, 400); // Taille fenêtre en pixel (h,v) h=horizontal v=vertical
@@ -81,7 +84,7 @@ public class WindowMain extends JFrame implements ActionListener {
             if (moderatorMain.isAdmin()){
                 this.remove(home);
                 ConnectMethods connectMethods = new ConnectMethods();
-                ArrayList<User> moderatorsArrayList = connectMethods.getArrayList(connectMethods.getModerator());
+                ArrayList<User> moderatorsArrayList = connectMethods.getArrayListModerator(connectMethods.getModerator());
                 System.out.println("le getmoderators en toString : " +moderatorsArrayList.toString());
                 home = new ScreenMain(this.moderatorMain, moderatorsArrayList);
                 this.add(home);

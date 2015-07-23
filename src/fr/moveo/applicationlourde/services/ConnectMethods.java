@@ -39,20 +39,26 @@ public class ConnectMethods {
     public static final String COMMENT_MESSAGE = "comment_message";
     public static final String COMMENT_DATE_INSERTED = "comment_added_datetime";
     public static final String GET_INBOX = "getInbox";
-    public static final String GET_MODERATORS = "getmoderators";
+    public static final String GET_MODERATORS = "getModerators";
+    public static final String ADD_MODERATOR = "addModerator";
+    public static final String MODERATOR_ID = "moderator_id";
+    public static final String MODERATOR_NAME = "moderator_name";
+    public static final String MODERATOR_EMAIL = "moderator_email";
+    public static final String MODERATOR_PASSWORD = "moderator_password";
+    public static final String IS_ADMIN = "is_admin";
 
-    /*
-        private String urlModerator = "http://moveo.besaba.com/moderator.php";
-        private String urlTrip = "http://moveo.besaba.com/trip.php";
-        private String urlUser = "http://moveo.besaba.com/user.php";
-        private String urlDialog = "http://moveo.besaba.com/dialog.php";
-        */
+/*
+    private String urlModerator = "http://moveo.besaba.com/moderator.php";
+    private String urlTrip = "http://moveo.besaba.com/trip.php";
+    private String urlUser = "http://moveo.besaba.com/user.php";
+    private String urlDialog = "http://moveo.besaba.com/dialog.php";
+*/
+
     private static final String urlModerator = "http://moveo.16mb.com/moderator.php";
     private static final String urlTrip = "http://moveo.16mb.com/trip.php";
     private static final String urlUser = "http://moveo.16mb.com/user.php";
     private static final String urlDialog = "http://moveo.16mb.com/dialog.php";
     private Connection connection = new Connection();
-
     /**
      * method used to log the moderator
      * @param email the email of the moderator
@@ -66,6 +72,16 @@ public class ConnectMethods {
         urlParameters.add(new BasicNameValuePair("email",email));
         urlParameters.add(new BasicNameValuePair("password", password));
         return connection.getJsonFromUrl(urlModerator, urlParameters);
+    }
+
+    public StringBuffer addModerator(String name, String email, String password, boolean isAdmin){
+        List<NameValuePair> urlParameters = new ArrayList<NameValuePair>();
+        urlParameters.add(new BasicNameValuePair("tag",ADD_MODERATOR));
+        urlParameters.add(new BasicNameValuePair(MODERATOR_NAME,name));
+        urlParameters.add(new BasicNameValuePair(MODERATOR_EMAIL,email));
+        urlParameters.add(new BasicNameValuePair(MODERATOR_PASSWORD,password));
+        urlParameters.add(new BasicNameValuePair(IS_ADMIN,Boolean.toString(isAdmin)));
+        return connection.getJsonFromUrl(urlModerator,urlParameters);
     }
 
     /**
@@ -109,7 +125,6 @@ public class ConnectMethods {
         modifyUserForm.add(new BasicNameValuePair("country", country));
         modifyUserForm.add(new BasicNameValuePair("city", city));
         modifyUserForm.add(new BasicNameValuePair("birthday", birthday));
-        System.out.println("le modifyuserform : " + modifyUserForm.toString());
         return connection.getJsonFromUrl(urlUser, modifyUserForm);
     }
 
@@ -161,6 +176,7 @@ public class ConnectMethods {
      * @return an Arraylist of users.
      */
     public ArrayList<User> getArrayList(StringBuffer jsonReceived){
+        System.out.println(jsonReceived.toString());
         ArrayList<User> userArrayList = new ArrayList<User>();
         JSONObject json = new JSONObject(jsonReceived.toString());
         if (json.getInt("error")==1){
@@ -208,6 +224,40 @@ public class ConnectMethods {
             }
         }
         return userArrayList;
+    }
+
+
+    /**
+     * method that convert a StringBuffer into an Arraylist of user. the StringBuffer must contain users
+     * @param jsonReceived the StringBuffer needed to be convert
+     * @return an Arraylist of users.
+     */
+    public ArrayList<User> getArrayListModerator(StringBuffer jsonReceived){
+        System.out.println(jsonReceived.toString());
+        ArrayList<User> moderatorArrayList = new ArrayList<User>();
+        JSONObject json = new JSONObject(jsonReceived.toString());
+        if (json.getInt("error")==1){
+            JOptionPane.showMessageDialog(null, json.getString("message"));
+        }
+        JSONArray moderatorTable = json.getJSONArray("moderator");
+        if (!json.has("moderator")||json.isNull("moderator")){
+            JOptionPane.showMessageDialog(null,"the json must have a moderator key","WARNING",JOptionPane.WARNING_MESSAGE);
+        }
+        else{
+            for (int i = 0; i < moderatorTable.length(); i++) {
+                User moderator = new User();
+                try {
+                    moderator.setId(moderatorTable.getJSONObject(i).getInt(MODERATOR_ID));
+                    moderator.setLastName(moderatorTable.getJSONObject(i).getString(MODERATOR_NAME));
+                    moderator.setEmail(moderatorTable.getJSONObject(i).getString(MODERATOR_EMAIL));
+                    moderator.setPassword(moderatorTable.getJSONObject(i).getString(MODERATOR_PASSWORD));
+                    moderatorArrayList.add(moderator);
+                }catch (NullPointerException e){
+                    e.printStackTrace();
+                }
+            }
+        }
+        return moderatorArrayList;
     }
 
     /**

@@ -72,7 +72,7 @@ public class WindowConnexion extends JFrame implements ActionListener {
         }else{
             StringBuffer result = new StringBuffer();
             result = connectMethods.loggin(screen.getMailEditText().getText(),screen.getPasswordEditText().getText());
-            System.out.println(result);
+            System.out.println(result.toString());
             JSONObject json = new JSONObject(result.toString());
             if (json.getInt("error")==1){
                 JOptionPane.showMessageDialog(null, "le modérateur n'existe pas","Oups",JOptionPane.WARNING_MESSAGE);
