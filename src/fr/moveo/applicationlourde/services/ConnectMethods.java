@@ -59,6 +59,7 @@ public class ConnectMethods {
     private static final String urlUser = "http://moveo.16mb.com/user.php";
     private static final String urlDialog = "http://moveo.16mb.com/dialog.php";
     private Connection connection = new Connection();
+
     /**
      * method used to log the moderator
      * @param email the email of the moderator
@@ -74,6 +75,15 @@ public class ConnectMethods {
         return connection.getJsonFromUrl(urlModerator, urlParameters);
     }
 
+    /**
+     * method used to add a new moderator. this method is allowed only if the user who ask it
+     * is an administrator
+     * @param name the name of the moderator
+     * @param email the email of the moderator
+     * @param password the password of the moderator
+     * @param isAdmin the boolean which define is the moderator is also a administrator
+     * @return a stringBuffer of a response
+     */
     public StringBuffer addModerator(String name, String email, String password, boolean isAdmin){
         List<NameValuePair> urlParameters = new ArrayList<NameValuePair>();
         urlParameters.add(new BasicNameValuePair("tag",ADD_MODERATOR));
@@ -225,7 +235,6 @@ public class ConnectMethods {
         }
         return userArrayList;
     }
-
 
     /**
      * method that convert a StringBuffer into an Arraylist of user. the StringBuffer must contain users
