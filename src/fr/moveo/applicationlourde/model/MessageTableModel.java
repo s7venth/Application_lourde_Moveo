@@ -13,7 +13,7 @@ public class MessageTableModel extends AbstractTableModel{
     public MessageTableModel(List<Message> listMessage) {
         super();
         nbMessage = listMessage;
-        columns = new String[]{"Identifiant utilisateur", "Message", "date d'envoi"};
+        columns = new String[]{"nom utilisateur","prenom utilisateur", "Message", "date d'envoi"};
     }
 
 
@@ -31,9 +31,10 @@ public class MessageTableModel extends AbstractTableModel{
     public Object getValueAt(int rowIndex, int columnIndex) {
         Message message = nbMessage.get(rowIndex);
         switch (columnIndex){
-            case 0: return message.getUserid();
-            case 1: return message.getMessage();
-            case 2: return message.getSentDateTime();
+            case 0: return message.getLastname();
+            case 1: return message.getFirstname();
+            case 2: return message.getMessage();
+            case 3: return message.getSentDateTime();
             default:return null;
         }
     }

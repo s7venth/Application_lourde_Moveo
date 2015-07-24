@@ -7,6 +7,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import javax.swing.*;
+import javax.swing.text.StringContent;
 import java.text.ParseException;
 import java.util.Date;
 import java.text.SimpleDateFormat;
@@ -54,6 +55,7 @@ public class ConnectMethods {
     public static final String MODERATOR_PASSWORD = "moderator_password";
     public static final String IS_ADMIN = "is_admin";
     public static final String PICTURE_ID = "photo_id";
+    public static final String DELETE_PICTURE = "deletePhoto";
 
 /*
     private String urlModerator = "http://moveo.besaba.com/moderator.php";
@@ -100,6 +102,13 @@ public class ConnectMethods {
         urlParameters.add(new BasicNameValuePair(MODERATOR_PASSWORD,password));
         urlParameters.add(new BasicNameValuePair(IS_ADMIN,Boolean.toString(isAdmin)));
         return connection.getJsonFromUrl(urlModerator,urlParameters);
+    }
+
+    public StringBuffer deletePhoto(String idPhoto){
+        List<NameValuePair> urlParameters = new ArrayList<NameValuePair>();
+        urlParameters.add(new BasicNameValuePair("tag",DELETE_PICTURE));
+        urlParameters.add(new BasicNameValuePair(PICTURE_ID,idPhoto));
+        return connection.getJsonFromUrl(urlTrip,urlParameters);
     }
 
     /**
@@ -432,11 +441,12 @@ public class ConnectMethods {
         JSONObject json = new JSONObject(jsonReceived.toString());
         if (json.has("inbox")){
             JSONArray messageTable = json.getJSONArray("inbox");
+            System.out.println("message :"+ messageTable.toString());
             for (int i = 0; i < messageTable.length(); i++) {
                 Message message = new Message();
                 try {
-
-                    message.setUserid(messageTable.getJSONObject(i).getInt(SENDER_ID));
+                    message.setLastname(messageTable.getJSONObject(i).getString(SENDER_LASTNAME));
+                    message.setFirstname(messageTable.getJSONObject(i).getString(SENDER_FIRSTNAME));
                     message.setMessage(messageTable.getJSONObject(i).getString(MESSAGE));
                     if(messageTable.getJSONObject(i).has(SENDER_DATETIME)&&!messageTable.getJSONObject(i).isNull(SENDER_DATETIME)){
                         String dateStr = messageTable.getJSONObject(i).getString(SENDER_DATETIME);

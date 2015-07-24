@@ -7,24 +7,29 @@ import java.util.Date;
  */
 public class Message {
     int userid;
-    String message;
+    String message, firstname, lastname;
     Date sentDateTime;
 
     public Message() {
     }
 
-    public Message(int userid, String message, Date sentDateTime) {
+    public Message(int userid, String message, String firstname, String lastname, Date sentDateTime) {
         this.userid = userid;
         this.message = message;
+        this.firstname = firstname;
+        this.lastname = lastname;
         this.sentDateTime = sentDateTime;
     }
 
     @Override
     public String toString() {
-        return "Message : " +
+        return "Message{" +
                 "userid=" + userid +
                 ", message='" + message + '\'' +
-                ", sentDateTime=" + sentDateTime;
+                ", firstname='" + firstname + '\'' +
+                ", lastname='" + lastname + '\'' +
+                ", sentDateTime=" + sentDateTime +
+                '}';
     }
 
     @Override
@@ -36,6 +41,8 @@ public class Message {
 
         if (userid != message1.userid) return false;
         if (message != null ? !message.equals(message1.message) : message1.message != null) return false;
+        if (firstname != null ? !firstname.equals(message1.firstname) : message1.firstname != null) return false;
+        if (lastname != null ? !lastname.equals(message1.lastname) : message1.lastname != null) return false;
         return !(sentDateTime != null ? !sentDateTime.equals(message1.sentDateTime) : message1.sentDateTime != null);
 
     }
@@ -44,12 +51,13 @@ public class Message {
     public int hashCode() {
         int result = userid;
         result = 31 * result + (message != null ? message.hashCode() : 0);
+        result = 31 * result + (firstname != null ? firstname.hashCode() : 0);
+        result = 31 * result + (lastname != null ? lastname.hashCode() : 0);
         result = 31 * result + (sentDateTime != null ? sentDateTime.hashCode() : 0);
         return result;
     }
 
     public int getUserid() {
-
         return userid;
     }
 
@@ -63,6 +71,22 @@ public class Message {
 
     public void setMessage(String message) {
         this.message = message;
+    }
+
+    public String getFirstname() {
+        return firstname;
+    }
+
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
+    }
+
+    public String getLastname() {
+        return lastname;
+    }
+
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
     }
 
     public Date getSentDateTime() {
