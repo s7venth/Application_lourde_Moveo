@@ -441,7 +441,6 @@ public class ConnectMethods {
         JSONObject json = new JSONObject(jsonReceived.toString());
         if (json.has("inbox")){
             JSONArray messageTable = json.getJSONArray("inbox");
-            System.out.println("message :"+ messageTable.toString());
             for (int i = 0; i < messageTable.length(); i++) {
                 Message message = new Message();
                 try {
